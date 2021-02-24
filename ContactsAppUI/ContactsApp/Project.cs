@@ -39,30 +39,14 @@ namespace ContactsApp
             }
         }
 
+        /// <summary>
+        /// Метод создает запись одного контакта
+        /// </summary>
+        /// <param name="value">объект класса Contact</param>
         public void Initialization(Contact value)
         {
             _contacts = new Contact[1];
             _contacts[0] = value;
         }
-        //public void SetContact(Contact[] contact)
-        //{
-        //    _length++;
-        //    Contact[] contacts = new Contact[_length];
-        //    for (int index = 0; index < _length - 1; index++)
-        //    {
-        //        contacts[index] = _contacts[index];
-        //    }
-
-        //    contacts[_length - 1] = contact[0];
-
-        //    _contacts = null;
-
-        //    _contacts = contacts;
-        //}
-
-        //public Contact[] GetContacts()
-        //{
-        //    return _contacts;
-        //}
     }
 }
