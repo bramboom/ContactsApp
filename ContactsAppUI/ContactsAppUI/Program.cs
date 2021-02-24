@@ -68,6 +68,23 @@ namespace ContactsAppUI
             Console.WriteLine(contacts[1].IDVKontakte);
             Console.WriteLine(contacts[1].Mail);
 
+            Manager.SafeToFile(contacts, "json");
+            contacts = null;
+            contacts = Manager.LoadFromFile("json");
+            Console.WriteLine(contacts[0].Surname);
+            Console.WriteLine(contacts[0].Name);
+            Console.WriteLine(contacts[0].Date);
+            Console.WriteLine(contacts[0].PhoneNumber);
+            Console.WriteLine(contacts[0].IDVKontakte);
+            Console.WriteLine(contacts[0].Mail);
+
+            Console.WriteLine(contacts[1].Surname);
+            Console.WriteLine(contacts[1].Name);
+            Console.WriteLine(contacts[1].Date);
+            Console.WriteLine(contacts[1].PhoneNumber);
+            Console.WriteLine(contacts[1].IDVKontakte);
+            Console.WriteLine(contacts[1].Mail);
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
