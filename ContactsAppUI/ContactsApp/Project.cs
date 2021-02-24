@@ -7,30 +7,62 @@ using System.Threading.Tasks;
 
 namespace ContactsApp
 {
-    class Project
+    /// <summary>
+    /// Класс, содержащий список контактов
+    /// </summary>
+    public class Project
     {
-        private Contact[] _contacts;
-        private int _lenght = 0;
+        /// <summary>
+        /// Список контактов
+        /// </summary>
+        private Contact[] _contacts { get; set; }
 
-        public void SetContact(Contact contact)
+        /// <summary>
+        /// Свойства поля _contacts
+        /// </summary>
+        public Contact[] Contacts
         {
-            _lenght++;
-            Contact[] contacts = new Contact[_lenght];
-            for (int index = 0; index < _lenght - 1; index++)
+            get { return _contacts; }
+            set
             {
-                contacts[index] = _contacts[index];
+                Contact[] contacts = new Contact[_contacts.Length + 1];
+                for (int index = 0; index < _contacts.Length; index++)
+                {
+                    contacts[index] = _contacts[index];
+                }
+
+                contacts[_contacts.Length] = value[0];
+
+                _contacts = null;
+
+                _contacts = contacts;
             }
-
-            contacts[_lenght - 1] = contact;
-
-            _contacts = null;
-
-            _contacts = contacts;
         }
 
-        public Contact[] GetContacts()
+        public void Initialization(Contact value)
         {
-            return _contacts;
+            _contacts = new Contact[1];
+            _contacts[0] = value;
         }
+        //public void SetContact(Contact[] contact)
+        //{
+        //    _length++;
+        //    Contact[] contacts = new Contact[_length];
+        //    for (int index = 0; index < _length - 1; index++)
+        //    {
+        //        contacts[index] = _contacts[index];
+        //    }
+
+        //    contacts[_length - 1] = contact[0];
+
+        //    _contacts = null;
+
+        //    _contacts = contacts;
+        //}
+
+        //public Contact[] GetContacts()
+        //{
+        //    return _contacts;
+        //}
     }
 }

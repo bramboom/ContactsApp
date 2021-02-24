@@ -6,10 +6,20 @@ using System.Threading.Tasks;
 
 namespace ContactsApp
 {
+    /// <summary>
+    /// Класс содержащий номер телефона
+    /// </summary>
     public class PhoneNumber
     {
-        private int _phoneNumber = 7;
+        /// <summary>
+        /// Номер телефона
+        /// </summary>
+        private long _phoneNumber;
 
+        /// <summary>
+        /// Метод помещает значение в поле _phoneNumber
+        /// </summary>
+        /// <param name="phoneNumber">Значение, введенное пользователем</param>
         public void SetPhoneNumber(string phoneNumber)
         {
             if(11!=phoneNumber.Length)
@@ -19,7 +29,7 @@ namespace ContactsApp
             
             for (int index = 0; index < phoneNumber.Length; index++)
             {
-                if ((phoneNumber[index] < '0') || (phoneNumber[index] > 9))
+                if ((phoneNumber[index] < '0') || (phoneNumber[index] > '9'))
                 {
                     throw new ArgumentException("Number must be digit!");
                 }
@@ -30,10 +40,14 @@ namespace ContactsApp
                 throw new ArgumentException("First numeral must be 7!");
             }
 
-            _phoneNumber = Int32.Parse(phoneNumber);
+            _phoneNumber = long.Parse(phoneNumber);
         }
 
-        public int GetPhoneNumber()
+        /// <summary>
+        /// Метод возвращает значение поля _phoneNumber
+        /// </summary>
+        /// <returns>_phoneNumber</returns>
+        public long GetPhoneNumber()
         {
             return _phoneNumber;
         }
