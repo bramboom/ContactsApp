@@ -69,7 +69,7 @@ namespace ContactsAppUI
             this.helpToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(932, 30);
+            this.menuStrip.Size = new System.Drawing.Size(932, 28);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "menuStrip";
             // 
@@ -78,13 +78,13 @@ namespace ContactsAppUI
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 26);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(116, 26);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitItem_Click);
             // 
@@ -95,27 +95,27 @@ namespace ContactsAppUI
             this.editContactToolStripMenuItem,
             this.removeContactToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(49, 26);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(49, 24);
             this.editToolStripMenuItem.Text = "Edit";
             // 
             // addContactToolStripMenuItem
             // 
             this.addContactToolStripMenuItem.Name = "addContactToolStripMenuItem";
-            this.addContactToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.addContactToolStripMenuItem.Size = new System.Drawing.Size(201, 26);
             this.addContactToolStripMenuItem.Text = "Add Contact";
             this.addContactToolStripMenuItem.Click += new System.EventHandler(this.AddContact_Click);
             // 
             // editContactToolStripMenuItem
             // 
             this.editContactToolStripMenuItem.Name = "editContactToolStripMenuItem";
-            this.editContactToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.editContactToolStripMenuItem.Size = new System.Drawing.Size(201, 26);
             this.editContactToolStripMenuItem.Text = "Edit Contact";
             this.editContactToolStripMenuItem.Click += new System.EventHandler(this.EditContact_Click);
             // 
             // removeContactToolStripMenuItem
             // 
             this.removeContactToolStripMenuItem.Name = "removeContactToolStripMenuItem";
-            this.removeContactToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.removeContactToolStripMenuItem.Size = new System.Drawing.Size(201, 26);
             this.removeContactToolStripMenuItem.Text = "Remove Contact";
             this.removeContactToolStripMenuItem.Click += new System.EventHandler(this.RemoveContact_Click);
             // 
@@ -124,13 +124,13 @@ namespace ContactsAppUI
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(55, 26);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(55, 24);
             this.helpToolStripMenuItem.Text = "Help";
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(133, 26);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.About_Click);
             // 
@@ -172,42 +172,54 @@ namespace ContactsAppUI
             // 
             // phoneTextBox
             // 
+            this.phoneTextBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.phoneTextBox.Location = new System.Drawing.Point(387, 116);
             this.phoneTextBox.Name = "phoneTextBox";
+            this.phoneTextBox.ReadOnly = true;
             this.phoneTextBox.Size = new System.Drawing.Size(536, 22);
             this.phoneTextBox.TabIndex = 4;
             // 
             // mailTextBox
             // 
+            this.mailTextBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.mailTextBox.Location = new System.Drawing.Point(387, 144);
             this.mailTextBox.Name = "mailTextBox";
+            this.mailTextBox.ReadOnly = true;
             this.mailTextBox.Size = new System.Drawing.Size(536, 22);
             this.mailTextBox.TabIndex = 5;
             // 
             // nameTextBox
             // 
+            this.nameTextBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.nameTextBox.Location = new System.Drawing.Point(387, 60);
             this.nameTextBox.Name = "nameTextBox";
+            this.nameTextBox.ReadOnly = true;
             this.nameTextBox.Size = new System.Drawing.Size(536, 22);
             this.nameTextBox.TabIndex = 6;
             // 
             // surnameTextBox
             // 
+            this.surnameTextBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.surnameTextBox.Location = new System.Drawing.Point(387, 32);
             this.surnameTextBox.Name = "surnameTextBox";
+            this.surnameTextBox.ReadOnly = true;
             this.surnameTextBox.Size = new System.Drawing.Size(536, 22);
             this.surnameTextBox.TabIndex = 7;
             // 
             // vkTextBox
             // 
+            this.vkTextBox.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.vkTextBox.Location = new System.Drawing.Point(387, 172);
             this.vkTextBox.Name = "vkTextBox";
+            this.vkTextBox.ReadOnly = true;
             this.vkTextBox.Size = new System.Drawing.Size(536, 22);
             this.vkTextBox.TabIndex = 8;
             // 
             // dateBox
             // 
+            this.dateBox.CustomFormat = "dd.MM.yyyy";
             this.dateBox.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateBox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.dateBox.Location = new System.Drawing.Point(387, 88);
             this.dateBox.MaxDate = new System.DateTime(9000, 2, 26, 0, 0, 0, 0);
             this.dateBox.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
@@ -215,7 +227,8 @@ namespace ContactsAppUI
             this.dateBox.Size = new System.Drawing.Size(120, 22);
             this.dateBox.TabIndex = 9;
             this.dateBox.TabStop = false;
-            this.dateBox.Value = new System.DateTime(2021, 2, 26, 0, 0, 0, 0);
+            this.dateBox.Value = new System.DateTime(2021, 1, 1, 0, 0, 0, 0);
+            this.dateBox.ValueChanged += new System.EventHandler(this.DateBox_ValueChanged);
             // 
             // surnameLabel
             // 
@@ -293,6 +306,7 @@ namespace ContactsAppUI
             this.textBoxFind.Name = "textBoxFind";
             this.textBoxFind.Size = new System.Drawing.Size(262, 22);
             this.textBoxFind.TabIndex = 17;
+            this.textBoxFind.TextChanged += new System.EventHandler(this.TextBoxFind_Changer);
             // 
             // surnameListBox
             // 
@@ -331,10 +345,13 @@ namespace ContactsAppUI
             this.Controls.Add(this.menuStrip);
             this.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip;
+            this.MinimumSize = new System.Drawing.Size(950, 570);
             this.Name = "MainForm";
             this.Text = "ContactsApp";
             this.Load += new System.EventHandler(this.MainForm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.ResumeLayout(false);
@@ -344,10 +361,7 @@ namespace ContactsAppUI
 
         #endregion
 
-        private void InicializeComponent()
-        {
-
-        }
+        
 
         private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
