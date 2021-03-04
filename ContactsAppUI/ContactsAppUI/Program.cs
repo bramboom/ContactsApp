@@ -45,45 +45,36 @@ namespace ContactsAppUI
             //Console.WriteLine(contact.IDVKontakte);
             //Console.WriteLine(contact.Mail);
 
+            //Console.WriteLine("CLone contact______________________");
+            //var contact2 = contact.Clone();
+
+            //Console.WriteLine(contact2.ToString());
+
             //Console.WriteLine("_____Class_Project_____");
 
-            //Contact[] contacts = new Contact[1];
-            //contacts[0] = contact;
+            
             //Project project = new Project();
             //project.Initialization(contact);
-            //project.Contacts = contacts;
-            //contacts = project.Contacts;
+            
 
-            //Console.WriteLine(contacts[0].Surname);
-            //Console.WriteLine(contacts[0].Name);
-            //Console.WriteLine(contacts[0].Date);
-            //Console.WriteLine(contacts[0].PhoneNumber);
-            //Console.WriteLine(contacts[0].IDVKontakte);
-            //Console.WriteLine(contacts[0].Mail);
+            //project.Show();
 
-            //Console.WriteLine(contacts[1].Surname);
-            //Console.WriteLine(contacts[1].Name);
-            //Console.WriteLine(contacts[1].Date);
-            //Console.WriteLine(contacts[1].PhoneNumber);
-            //Console.WriteLine(contacts[1].IDVKontakte);
-            //Console.WriteLine(contacts[1].Mail);
+            //project.AddContact(contact);
+            //project.AddContact(contact);
 
-            //Manager.SafeToFile(contacts, "json");
-            //contacts = null;
-            //contacts = Manager.LoadFromFile("json");
-            //Console.WriteLine(contacts[0].Surname);
-            //Console.WriteLine(contacts[0].Name);
-            //Console.WriteLine(contacts[0].Date);
-            //Console.WriteLine(contacts[0].PhoneNumber);
-            //Console.WriteLine(contacts[0].IDVKontakte);
-            //Console.WriteLine(contacts[0].Mail);
+            //project.Show();
 
-            //Console.WriteLine(contacts[1].Surname);
-            //Console.WriteLine(contacts[1].Name);
-            //Console.WriteLine(contacts[1].Date);
-            //Console.WriteLine(contacts[1].PhoneNumber);
-            //Console.WriteLine(contacts[1].IDVKontakte);
-            //Console.WriteLine(contacts[1].Mail);
+            //Console.WriteLine("_____________________");
+
+            //project.DeleteNode(2);
+
+            //project.Show();
+
+            //Manager.SafeToFile(project.Contacts);
+            //project.DeleteContacts();
+            //project.Contacts = Manager.LoadFromFile();
+            
+            //project.Show();
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

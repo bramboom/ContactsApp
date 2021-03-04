@@ -26,7 +26,10 @@ namespace ContactsApp
             get { return _contacts; }
             set
             {
-                _contacts = value;
+                if (value != null)
+                {
+                    _contacts = (Contact[])value.Clone();
+                }
             }
         }
 
@@ -37,36 +40,80 @@ namespace ContactsApp
         public void Initialization(Contact value)
         {
             _contacts = new Contact[1];
-            _contacts[0] = new Contact(value.Surname, value.Name, value.Date, value.PhoneNumber, value.IDVKontakte,
-                value.Mail);
+            _contacts[0] = (Contact) value.Clone();
         }
-
+        
+        /// <summary>
+        /// Метод добавляет объект Contact в конец
+        /// </summary>
+        /// <param name="value"></param>
         public void AddContact(Contact value)
         {
             int len = _contacts.Length;
             Contact[] newContacts = new Contact[len + 1];
             for (int index = 0; index < _contacts.Length; index++)
             {
-                newContacts[index] = new Contact(_contacts[index].Surname, _contacts[index].Name, 
-                    _contacts[index].Date, _contacts[index].PhoneNumber, 
-                    _contacts[index].IDVKontakte, _contacts[index].Mail);
+                newContacts[index] = (Contact) _contacts[index].Clone();
             }
 
-            newContacts[_contacts.Length] = new Contact(value.Surname, value.Name, value.Date, value.PhoneNumber, value.IDVKontakte,
+            newContacts[len] = new Contact(value.Surname, value.Name, value.Date, value.PhoneNumber, value.IDVKontakte,
                 value.Mail);
 
             _contacts = null;
 
-            _contacts = newContacts;
+            _contacts = (Contact[]) newContacts.Clone();
         }
 
+        /// <summary>
+        /// Метод удаляет объект
+        /// </summary>
         public void DeleteContacts()
         {
             _contacts = null;
         }
 
+        /// <summary>
+        /// Удаляет один элемент из списка контактов
+        /// </summary>
+        /// <param name="indexDeleteElement">Индекс удаляемого контакта</param>
+        public void DeleteNode(int indexDeleteElement)
+        {
+            if (_contacts.Length < 2)
+            {
+                _contacts = null;
+            }
+            else
+            {
+                int len = _contacts.Length;
+                Contact[] newContacts = new Contact[len - 1];
+                for (int index = 0; index < len; index++)
+                {
+                    if (index < indexDeleteElement)
+                    {
+                        newContacts[index] = (Contact)_contacts[index].Clone();
+                    }
+                    else if (index > indexDeleteElement)
+                    {
+                        newContacts[index-1] = (Contact) _contacts[index].Clone();
+                    }
+                }
+
+                _contacts = null;
+                _contacts = (Contact[]) newContacts.Clone();
+
+            }
+        }
+
+        /// <summary>
+        /// Выводит содержимое объекта
+        /// </summary>
         public void Show()
         {
+            if (_contacts == null)
+            {
+                return;
+            }
+
             for (int index = 0; index < _contacts.Length; index++)
             {
                 Console.WriteLine(_contacts[index].Surname);

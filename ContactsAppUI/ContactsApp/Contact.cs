@@ -10,7 +10,7 @@ namespace ContactsApp
     /// <summary>
     /// Класс, содержащий информацию о контакте
     /// </summary>
-    public class Contact
+    public class Contact : ICloneable
     {
         /// <summary>
         /// Фамилия контакта
@@ -50,6 +50,10 @@ namespace ContactsApp
             get { return _surname; }
             set
             {
+                if (value == "")
+                {
+                    return;
+                }
                 if (value.Length > 50)
                 {
                     throw new ArgumentException("Surname must have less 50 symbols!");
@@ -63,7 +67,7 @@ namespace ContactsApp
                     }
                 }
 
-                if ((value[0] < 'Z') && (value[0] > 'A'))
+                if ((value[0] <= 'Z') && (value[0] >= 'A'))
                 {
                     _surname = value;
                     return;
@@ -89,6 +93,10 @@ namespace ContactsApp
             get { return _name; }
             set
             {
+                if (value == "")
+                {
+                    return;
+                }
                 if (value.Length > 50)
                 {
                     throw new ArgumentException("Name must have less 50 symbols!");
@@ -128,21 +136,15 @@ namespace ContactsApp
             get { return _date; }
             set
             {
+                if (value == "")
+                {
+                    return;
+                }
                 string[] separators = {".", "/", "|"};
                 string[] dateValue = value.Split(separators, StringSplitOptions.RemoveEmptyEntries);
                 if ((Int32.Parse(dateValue[2]) < 1900) || (Int32.Parse(dateValue[2]) > DateTime.Now.Year))
                 {
                     throw new ArgumentException("Year value must be less now year and more 1900!");
-                }
-
-                if ((Int32.Parse(dateValue[1]) > 12) || (Int32.Parse(dateValue[1]) < 1))
-                {
-                    throw new ArgumentException("Mouth value must be less 12 and more 1!");
-                }
-
-                if ((Int32.Parse(dateValue[0]) > 31) || (Int32.Parse(dateValue[0]) < 1))
-                {
-                    throw new ArgumentException("Day value must be less 31 and more 1!");
                 }
 
                 _date = value;
@@ -157,6 +159,10 @@ namespace ContactsApp
             get { return _phoneNumber; }
             set
             {
+                if (value == "")
+                {
+                    return;
+                }
                 if (value.Length != 11)
                 {
                     throw new ArgumentException("Number must have 11 symbols!");
@@ -187,15 +193,28 @@ namespace ContactsApp
             get { return _idVKontakte; }
             set
             {
+                if (value == "")
+                {
+                    return;
+                }
                 if (value.Length > 15)
                 {
                     throw new ArgumentException("idVKontakte must have less 15 symbols!");
                 }
 
-                if ((value[0] != 'i') && (value[1] != 'd'))
+                if (value[0] != 'i')
                 {
                     throw new ArgumentException("ID must start of 'id'!");
                 }
+
+                if (value.Length > 1)
+                {
+                    if ((value[1] != 'd'))
+                    {
+                        throw new ArgumentException("ID must start of 'id'!");
+                    }
+                }
+
 
                 _idVKontakte = value;
             }
@@ -209,6 +228,10 @@ namespace ContactsApp
             get { return _mail; }
             set
             {
+                if (value == "")
+                {
+                    return;
+                }
                 if (value.Length > 50)
                 {
                     throw new ArgumentException("Mail must have less 50 symbols!");
@@ -216,6 +239,11 @@ namespace ContactsApp
 
                 _mail = value;
             }
+        }
+
+        public Contact()
+        {
+
         }
 
         /// <summary>
@@ -235,6 +263,15 @@ namespace ContactsApp
             PhoneNumber = phoneNumber;
             IDVKontakte = idVKontakte;
             Mail = mail;
+        }
+
+        /// <summary>
+        /// Метод копирует объект
+        /// </summary>
+        /// <returns></returns>
+        public object Clone()
+        {
+            return this.MemberwiseClone();
         }
     }
 }

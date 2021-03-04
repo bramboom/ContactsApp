@@ -17,11 +17,10 @@ namespace ContactsApp
         /// Метод сериализирует объект Project в файл
         /// </summary>
         /// <param name="value">сериализируемый объект</param>
-        /// <param name="fileName">имя файла</param>
-        public static void SafeToFile(Contact[] value, string fileName)
+        public static void SafeToFile(Contact[] value)
         {
             JsonSerializer serializer = new JsonSerializer();
-            using (StreamWriter sw = new StreamWriter(@"C:\Users\bramboom\Desktop\json.txt"))
+            using (StreamWriter sw = new StreamWriter(@"json.txt"))
             using (JsonWriter writer = new JsonTextWriter(sw))
             {
                 serializer.Serialize(writer, value);
@@ -31,13 +30,12 @@ namespace ContactsApp
         /// <summary>
         /// Метод десериализирует объект Project из файла
         /// </summary>
-        /// <param name="fileName">название файла</param>
         /// <returns>десериализированный объект</returns>
-        public static Contact[] LoadFromFile(string fileName)
+        public static Contact[] LoadFromFile()
         {
             Contact[] contact = null;
             JsonSerializer serializer = new JsonSerializer();
-            using (StreamReader sr = new StreamReader(@"C:\Users\bramboom\Desktop\json.txt"))
+            using (StreamReader sr = new StreamReader(@"json.txt"))
             using (JsonReader reader = new JsonTextReader(sr))
             {
                 contact = (Contact[]) serializer.Deserialize<Contact[]>(reader);
