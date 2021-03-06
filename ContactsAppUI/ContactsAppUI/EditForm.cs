@@ -13,8 +13,14 @@ namespace ContactsAppUI
 {
     public partial class EditForm : Form
     {
+        /// <summary>
+        /// объект класса Contact, который нужно изменить или добавить
+        /// </summary>
         private Contact _contact = new Contact();
 
+        /// <summary>
+        /// свойство поля _contact
+        /// </summary>
         public Contact Contact
         {
             get { return _contact;}
@@ -147,36 +153,6 @@ namespace ContactsAppUI
             phoneTextBox.Text = _contact.PhoneNumber;
             mailTextBox.Text = _contact.Mail;
             vkTextBox.Text = _contact.IDVKontakte;
-        }
-
-        private void surnameTextBox_Leave(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void nameTextBox_Leave(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void dateBox_Leave(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void phoneBox_Leave(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void mailTextBox_Leave(object sender, EventArgs e)
-        {
-           
-        }
-
-        private void vkTextBox_Leave(object sender, EventArgs e)
-        {
-            
         }
 
         private void surnameTextBox_Changed(object sender, EventArgs e)

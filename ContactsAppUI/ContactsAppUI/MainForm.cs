@@ -14,7 +14,14 @@ namespace ContactsAppUI
 {
     public partial class MainForm : System.Windows.Forms.Form
     {
+        /// <summary>
+        /// объект класса Project
+        /// </summary>
        private Project project = new Project();
+
+        /// <summary>
+        /// поле содержит индекс контакта в соответствии с индексом в ListBox
+        /// </summary>
        private int[] indexOfContact;
 
         
@@ -26,12 +33,18 @@ namespace ContactsAppUI
             InitializeInbexOfContact();
         }
 
+        /// <summary>
+        /// инициализация индексов контактов
+        /// </summary>
         private void InitializeInbexOfContact()
         {
-            indexOfContact = new int[project.Contacts.Length];
-            for (int index = 0; index < project.Contacts.Length; index++)
+            if (project.Contacts != null)
             {
-                indexOfContact[index] = index;
+                indexOfContact = new int[project.Contacts.Length];
+                for (int index = 0; index < project.Contacts.Length; index++)
+                {
+                    indexOfContact[index] = index;
+                }
             }
         }
 
@@ -91,20 +104,26 @@ namespace ContactsAppUI
 
         private void RemoveContact_Click(object sender, EventArgs e)
         {
-            Contact[] contacts = project.Contacts;
-            int index = indexOfContact[surnameListBox.SelectedIndex];
-
-            DialogResult result = MessageBox.Show(
-                $"Do you really want to remove this contact: {contacts[index].Surname}",
-                "Remove Contact",
-                MessageBoxButtons.OKCancel);
-            if (result == DialogResult.OK)
+            if (surnameListBox.SelectedItem != null)
             {
-                project.DeleteNode(index);
+                int index = indexOfContact[surnameListBox.SelectedIndex];
+
+                DialogResult result = MessageBox.Show(
+                    $"Do you really want to remove this contact: {project.Contacts[index].Surname}",
+                    "Remove Contact",
+                    MessageBoxButtons.OKCancel);
+                if (result == DialogResult.OK)
+                {
+                    project.DeleteNode(index);
+                }
+                Manager.SafeToFile(project.Contacts);
+                textBoxFind.Clear();
+                InsertToListBox();
             }
-            Manager.SafeToFile(project.Contacts);
-            textBoxFind.Clear();
-            InsertToListBox();
+            else
+            {
+                MessageBox.Show("Select contact!");
+            }
         }
 
         private void About_Click(object sender, EventArgs e)
@@ -121,6 +140,9 @@ namespace ContactsAppUI
             }
         }
 
+        /// <summary>
+        /// вывод всех контактов по фамилии в ListBox
+        /// </summary>
         private void InsertToListBox()
         {
             surnameListBox.Items.Clear();
@@ -219,7 +241,5 @@ namespace ContactsAppUI
                 dateBox.Text = DateTime.Now.ToString();
             }
         }
-
-        
     }
 }

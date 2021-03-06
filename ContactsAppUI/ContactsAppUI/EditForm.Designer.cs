@@ -54,7 +54,6 @@ namespace ContactsAppUI
             this.nameTextBox.Size = new System.Drawing.Size(426, 22);
             this.nameTextBox.TabIndex = 0;
             this.nameTextBox.TextChanged += new System.EventHandler(this.nameTextBox_TextChanged);
-            this.nameTextBox.MouseLeave += new System.EventHandler(this.nameTextBox_Leave);
             // 
             // mailTextBox
             // 
@@ -63,7 +62,6 @@ namespace ContactsAppUI
             this.mailTextBox.Size = new System.Drawing.Size(426, 22);
             this.mailTextBox.TabIndex = 1;
             this.mailTextBox.TextChanged += new System.EventHandler(this.mailTextBox_TextChanged);
-            this.mailTextBox.MouseLeave += new System.EventHandler(this.mailTextBox_Leave);
             // 
             // vkTextBox
             // 
@@ -72,7 +70,6 @@ namespace ContactsAppUI
             this.vkTextBox.Size = new System.Drawing.Size(426, 22);
             this.vkTextBox.TabIndex = 2;
             this.vkTextBox.TextChanged += new System.EventHandler(this.vkTextBox_TextChanged);
-            this.vkTextBox.MouseLeave += new System.EventHandler(this.vkTextBox_Leave);
             // 
             // surnameTextBox
             // 
@@ -82,7 +79,6 @@ namespace ContactsAppUI
             this.surnameTextBox.Size = new System.Drawing.Size(426, 22);
             this.surnameTextBox.TabIndex = 3;
             this.surnameTextBox.TextChanged += new System.EventHandler(this.surnameTextBox_Changed);
-            this.surnameTextBox.MouseLeave += new System.EventHandler(this.surnameTextBox_Leave);
             // 
             // phoneTextBox
             // 
@@ -91,11 +87,10 @@ namespace ContactsAppUI
             this.phoneTextBox.Size = new System.Drawing.Size(426, 22);
             this.phoneTextBox.TabIndex = 4;
             this.phoneTextBox.TextChanged += new System.EventHandler(this.phoneTextBox_TextChanged);
-            this.phoneTextBox.MouseLeave += new System.EventHandler(this.phoneBox_Leave);
             // 
             // dateTimePicker
             // 
-            this.dateTimePicker.CalendarForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.dateTimePicker.CalendarForeColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.dateTimePicker.CalendarTitleBackColor = System.Drawing.SystemColors.ActiveBorder;
             this.dateTimePicker.CustomFormat = "dd.MM.yyyy";
             this.dateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
@@ -106,7 +101,6 @@ namespace ContactsAppUI
             this.dateTimePicker.TabIndex = 5;
             this.dateTimePicker.Value = new System.DateTime(2021, 3, 2, 0, 0, 0, 0);
             this.dateTimePicker.ValueChanged += new System.EventHandler(this.dateBox_ValueChanged);
-            this.dateTimePicker.MouseLeave += new System.EventHandler(this.dateBox_Leave);
             // 
             // vkLabel
             // 

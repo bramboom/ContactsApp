@@ -16,7 +16,7 @@ namespace ContactsApp
         /// <summary>
         /// Список контактов
         /// </summary>
-        private Contact[] _contacts { get; set; }
+        private Contact[] _contacts;
 
         /// <summary>
         /// Свойства поля _contacts
@@ -56,8 +56,8 @@ namespace ContactsApp
                 newContacts[index] = (Contact) _contacts[index].Clone();
             }
 
-            newContacts[len] = new Contact(value.Surname, value.Name, value.Date, value.PhoneNumber, value.IDVKontakte,
-                value.Mail);
+            newContacts[len] = new Contact(value.Surname, value.Name, value.Date, 
+                value.PhoneNumber, value.IDVKontakte, value.Mail);
 
             _contacts = null;
 

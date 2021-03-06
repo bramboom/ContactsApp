@@ -15,32 +15,32 @@ namespace ContactsApp
         /// <summary>
         /// Фамилия контакта
         /// </summary>
-        private string _surname { get; set; }
+        private string _surname;
 
         /// <summary>
         /// Имя контакта
         /// </summary>
-        private string _name { get; set; }
+        private string _name;
 
         /// <summary>
         /// День рождения контакта
         /// </summary>
-        private string _date { get; set; }
+        private string _date;
 
         /// <summary>
         /// Номер телефона
         /// </summary>
-        private string _phoneNumber { get; set; }
+        private string _phoneNumber;
 
         /// <summary>
         /// ID ВКонтакте
         /// </summary>
-        private string _idVKontakte { get; set; }
+        private string _idVKontakte;
 
         /// <summary>
         /// Адрес почты
         /// </summary>
-        private string _mail { get; set; }
+        private string _mail;
 
         /// <summary>
         /// Свойства поля _surname
@@ -141,8 +141,11 @@ namespace ContactsApp
                     return;
                 }
                 string[] separators = {".", "/", "|"};
-                string[] dateValue = value.Split(separators, StringSplitOptions.RemoveEmptyEntries);
-                if ((Int32.Parse(dateValue[2]) < 1900) || (Int32.Parse(dateValue[2]) > DateTime.Now.Year))
+                string[] dateValue = 
+                    value.Split(separators, StringSplitOptions.RemoveEmptyEntries);
+
+                if ((Int32.Parse(dateValue[2]) < 1900) || 
+                    (Int32.Parse(dateValue[2]) > DateTime.Now.Year))
                 {
                     throw new ArgumentException("Year value must be less now year and more 1900!");
                 }
@@ -241,6 +244,9 @@ namespace ContactsApp
             }
         }
 
+        /// <summary>
+        /// Создание пустого объекта
+        /// </summary>
         public Contact()
         {
 
@@ -255,7 +261,8 @@ namespace ContactsApp
         /// <param name="phoneNumber">Инициализирует поле _phoneNumber</param>
         /// <param name="idVKontakte">Инициализирует поле _idVKontakte</param>
         /// <param name="mail">Инициализирует поле _mail</param>
-        public Contact(string surname, string name, string date, string phoneNumber, string idVKontakte, string mail)
+        public Contact(string surname, string name, string date, 
+            string phoneNumber, string idVKontakte, string mail)
         {
             Surname = surname;
             Name = name;
@@ -268,7 +275,7 @@ namespace ContactsApp
         /// <summary>
         /// Метод копирует объект
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Копию объекта</returns>
         public object Clone()
         {
             return this.MemberwiseClone();
