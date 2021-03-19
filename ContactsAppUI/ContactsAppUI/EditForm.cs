@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using ContactsApp;
 
@@ -16,7 +10,7 @@ namespace ContactsAppUI
         /// <summary>
         /// объект класса Contact, который нужно изменить или добавить
         /// </summary>
-        private Contact _contact = new Contact();
+        private Contact _contact;
 
         /// <summary>
         /// свойство поля _contact
@@ -26,10 +20,12 @@ namespace ContactsAppUI
             get { return _contact;}
             set
             {
-                _contact = new Contact(value.Surname, value.Name, value.Date, value.PhoneNumber, value.IDVKontakte,
-                    value.Mail);
+                _contact = new Contact(value.Surname, value.Name, value.Birthday, value.PhoneNumber, value.IdVkontakte,
+                    value.EMail);
             }
         }
+
+     
 
         public EditForm()
         {
@@ -40,7 +36,7 @@ namespace ContactsAppUI
         {
             if ((surnameTextBox.BackColor == Color.DarkSalmon)||(surnameTextBox.Text == ""))
             {
-                MessageBox.Show("Incorrect surname!", "Error");
+                MessageBox.Show("incorrect surname!");
             }
             else if ((nameTextBox.BackColor == Color.DarkSalmon) || (nameTextBox.Text == ""))
             {
@@ -60,7 +56,7 @@ namespace ContactsAppUI
             }
             else if ((vkTextBox.BackColor == Color.DarkSalmon)||(vkTextBox.Text == ""))
             {
-                MessageBox.Show("Incorrect vk.com!", "Error");
+                MessageBox.Show("Incorrect vk.com!");
             }
             else
             {
@@ -88,12 +84,14 @@ namespace ContactsAppUI
             dateTimePicker.BackColor = Color.White;
             try
             {
-                _contact.Date = dateTimePicker.Text;
+                _contact.Birthday = dateTimePicker.Value;
             }
             catch (ArgumentException exception)
             {
                 Console.WriteLine(exception);
                 dateTimePicker.BackColor = Color.DarkSalmon;
+                myDateTimePicker.BackColor = Color.DarkSalmon;
+
             }
         }
 
@@ -102,7 +100,9 @@ namespace ContactsAppUI
             phoneTextBox.BackColor = Color.White;
             try
             {
-                _contact.PhoneNumber = phoneTextBox.Text;
+                PhoneNumber value = new PhoneNumber();
+                value.Number = long.Parse(phoneTextBox.Text);
+              _contact.PhoneNumber = value;
             }
             catch (ArgumentException exception)
             {
@@ -116,7 +116,7 @@ namespace ContactsAppUI
             mailTextBox.BackColor = Color.White;
             try
             {
-                _contact.Mail = mailTextBox.Text;
+                _contact.EMail = mailTextBox.Text;
             }
             catch (ArgumentException exception)
             {
@@ -130,7 +130,7 @@ namespace ContactsAppUI
             vkTextBox.BackColor = Color.White;
             try
             {
-                _contact.IDVKontakte = vkTextBox.Text;
+                _contact.IdVkontakte = vkTextBox.Text;
             }
             catch (ArgumentException exception)
             {
@@ -147,12 +147,22 @@ namespace ContactsAppUI
 
         private void EditForm_Load(object sender, EventArgs e)
         {
-            surnameTextBox.Text = _contact.Surname;
-            nameTextBox.Text = _contact.Name;
-            dateTimePicker.Text = _contact.Date;
-            phoneTextBox.Text = _contact.PhoneNumber;
-            mailTextBox.Text = _contact.Mail;
-            vkTextBox.Text = _contact.IDVKontakte;
+            if (_contact != null)
+            {
+                surnameTextBox.Text = _contact.Surname;
+                nameTextBox.Text = _contact.Name;
+                dateTimePicker.Value = _contact.Birthday;
+                phoneTextBox.Text = _contact.PhoneNumber.Number.ToString();
+                mailTextBox.Text = _contact.EMail;
+                vkTextBox.Text = _contact.IdVkontakte;
+            }
+            else
+            {
+                _contact = new Contact();
+                _contact.Birthday = DateTime.Now;
+                dateTimePicker.Value = DateTime.Now;
+            }
+            
         }
 
         private void surnameTextBox_Changed(object sender, EventArgs e)

@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ContactsApp
 {
@@ -25,12 +20,12 @@ namespace ContactsApp
         /// <summary>
         /// День рождения контакта
         /// </summary>
-        private string _date;
+        private DateTime _birthday;
 
         /// <summary>
         /// Номер телефона
         /// </summary>
-        private string _phoneNumber;
+        private PhoneNumber _phoneNumber;
 
         /// <summary>
         /// ID ВКонтакте
@@ -40,207 +35,101 @@ namespace ContactsApp
         /// <summary>
         /// Адрес почты
         /// </summary>
-        private string _mail;
+        private string _eMail;
 
         /// <summary>
-        /// Свойства поля _surname
+        /// метод возвращает и задает значение фамилии
         /// </summary>
         public string Surname
         {
             get { return _surname; }
             set
             {
-                if (value == "")
-                {
-                    return;
-                }
-                if (value.Length > 50)
-                {
-                    throw new ArgumentException("Surname must have less 50 symbols!");
-                }
-
-                for (int index = 1; index < value.Length; index++)
-                {
-                    if ((value[index] > 'z') || (value[index] < 'a'))
-                    {
-                        throw new ArgumentException("Surname must consist of symbols a..z");
-                    }
-                }
-
-                if ((value[0] <= 'Z') && (value[0] >= 'A'))
-                {
-                    _surname = value;
-                    return;
-                }
-
-                if ((value[0] > 'z') || (value[0] < 'a'))
-                {
-                    throw new ArgumentException("Surname must consist of symbols a..z");
-                }
-                else
-                {
-                    TextInfo myTI = new CultureInfo("en-US", false).TextInfo;
-                    _surname = myTI.ToTitleCase(value);
-                }
+                _surname = NameVerification(value, "Surname");
             }
         }
 
         /// <summary>
-        /// Свойства поля _name
+        /// метод возвращает и задает значение имени
         /// </summary>
         public string Name
         {
             get { return _name; }
             set
             {
-                if (value == "")
-                {
-                    return;
-                }
-                if (value.Length > 50)
-                {
-                    throw new ArgumentException("Name must have less 50 symbols!");
-                }
-
-                for (int index = 1; index < value.Length; index++)
-                {
-                    if ((value[index] > 'z') || (value[index] < 'a'))
-                    {
-                        throw new ArgumentException("Name must consist of a..z");
-                    }
-                }
-
-                if ((value[0] <= 'Z') && (value[0] >= 'A'))
-                {
-                    _name = value;
-                    return;
-                }
-
-                if ((value[0] > 'z') || (value[0] < 'a'))
-                {
-                    throw new ArgumentException("Name must consist of a..z");
-                }
-                else
-                {
-                    TextInfo myTI = new CultureInfo("en-US", false).TextInfo;
-                    _name = myTI.ToTitleCase(value);
-                }
+                _name = NameVerification(value, "Name");
             }
         }
 
         /// <summary>
-        /// Свойства поля _date
+        /// метод возвращает и задает значение дня рождения
         /// </summary>
-        public string Date
+        public DateTime Birthday
         {
-            get { return _date; }
+            get { return _birthday; }
             set
             {
-                if (value == "")
+                if(value > DateTime.Now)
                 {
-                    return;
-                }
-                string[] separators = {".", "/", "|"};
-                string[] dateValue = 
-                    value.Split(separators, StringSplitOptions.RemoveEmptyEntries);
-
-                if ((Int32.Parse(dateValue[2]) < 1900) || 
-                    (Int32.Parse(dateValue[2]) > DateTime.Now.Year))
-                {
-                    throw new ArgumentException("Year value must be less now year and more 1900!");
+                    throw new ArgumentException("Birthday should be less than now date ");
                 }
 
-                _date = value;
+                if (value.Year < 1900)
+                {
+                    throw new ArgumentException("Birthday year should be more 1900");
+                }
+                _birthday = value;
             }
         }
 
         /// <summary>
-        /// Свойства поля _phoneNumber
+        /// метод возвращает и задает значение номера телефона
         /// </summary>
-        public string PhoneNumber
+        public PhoneNumber PhoneNumber
         {
             get { return _phoneNumber; }
             set
             {
-                if (value == "")
-                {
-                    return;
-                }
-                if (value.Length != 11)
-                {
-                    throw new ArgumentException("Number must have 11 symbols!");
-                }
-
-                for (int index = 0; index < value.Length; index++)
-                {
-                    if ((value[index] < '0') || (value[index] > '9'))
-                    {
-                        throw new ArgumentException("Number must be digit!");
-                    }
-                }
-
-                if (value[0] != '7')
-                {
-                    throw new ArgumentException("First numeral must be 7!");
-                }
-
                 _phoneNumber = value;
             }
         }
 
         /// <summary>
-        /// Свойства поля _idVKontakte
+        /// метод возвращает и задает значение id Вконтакте
         /// </summary>
-        public string IDVKontakte
+        public string IdVkontakte
         {
             get { return _idVKontakte; }
             set
             {
-                if (value == "")
-                {
-                    return;
-                }
                 if (value.Length > 15)
                 {
                     throw new ArgumentException("idVKontakte must have less 15 symbols!");
                 }
 
-                if (value[0] != 'i')
+                if (!value.StartsWith("id"))
                 {
-                    throw new ArgumentException("ID must start of 'id'!");
+                    throw new ArgumentException("idVkontakte should start 'id'");
                 }
-
-                if (value.Length > 1)
-                {
-                    if ((value[1] != 'd'))
-                    {
-                        throw new ArgumentException("ID must start of 'id'!");
-                    }
-                }
-
 
                 _idVKontakte = value;
             }
         }
 
         /// <summary>
-        /// Свойства поля _mail
+        /// метод возвращает и задает значение электронной почты
         /// </summary>
-        public string Mail
+        public string EMail
         {
-            get { return _mail; }
+            get { return _eMail; }
             set
             {
-                if (value == "")
-                {
-                    return;
-                }
                 if (value.Length > 50)
                 {
-                    throw new ArgumentException("Mail must have less 50 symbols!");
+                    throw new ArgumentException("EMail must have less 50 symbols!");
                 }
 
-                _mail = value;
+                _eMail = value;
             }
         }
 
@@ -257,19 +146,19 @@ namespace ContactsApp
         /// </summary>
         /// <param name="surname">Инициализирует поле _surname</param>
         /// <param name="name">Инициализирует поле _name</param>
-        /// <param name="date">Инициализирует поле _date</param>
+        /// <param name="birthday">Инициализирует поле _birthday</param>
         /// <param name="phoneNumber">Инициализирует поле _phoneNumber</param>
         /// <param name="idVKontakte">Инициализирует поле _idVKontakte</param>
-        /// <param name="mail">Инициализирует поле _mail</param>
-        public Contact(string surname, string name, string date, 
-            string phoneNumber, string idVKontakte, string mail)
+        /// <param name="eMail">Инициализирует поле _eMail</param>
+        public Contact(string surname, string name, DateTime birthday, 
+            PhoneNumber phoneNumber, string idVKontakte, string eMail)
         {
             Surname = surname;
             Name = name;
-            Date = date;
+            Birthday = birthday;
             PhoneNumber = phoneNumber;
-            IDVKontakte = idVKontakte;
-            Mail = mail;
+            IdVkontakte = idVKontakte;
+            EMail = eMail;
         }
 
         /// <summary>
@@ -279,6 +168,36 @@ namespace ContactsApp
         public object Clone()
         {
             return this.MemberwiseClone();
+        }
+
+        /// <summary>
+        /// проверяет строку с именем или фамилией
+        /// </summary>
+        /// <param name="value">строка которую проверяем</param>
+        /// <param name="name">строка с названием метода, в котором вызывается проверка</param>
+        /// <returns>проверенная строка</returns>
+        private string NameVerification(string value, string name)
+        {
+            if (value.Length > 50)
+            {
+                throw new ArgumentException($"{name} must have less 50 symbols!");
+            }
+
+            for (int index = 0; index < value.Length; index++)
+            {
+                if (!char.IsLetter(value[index]))
+                {
+                    throw new ArgumentException($"{name} must consist of a..z");
+                }
+            }
+
+            if (value != "")
+            {
+                string newValue = value.ToUpper()[0] + value.Substring(1);
+                return newValue;
+            }
+
+            return value;
         }
     }
 }

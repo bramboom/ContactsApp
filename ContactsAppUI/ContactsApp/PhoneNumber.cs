@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ContactsApp
 {
@@ -14,42 +10,31 @@ namespace ContactsApp
         /// <summary>
         /// Номер телефона
         /// </summary>
-        private long _phoneNumber;
+        private long _number;
 
         /// <summary>
-        /// Метод помещает значение в поле _phoneNumber
+        /// метод возвращает и задает значение номера телефона
         /// </summary>
-        /// <param name="phoneNumber">Значение, введенное пользователем</param>
-        public void SetPhoneNumber(string phoneNumber)
+        public long Number
         {
-            if(11!=phoneNumber.Length)
+            get
             {
-                throw new ArgumentException("Number must have 11 symbols!");
+                return _number;
             }
-            
-            for (int index = 0; index < phoneNumber.Length; index++)
+            set
             {
-                if ((phoneNumber[index] < '0') || (phoneNumber[index] > '9'))
+                if(value.ToString().Length != 11)
                 {
-                    throw new ArgumentException("Number must be digit!");
+                    throw new ArgumentException("Number must have 11 symbols!");
                 }
+
+                if(!value.ToString().StartsWith("7"))
+                {
+                    throw new ArgumentException("First numeral must be 7!");
+                }
+
+                _number = value;
             }
-
-            if (phoneNumber[0] != '7')
-            {
-                throw new ArgumentException("First numeral must be 7!");
-            }
-
-            _phoneNumber = long.Parse(phoneNumber);
-        }
-
-        /// <summary>
-        /// Метод возвращает значение поля _phoneNumber
-        /// </summary>
-        /// <returns>_phoneNumber</returns>
-        public long GetPhoneNumber()
-        {
-            return _phoneNumber;
         }
     }
 }

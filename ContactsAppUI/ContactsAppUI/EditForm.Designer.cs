@@ -45,6 +45,7 @@ namespace ContactsAppUI
             this.surnameLabel = new System.Windows.Forms.Label();
             this.cancelButton = new System.Windows.Forms.Button();
             this.OkButton = new System.Windows.Forms.Button();
+            this.myDateTimePicker = new ContactsAppUI.myDateTimePicker();
             this.SuspendLayout();
             // 
             // nameTextBox
@@ -95,11 +96,11 @@ namespace ContactsAppUI
             this.dateTimePicker.CustomFormat = "dd.MM.yyyy";
             this.dateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePicker.Location = new System.Drawing.Point(89, 68);
-            this.dateTimePicker.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
+            this.dateTimePicker.MinDate = new System.DateTime(1800, 1, 1, 0, 0, 0, 0);
             this.dateTimePicker.Name = "dateTimePicker";
             this.dateTimePicker.Size = new System.Drawing.Size(126, 22);
             this.dateTimePicker.TabIndex = 5;
-            this.dateTimePicker.Value = new System.DateTime(2021, 3, 2, 0, 0, 0, 0);
+            this.dateTimePicker.Value = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             this.dateTimePicker.ValueChanged += new System.EventHandler(this.dateBox_ValueChanged);
             // 
             // vkLabel
@@ -126,21 +127,21 @@ namespace ContactsAppUI
             // 
             this.dateLabel.AutoSize = true;
             this.dateLabel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.dateLabel.Location = new System.Drawing.Point(40, 68);
+            this.dateLabel.Location = new System.Drawing.Point(14, 73);
             this.dateLabel.Name = "dateLabel";
-            this.dateLabel.Size = new System.Drawing.Size(42, 17);
+            this.dateLabel.Size = new System.Drawing.Size(64, 17);
             this.dateLabel.TabIndex = 19;
-            this.dateLabel.Text = "Date:";
+            this.dateLabel.Text = "Birthday:";
             // 
             // mailLabel
             // 
             this.mailLabel.AutoSize = true;
             this.mailLabel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.mailLabel.Location = new System.Drawing.Point(45, 124);
+            this.mailLabel.Location = new System.Drawing.Point(29, 124);
             this.mailLabel.Name = "mailLabel";
-            this.mailLabel.Size = new System.Drawing.Size(37, 17);
+            this.mailLabel.Size = new System.Drawing.Size(46, 17);
             this.mailLabel.TabIndex = 18;
-            this.mailLabel.Text = "Mail:";
+            this.mailLabel.Text = "EMail:";
             // 
             // nameLabel
             // 
@@ -182,11 +183,19 @@ namespace ContactsAppUI
             this.OkButton.UseVisualStyleBackColor = true;
             this.OkButton.Click += new System.EventHandler(this.OkButton_Click);
             // 
+            // myDateTimePicker
+            // 
+            this.myDateTimePicker.Location = new System.Drawing.Point(292, 68);
+            this.myDateTimePicker.Name = "myDateTimePicker";
+            this.myDateTimePicker.Size = new System.Drawing.Size(200, 22);
+            this.myDateTimePicker.TabIndex = 24;
+            // 
             // EditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(537, 227);
+            this.Controls.Add(this.myDateTimePicker);
             this.Controls.Add(this.OkButton);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.vkLabel);
@@ -228,5 +237,6 @@ namespace ContactsAppUI
         private System.Windows.Forms.Label surnameLabel;
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Button OkButton;
+        private myDateTimePicker myDateTimePicker;
     }
 }

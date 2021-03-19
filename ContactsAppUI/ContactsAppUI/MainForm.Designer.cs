@@ -282,7 +282,7 @@ namespace ContactsAppUI
             this.mailLabel.Name = "mailLabel";
             this.mailLabel.Size = new System.Drawing.Size(37, 17);
             this.mailLabel.TabIndex = 12;
-            this.mailLabel.Text = "Mail:";
+            this.mailLabel.Text = "EMail:";
             // 
             // dateLabel
             // 
@@ -292,7 +292,7 @@ namespace ContactsAppUI
             this.dateLabel.Name = "dateLabel";
             this.dateLabel.Size = new System.Drawing.Size(42, 17);
             this.dateLabel.TabIndex = 13;
-            this.dateLabel.Text = "Date:";
+            this.dateLabel.Text = "Birthday:";
             // 
             // phoneLabel
             // 
