@@ -3,7 +3,7 @@
 namespace ContactsApp
 {
     /// <summary>
-    /// Класс, содержащий информацию о контакте
+    ///содержит информацию о контакте
     /// </summary>
     public class Contact : ICloneable
     {
@@ -23,11 +23,6 @@ namespace ContactsApp
         private DateTime _birthday;
 
         /// <summary>
-        /// Номер телефона
-        /// </summary>
-        private PhoneNumber _phoneNumber;
-
-        /// <summary>
         /// ID ВКонтакте
         /// </summary>
         private string _idVKontakte;
@@ -45,31 +40,39 @@ namespace ContactsApp
             get { return _surname; }
             set
             {
-                _surname = NameVerification(value, "Surname");
+                AssertName(value, "Surname");
+                _surname = ChangeRegisterOfFirstSymbol(value);
             }
         }
 
         /// <summary>
-        /// метод возвращает и задает значение имени
+        /// возвращает и задает значение имени
         /// </summary>
         public string Name
         {
-            get { return _name; }
+            get
+            {
+                return _name;
+            }
             set
             {
-                _name = NameVerification(value, "Name");
+                AssertName(value, "Name");
+                _name = ChangeRegisterOfFirstSymbol(value);
             }
         }
 
         /// <summary>
-        /// метод возвращает и задает значение дня рождения
+        /// возвращает и задает значение дня рождения
         /// </summary>
         public DateTime Birthday
         {
-            get { return _birthday; }
+            get
+            {
+                return _birthday;
+            }
             set
             {
-                if(value > DateTime.Now)
+                if (value > DateTime.Now)
                 {
                     throw new ArgumentException("Birthday should be less than now date ");
                 }
@@ -83,19 +86,12 @@ namespace ContactsApp
         }
 
         /// <summary>
-        /// метод возвращает и задает значение номера телефона
+        /// возвращает и задает значение номера телефона
         /// </summary>
-        public PhoneNumber PhoneNumber
-        {
-            get { return _phoneNumber; }
-            set
-            {
-                _phoneNumber = value;
-            }
-        }
+        public PhoneNumber PhoneNumber { get; set; } = new PhoneNumber();
 
         /// <summary>
-        /// метод возвращает и задает значение id Вконтакте
+        /// возвращает и задает значение id Вконтакте
         /// </summary>
         public string IdVkontakte
         {
@@ -117,7 +113,7 @@ namespace ContactsApp
         }
 
         /// <summary>
-        /// метод возвращает и задает значение электронной почты
+        /// возвращает и задает значение электронной почты
         /// </summary>
         public string EMail
         {
@@ -150,7 +146,7 @@ namespace ContactsApp
         /// <param name="phoneNumber">Инициализирует поле _phoneNumber</param>
         /// <param name="idVKontakte">Инициализирует поле _idVKontakte</param>
         /// <param name="eMail">Инициализирует поле _eMail</param>
-        public Contact(string surname, string name, DateTime birthday, 
+        public Contact(string surname, string name, DateTime birthday,
             PhoneNumber phoneNumber, string idVKontakte, string eMail)
         {
             Surname = surname;
@@ -162,7 +158,7 @@ namespace ContactsApp
         }
 
         /// <summary>
-        /// Метод копирует объект
+        /// копирует объект
         /// </summary>
         /// <returns>Копию объекта</returns>
         public object Clone()
@@ -174,29 +170,36 @@ namespace ContactsApp
         /// проверяет строку с именем или фамилией
         /// </summary>
         /// <param name="value">строка которую проверяем</param>
-        /// <param name="name">строка с названием метода, в котором вызывается проверка</param>
+        /// <param name="nameProperty">строка с названием метода, в котором вызывается проверка</param>
         /// <returns>проверенная строка</returns>
-        private string NameVerification(string value, string name)
+        private void AssertName(string value, string nameProperty)
         {
             if (value.Length > 50)
             {
-                throw new ArgumentException($"{name} must have less 50 symbols!");
+                throw new ArgumentException($"{nameProperty} must have less 50 symbols!");
             }
 
             for (int index = 0; index < value.Length; index++)
             {
                 if (!char.IsLetter(value[index]))
                 {
-                    throw new ArgumentException($"{name} must consist of a..z");
+                    throw new ArgumentException($"{nameProperty} must consist of a..z");
                 }
             }
+        }
 
+        /// <summary>
+        /// приравнивает первый символ к верхнему регистру
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        private string ChangeRegisterOfFirstSymbol(string value)
+        {
             if (value != "")
             {
                 string newValue = value.ToUpper()[0] + value.Substring(1);
                 return newValue;
             }
-
             return value;
         }
     }

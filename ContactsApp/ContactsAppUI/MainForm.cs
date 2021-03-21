@@ -9,14 +9,14 @@ namespace ContactsAppUI
         /// <summary>
         /// объект класса Project
         /// </summary>
-       private Project project = ProjectManager.LoadFromFile(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
+        private Project project = ProjectManager.LoadFromFile(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
 
         /// <summary>
         /// поле содержит индекс контакта в соответствии с индексом в ListBox
         /// </summary>
-       private int[] _indexOfContact;
+        private int[] _indexOfContact;
 
-        
+
 
         public MainForm()
         {
@@ -68,7 +68,7 @@ namespace ContactsAppUI
                 edit.ShowDialog();
                 if (edit.DialogResult == DialogResult.OK)
                 {
-                    project.Contacts[index] = (Contact) edit.Contact.Clone();
+                    project.Contacts[index] = (Contact)edit.Contact.Clone();
                 }
                 ProjectManager.SaveToFile(project, Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
                 textBoxFind.Clear();
@@ -186,10 +186,10 @@ namespace ContactsAppUI
                         _indexOfContact[count] = index;
                         surnameListBox.Items.Insert(count, project.Contacts[index].Surname);
                         count++;
-                        
+
                     }
 
-                   
+
                 }
             }
             else

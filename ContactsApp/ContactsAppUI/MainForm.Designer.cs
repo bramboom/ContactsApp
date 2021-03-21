@@ -71,7 +71,7 @@ namespace ContactsAppUI
             this.helpToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(932, 30);
+            this.menuStrip.Size = new System.Drawing.Size(932, 28);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "menuStrip";
             // 
@@ -80,7 +80,7 @@ namespace ContactsAppUI
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 26);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // exitToolStripMenuItem
@@ -97,7 +97,7 @@ namespace ContactsAppUI
             this.editContactToolStripMenuItem,
             this.removeContactToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(49, 26);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(49, 24);
             this.editToolStripMenuItem.Text = "Edit";
             // 
             // addContactToolStripMenuItem
@@ -126,7 +126,7 @@ namespace ContactsAppUI
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(55, 26);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(55, 24);
             this.helpToolStripMenuItem.Text = "Help";
             // 
             // aboutToolStripMenuItem
@@ -180,6 +180,7 @@ namespace ContactsAppUI
             this.phoneTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.phoneTextBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.phoneTextBox.ForeColor = System.Drawing.SystemColors.InfoText;
             this.phoneTextBox.Location = new System.Drawing.Point(68, 89);
             this.phoneTextBox.MaximumSize = new System.Drawing.Size(2000, 22);
             this.phoneTextBox.Name = "phoneTextBox";
@@ -280,7 +281,7 @@ namespace ContactsAppUI
             this.mailLabel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.mailLabel.Location = new System.Drawing.Point(28, 122);
             this.mailLabel.Name = "mailLabel";
-            this.mailLabel.Size = new System.Drawing.Size(37, 17);
+            this.mailLabel.Size = new System.Drawing.Size(46, 17);
             this.mailLabel.TabIndex = 12;
             this.mailLabel.Text = "EMail:";
             // 
@@ -290,7 +291,7 @@ namespace ContactsAppUI
             this.dateLabel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.dateLabel.Location = new System.Drawing.Point(23, 66);
             this.dateLabel.Name = "dateLabel";
-            this.dateLabel.Size = new System.Drawing.Size(42, 17);
+            this.dateLabel.Size = new System.Drawing.Size(64, 17);
             this.dateLabel.TabIndex = 13;
             this.dateLabel.Text = "Birthday:";
             // 

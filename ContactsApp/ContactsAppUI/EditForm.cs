@@ -42,7 +42,7 @@ namespace ContactsAppUI
             {
                 MessageBox.Show("Incorrect name!", "Error");
             }
-            else if ((dateTimePicker.BackColor == Color.DarkSalmon) || (dateTimePicker.Text == ""))
+            else if (myDateTimePicker.BackColor == Color.DarkSalmon)
             {
                 MessageBox.Show("Incorrect date!", "Error");
             }
@@ -81,16 +81,17 @@ namespace ContactsAppUI
 
         private void dateBox_ValueChanged(object sender, EventArgs e)
         {
-            dateTimePicker.BackColor = Color.White;
+            myDateTimePicker.BackColor = Color.White;
             try
             {
-                _contact.Birthday = dateTimePicker.Value;
+                _contact.Birthday = myDateTimePicker.Value;
             }
             catch (ArgumentException exception)
             {
                 Console.WriteLine(exception);
-                dateTimePicker.BackColor = Color.DarkSalmon;
                 myDateTimePicker.BackColor = Color.DarkSalmon;
+                myDateTimePicker.Invalidate();
+
 
             }
         }
@@ -151,7 +152,7 @@ namespace ContactsAppUI
             {
                 surnameTextBox.Text = _contact.Surname;
                 nameTextBox.Text = _contact.Name;
-                dateTimePicker.Value = _contact.Birthday;
+                myDateTimePicker.Value = _contact.Birthday;
                 phoneTextBox.Text = _contact.PhoneNumber.Number.ToString();
                 mailTextBox.Text = _contact.EMail;
                 vkTextBox.Text = _contact.IdVkontakte;
@@ -160,9 +161,8 @@ namespace ContactsAppUI
             {
                 _contact = new Contact();
                 _contact.Birthday = DateTime.Now;
-                dateTimePicker.Value = DateTime.Now;
+                myDateTimePicker.Value = DateTime.Now;
             }
-            
         }
 
         private void surnameTextBox_Changed(object sender, EventArgs e)

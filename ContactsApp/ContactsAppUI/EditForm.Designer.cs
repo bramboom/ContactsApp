@@ -36,7 +36,6 @@ namespace ContactsAppUI
             this.vkTextBox = new System.Windows.Forms.TextBox();
             this.surnameTextBox = new System.Windows.Forms.TextBox();
             this.phoneTextBox = new System.Windows.Forms.TextBox();
-            this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.vkLabel = new System.Windows.Forms.Label();
             this.phoneLabel = new System.Windows.Forms.Label();
             this.dateLabel = new System.Windows.Forms.Label();
@@ -88,20 +87,6 @@ namespace ContactsAppUI
             this.phoneTextBox.Size = new System.Drawing.Size(426, 22);
             this.phoneTextBox.TabIndex = 4;
             this.phoneTextBox.TextChanged += new System.EventHandler(this.phoneTextBox_TextChanged);
-            // 
-            // dateTimePicker
-            // 
-            this.dateTimePicker.CalendarForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.dateTimePicker.CalendarTitleBackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.dateTimePicker.CustomFormat = "dd.MM.yyyy";
-            this.dateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker.Location = new System.Drawing.Point(89, 68);
-            this.dateTimePicker.MinDate = new System.DateTime(1800, 1, 1, 0, 0, 0, 0);
-            this.dateTimePicker.Name = "dateTimePicker";
-            this.dateTimePicker.Size = new System.Drawing.Size(126, 22);
-            this.dateTimePicker.TabIndex = 5;
-            this.dateTimePicker.Value = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
-            this.dateTimePicker.ValueChanged += new System.EventHandler(this.dateBox_ValueChanged);
             // 
             // vkLabel
             // 
@@ -185,10 +170,13 @@ namespace ContactsAppUI
             // 
             // myDateTimePicker
             // 
-            this.myDateTimePicker.Location = new System.Drawing.Point(292, 68);
+            this.myDateTimePicker.CustomFormat = "dd.MM.yyyy";
+            this.myDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.myDateTimePicker.Location = new System.Drawing.Point(89, 68);
             this.myDateTimePicker.Name = "myDateTimePicker";
-            this.myDateTimePicker.Size = new System.Drawing.Size(200, 22);
+            this.myDateTimePicker.Size = new System.Drawing.Size(126, 22);
             this.myDateTimePicker.TabIndex = 24;
+            this.myDateTimePicker.ValueChanged += new System.EventHandler(this.dateBox_ValueChanged);
             // 
             // EditForm
             // 
@@ -204,7 +192,6 @@ namespace ContactsAppUI
             this.Controls.Add(this.mailLabel);
             this.Controls.Add(this.nameLabel);
             this.Controls.Add(this.surnameLabel);
-            this.Controls.Add(this.dateTimePicker);
             this.Controls.Add(this.phoneTextBox);
             this.Controls.Add(this.surnameTextBox);
             this.Controls.Add(this.vkTextBox);
@@ -228,7 +215,6 @@ namespace ContactsAppUI
         private System.Windows.Forms.TextBox vkTextBox;
         private System.Windows.Forms.TextBox surnameTextBox;
         private System.Windows.Forms.TextBox phoneTextBox;
-        private System.Windows.Forms.DateTimePicker dateTimePicker;
         private System.Windows.Forms.Label vkLabel;
         private System.Windows.Forms.Label phoneLabel;
         private System.Windows.Forms.Label dateLabel;

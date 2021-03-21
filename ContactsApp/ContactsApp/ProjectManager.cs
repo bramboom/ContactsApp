@@ -1,26 +1,33 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using Newtonsoft.Json;
 
 namespace ContactsApp
 {
     /// <summary>
-    /// Класс сериализации объекта Project
+    ///сериализация объекта Project
     /// </summary>
     public static class ProjectManager
     {
         /// <summary>
-        /// поле, которое хранит путь к файлу
+        /// хранит путь до файла
         /// </summary>
-        private static string _path = "/ContactsApp/ContactsApp.notes";
+        public static readonly string Path =
+            Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/ContactsApp";
 
         /// <summary>
-        /// Метод сериализирует объект Project в файл
+        ///хранит имя файла
+        /// </summary>
+        public static readonly string FileName = "/ContactsApp.notes";
+
+        /// <summary>
+        /// сериализирует объект Project в файл
         /// </summary>
         /// <param name="project">сериализируемый объект</param>
         /// <param name="fileName">путь к файлу</param>
         public static void SaveToFile(Project project, string fileName)
         {
-            DirectoryInfo directoryInfo = new DirectoryInfo(fileName + "/ContactsApp");
+            DirectoryInfo directoryInfo = new DirectoryInfo(fileName);
 
             if (!directoryInfo.Exists)
             {
@@ -28,7 +35,7 @@ namespace ContactsApp
             }
 
             JsonSerializer serializer = new JsonSerializer();
-            using (StreamWriter sw = new StreamWriter(fileName + _path))
+            using (StreamWriter sw = new StreamWriter(fileName + FileName))
             using (JsonWriter writer = new JsonTextWriter(sw))
             {
                 serializer.Serialize(writer, project);
@@ -36,23 +43,29 @@ namespace ContactsApp
         }
 
         /// <summary>
-        /// Метод десериализирует объект Project из файла
+        /// десериализирует объект Project из файла
         /// </summary>
         /// <param name="fileName">путь к файлу</param>
         /// <returns>десериализированный объект</returns>
         public static Project LoadFromFile(string fileName)
         {
             Project project = new Project();
-            if (File.Exists(fileName + _path))
+            if (File.Exists(fileName + FileName))
             {
                 JsonSerializer serializer = new JsonSerializer();
-                using (StreamReader sr = new StreamReader(fileName + _path))
+                using (StreamReader sr = new StreamReader(fileName + FileName))
                 using (JsonReader reader = new JsonTextReader(sr))
                 {
                     project = serializer.Deserialize<Project>(reader);
+                }
+
+                if (project == null)
+                {
+                    return new Project();
                 }
             }
             return project;
         }
     }
 }
+

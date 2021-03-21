@@ -3,7 +3,7 @@
 namespace ContactsApp
 {
     /// <summary>
-    /// Класс содержащий номер телефона
+    /// содержит номер телефона
     /// </summary>
     public class PhoneNumber
     {
@@ -13,7 +13,7 @@ namespace ContactsApp
         private long _number;
 
         /// <summary>
-        /// метод возвращает и задает значение номера телефона
+        ///возвращает и задает значение номера телефона
         /// </summary>
         public long Number
         {
@@ -23,12 +23,12 @@ namespace ContactsApp
             }
             set
             {
-                if(value.ToString().Length != 11)
+                if (value.ToString().Length != 11)
                 {
                     throw new ArgumentException("Number must have 11 symbols!");
                 }
 
-                if(!value.ToString().StartsWith("7"))
+                if (!value.ToString().StartsWith("7"))
                 {
                     throw new ArgumentException("First numeral must be 7!");
                 }
