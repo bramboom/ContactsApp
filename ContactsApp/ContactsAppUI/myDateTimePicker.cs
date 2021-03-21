@@ -1,41 +1,63 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
+using System.Windows.Forms.VisualStyles;
 
 namespace ContactsAppUI
 {
     public class myDateTimePicker:DateTimePicker
     {
-        private Color _backColor = DefaultBackColor;
-        public override Color BackColor
+        public myDateTimePicker()
         {
-            get { return _backColor;}
-            set
-            {
-                _backColor = value;
-            }
+            this.SetStyle(ControlStyles.UserPaint, true);
         }
 
-        const int WM_ERASEBKGND = 0x14;
-        protected override void WndProc(ref System.Windows.Forms.Message m)
+        protected override void OnPaint(PaintEventArgs e)
         {
-            if (m.Msg == WM_ERASEBKGND)
-            {
-                using (var g = Graphics.FromHdc(m.WParam))
-                {
-                    using (var b = new SolidBrush(_backColor))
-                    {
-                        g.FillRectangle(b, ClientRectangle);
-                    }
-                }
-                return;
-            }
+            Graphics g = this.CreateGraphics();
 
-            base.WndProc(ref m);
+            Rectangle dropDownRectangle = new Rectangle(ClientRectangle.Width - 20, 0, 20, 20);
+            Brush bkgBrush;
+            ComboBoxState visualState;
+            if (this.Enabled)
+            {
+                bkgBrush = new SolidBrush(Color.DimGray);
+                visualState = ComboBoxState.Normal;
+            }
+            else
+            {
+                bkgBrush = new SolidBrush(Color.DimGray);
+                visualState = ComboBoxState.Disabled;
+            }
+            g.FillRectangle(bkgBrush, 0, 0, ClientRectangle.Width, ClientRectangle.Height);
+            if (this.Enabled)
+            {
+                bkgBrush = new SolidBrush(this.BackColor);
+                visualState = ComboBoxState.Normal;
+            }
+            else
+            {
+                bkgBrush = new SolidBrush(this.BackColor);
+                visualState = ComboBoxState.Disabled;
+            }
+            g.FillRectangle(bkgBrush, 1, 1, ClientRectangle.Width-22, ClientRectangle.Height-2);
+            g.DrawString(this.Text, this.Font, Brushes.Black, 0, 2);
+            ComboBoxRenderer.DrawDropDownButton(g, dropDownRectangle, visualState);
+
+            g.Dispose();
+            bkgBrush.Dispose();
+        }
+
+        [Browsable(true), DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public override Color BackColor
+        {
+            get { return base.BackColor; }
+            set { base.BackColor = value; }
         }
     }
 }
