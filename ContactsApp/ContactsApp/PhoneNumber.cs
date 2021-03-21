@@ -3,7 +3,7 @@
 namespace ContactsApp
 {
     /// <summary>
-    /// Класс содержащий номер телефона
+    /// содержит номер телефона
     /// </summary>
     public class PhoneNumber
     {
@@ -13,7 +13,7 @@ namespace ContactsApp
         private long _number;
 
         /// <summary>
-        /// метод возвращает и задает значение номера телефона
+        ///возвращает и задает значение номера телефона
         /// </summary>
         public long Number
         {

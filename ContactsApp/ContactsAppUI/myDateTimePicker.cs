@@ -10,7 +10,7 @@ namespace ContactsAppUI
 {
     public class myDateTimePicker:DateTimePicker
     {
-        private Color _backColor;
+        private Color _backColor = DefaultBackColor;
         public override Color BackColor
         {
             get { return _backColor;}
