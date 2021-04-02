@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using ContactsApp;
 
@@ -99,15 +100,22 @@ namespace ContactsAppUI
         private void phoneTextBox_TextChanged(object sender, EventArgs e)
         {
             phoneTextBox.BackColor = Color.White;
-            try
+            if ((phoneTextBox.Text.All(char.IsDigit)) && (phoneTextBox.Text != ""))
             {
-                PhoneNumber value = new PhoneNumber();
-                value.Number = long.Parse(phoneTextBox.Text);
-              _contact.PhoneNumber = value;
+                try
+                {
+                    PhoneNumber value = new PhoneNumber();
+                    value.Number = long.Parse(phoneTextBox.Text);
+                    _contact.PhoneNumber = value;
+                }
+                catch (ArgumentException exception)
+                {
+                    Console.WriteLine(exception);
+                    phoneTextBox.BackColor = Color.DarkSalmon;
+                }
             }
-            catch (ArgumentException exception)
+            else
             {
-                Console.WriteLine(exception);
                 phoneTextBox.BackColor = Color.DarkSalmon;
             }
         }
