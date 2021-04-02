@@ -92,7 +92,7 @@ namespace ContactsAppUI
             // 
             this.vkLabel.AutoSize = true;
             this.vkLabel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.vkLabel.Location = new System.Drawing.Point(23, 152);
+            this.vkLabel.Location = new System.Drawing.Point(25, 155);
             this.vkLabel.Name = "vkLabel";
             this.vkLabel.Size = new System.Drawing.Size(56, 17);
             this.vkLabel.TabIndex = 21;
@@ -102,7 +102,7 @@ namespace ContactsAppUI
             // 
             this.phoneLabel.AutoSize = true;
             this.phoneLabel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.phoneLabel.Location = new System.Drawing.Point(29, 96);
+            this.phoneLabel.Location = new System.Drawing.Point(30, 99);
             this.phoneLabel.Name = "phoneLabel";
             this.phoneLabel.Size = new System.Drawing.Size(53, 17);
             this.phoneLabel.TabIndex = 20;
@@ -112,7 +112,7 @@ namespace ContactsAppUI
             // 
             this.dateLabel.AutoSize = true;
             this.dateLabel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.dateLabel.Location = new System.Drawing.Point(14, 73);
+            this.dateLabel.Location = new System.Drawing.Point(20, 70);
             this.dateLabel.Name = "dateLabel";
             this.dateLabel.Size = new System.Drawing.Size(64, 17);
             this.dateLabel.TabIndex = 19;
@@ -122,7 +122,7 @@ namespace ContactsAppUI
             // 
             this.mailLabel.AutoSize = true;
             this.mailLabel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.mailLabel.Location = new System.Drawing.Point(29, 124);
+            this.mailLabel.Location = new System.Drawing.Point(36, 127);
             this.mailLabel.Name = "mailLabel";
             this.mailLabel.Size = new System.Drawing.Size(46, 17);
             this.mailLabel.TabIndex = 18;
@@ -132,7 +132,7 @@ namespace ContactsAppUI
             // 
             this.nameLabel.AutoSize = true;
             this.nameLabel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.nameLabel.Location = new System.Drawing.Point(33, 40);
+            this.nameLabel.Location = new System.Drawing.Point(33, 43);
             this.nameLabel.Name = "nameLabel";
             this.nameLabel.Size = new System.Drawing.Size(49, 17);
             this.nameLabel.TabIndex = 17;
@@ -142,7 +142,7 @@ namespace ContactsAppUI
             // 
             this.surnameLabel.AutoSize = true;
             this.surnameLabel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.surnameLabel.Location = new System.Drawing.Point(14, 12);
+            this.surnameLabel.Location = new System.Drawing.Point(14, 15);
             this.surnameLabel.Name = "surnameLabel";
             this.surnameLabel.Size = new System.Drawing.Size(69, 17);
             this.surnameLabel.TabIndex = 16;

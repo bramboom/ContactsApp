@@ -6,6 +6,7 @@ using System.Windows.Forms.VisualStyles;
 
 namespace ContactsAppUI
 {
+    //https://stackoverflow.com/questions/33436162/why-datetimepicker-backcolor-disable-manual-typing
     public class myDateTimePicker:DateTimePicker
     {
         public myDateTimePicker()

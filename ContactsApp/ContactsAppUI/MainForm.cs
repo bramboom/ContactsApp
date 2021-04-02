@@ -62,7 +62,7 @@ namespace ContactsAppUI
         {
             if (surnameListBox.SelectedItem != null)
             {
-                int index = surnameListBox.SelectedIndex;
+                int index = _indexOfContact[surnameListBox.SelectedIndex];
                 EditForm edit = new EditForm();
                 edit.Contact = (Contact)project.Contacts[index].Clone();
                 edit.ShowDialog();
@@ -86,15 +86,17 @@ namespace ContactsAppUI
         {
             if (surnameListBox.SelectedItem != null)
             {
+                int index = _indexOfContact[surnameListBox.SelectedIndex];
                 DialogResult result =
                     MessageBox.Show("Do you really want to remove this contact: " +
-                                    $"{project.Contacts[surnameListBox.SelectedIndex].Surname}",
+                                    $"{project.Contacts[index].Surname}",
                             "Remove Contact", MessageBoxButtons.OKCancel);
                 if (result == DialogResult.OK)
                 {
-                    project.Contacts.RemoveAt(surnameListBox.SelectedIndex);
+                    project.Contacts.RemoveAt(index);
                 }
-                ProjectManager.SaveToFile(project, Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
+                ProjectManager.SaveToFile(project, 
+                    Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
                 textBoxFind.Clear();
                 InitializeInbexOfContact();
                 InsertToListBox();
