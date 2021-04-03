@@ -21,8 +21,9 @@ namespace ContactsAppUI
             get { return _contact;}
             set
             {
-                _contact = new Contact(value.Surname, value.Name, value.Birthday, value.PhoneNumber, value.IdVkontakte,
-                    value.EMail);
+                _contact = new Contact(value.Surname, value.Name, 
+                    value.Birthday, value.PhoneNumber, 
+                    value.IdVkontakte, value.EMail);
             }
         }
 
@@ -33,6 +34,7 @@ namespace ContactsAppUI
             InitializeComponent();
         }
 
+        //исправить проверку на неккоректный ввод (сгруппиовать чтобы показывалло все ошибки)
         private void OkButton_Click(object sender, EventArgs e)
         {
             if ((surnameTextBox.BackColor == Color.DarkSalmon)||(surnameTextBox.Text == ""))

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using ContactsApp;
-
+//тестовое поле поиска должно быть на 1 писель шире, 
 namespace ContactsAppUI
 {
     public partial class MainForm : Form
@@ -14,7 +14,7 @@ namespace ContactsAppUI
         /// <summary>
         /// поле содержит индекс контакта в соответствии с индексом в ListBox
         /// </summary>
-        private int[] _indexOfContact;
+        private int[] _indexOfContact;//изменить на объект класса list<contact> по типу viewContacts
 
 
 
@@ -79,32 +79,31 @@ namespace ContactsAppUI
             {
                 MessageBox.Show("Select contact");
             }
-
         }
 
         private void RemoveContact_Click(object sender, EventArgs e)
         {
-            if (surnameListBox.SelectedItem != null)
-            {
-                int index = _indexOfContact[surnameListBox.SelectedIndex];
-                DialogResult result =
-                    MessageBox.Show("Do you really want to remove this contact: " +
-                                    $"{project.Contacts[index].Surname}",
-                            "Remove Contact", MessageBoxButtons.OKCancel);
-                if (result == DialogResult.OK)
-                {
-                    project.Contacts.RemoveAt(index);
-                }
-                ProjectManager.SaveToFile(project, 
-                    Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
-                textBoxFind.Clear();
-                InitializeInbexOfContact();
-                InsertToListBox();
-            }
-            else
+            if (surnameListBox.SelectedItem == null)
             {
                 MessageBox.Show("Select contact!");
+                return;
             }
+
+            int index = _indexOfContact[surnameListBox.SelectedIndex];
+            DialogResult result =
+                MessageBox.Show("Do you really want to remove this contact: " +
+                                $"{project.Contacts[index].Surname}",
+                        "Remove Contact", MessageBoxButtons.OKCancel);
+            if (result == DialogResult.OK)
+            {
+                project.Contacts.RemoveAt(index);
+            }
+            ProjectManager.SaveToFile(project, 
+                Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
+            textBoxFind.Clear();
+            InitializeInbexOfContact();
+            InsertToListBox();
+          
         }
 
         private void About_Click(object sender, EventArgs e)
@@ -153,10 +152,7 @@ namespace ContactsAppUI
                 vkTextBox.Text = project.Contacts[index].IdVkontakte;
                 mailTextBox.Text = project.Contacts[index].EMail;
             }
-
         }
-
-
 
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
         {
@@ -171,6 +167,7 @@ namespace ContactsAppUI
             }
         }
 
+        //изменить реализацию вынести поиск в отдельный метод класса Project, создать метод выводящий список контактов из метода поиска 
         private void TextBoxFind_Changer(object sender, EventArgs e)
         {
             string strFind = textBoxFind.Text;
