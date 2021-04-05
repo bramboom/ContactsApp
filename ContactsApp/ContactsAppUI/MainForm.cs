@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using ContactsApp;
-//тестовое поле поиска должно быть на 1 писель шире, 
+
 namespace ContactsAppUI
 {
     public partial class MainForm : Form
@@ -9,33 +10,62 @@ namespace ContactsAppUI
         /// <summary>
         /// объект класса Project
         /// </summary>
-        private Project project = ProjectManager.LoadFromFile(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
+        private Project _project = ProjectManager.LoadFromFile(ProjectManager.Path);
 
         /// <summary>
-        /// поле содержит индекс контакта в соответствии с индексом в ListBox
+        /// Хранит список контактов для просмотра
         /// </summary>
-        private int[] _indexOfContact;//изменить на объект класса list<contact> по типу viewContacts
+        private Project _viewContacts = new Project();
 
+        /// <summary>
+        /// вывод всех контактов по фамилии в ListBox
+        /// </summary>
+        private void InsertToListBox()
+        {
+            for (int index = 0; index < _viewContacts.Contacts.Count; index++)
+            {
+                surnameListBox.Items.Insert(index, _viewContacts.Contacts[index].Surname);
+            }
+        }
 
+        /// <summary>
+        /// Выводит информацию о контакте по индексу
+        /// </summary>
+        /// <param name="index">индекс контакта</param>
+        private void InputInformationOfContact(int index)
+        {
+            if (index != -1)
+            {
+                surnameTextBox.Text = _viewContacts.Contacts[index].Surname;
+                nameTextBox.Text = _viewContacts.Contacts[index].Name;
+                dateBox.Value = _viewContacts.Contacts[index].Birthday;
+                phoneTextBox.Text = _viewContacts.Contacts[index].PhoneNumber.Number.ToString();
+                vkTextBox.Text = _viewContacts.Contacts[index].IdVkontakte;
+                mailTextBox.Text = _viewContacts.Contacts[index].EMail;
+            }
+        }
+
+        /// <summary>
+        /// Чистит информацию во всех TextBox
+        /// </summary>
+        private void ClearInformationOfContact()
+        {
+            surnameTextBox.Text = "";
+            nameTextBox.Text = "";
+            dateBox.Value = DateTime.Now;
+            phoneTextBox.Text = "";
+            vkTextBox.Text = "";
+            mailTextBox.Text = "";
+        }
 
         public MainForm()
         {
             InitializeComponent();
-            InitializeInbexOfContact();
-        }
-
-        /// <summary>
-        /// инициализация индексов контактов
-        /// </summary>
-        private void InitializeInbexOfContact()
-        {
-            if (project.Contacts != null)
+            _viewContacts.Contacts = _project.Contacts;
+            if (_viewContacts.Contacts.Count > 0)
             {
-                _indexOfContact = new int[project.Contacts.Count];
-                for (int index = 0; index < project.Contacts.Count; index++)
-                {
-                    _indexOfContact[index] = index;
-                }
+                surnameListBox.SelectedItem = 0;
+                InputInformationOfContact(0);
             }
         }
 
@@ -50,34 +80,51 @@ namespace ContactsAppUI
             edit.ShowDialog();
             if (edit.DialogResult == DialogResult.OK)
             {
-                project.Contacts.Add(edit.Contact);
+                _project.Contacts.Add(edit.Contact);
             }
-            ProjectManager.SaveToFile(project, Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
-            InitializeInbexOfContact();
-            textBoxFind.Clear();
+            ProjectManager.SaveToFile(_project, ProjectManager.Path);
+            _viewContacts.Contacts = new List<Contact>();
+            _viewContacts.Contacts = _project.SearchContactByString(textBoxFind.Text);
+            surnameListBox.Items.Clear();
             InsertToListBox();
+            int index = _viewContacts.Contacts.Count - 1;
+            surnameListBox.SelectedItem = index;
+            InputInformationOfContact(index);
         }
 
         private void EditContact_Click(object sender, EventArgs e)
         {
-            if (surnameListBox.SelectedItem != null)
+            if (surnameListBox.SelectedItem == null)
             {
-                int index = _indexOfContact[surnameListBox.SelectedIndex];
-                EditForm edit = new EditForm();
-                edit.Contact = (Contact)project.Contacts[index].Clone();
-                edit.ShowDialog();
-                if (edit.DialogResult == DialogResult.OK)
-                {
-                    project.Contacts[index] = (Contact)edit.Contact.Clone();
-                }
-                ProjectManager.SaveToFile(project, Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
-                textBoxFind.Clear();
-                InitializeInbexOfContact();
-                InsertToListBox();
+                MessageBox.Show("Select contact");
+                return;
+            }
+            
+            int index = surnameListBox.SelectedIndex;
+            EditForm edit = new EditForm();
+            edit.Contact = (Contact)_viewContacts.Contacts[index].Clone();
+            edit.ShowDialog();
+            if (edit.DialogResult == DialogResult.OK)
+            {
+                _project.Contacts[
+                    _project.Contacts.IndexOf(
+                        _viewContacts.Contacts[index])] 
+                    = (Contact)edit.Contact.Clone();
+            }
+            ProjectManager.SaveToFile(_project, ProjectManager.Path);
+            _viewContacts.Contacts = new List<Contact>();
+            _viewContacts.Contacts = _project.SearchContactByString(textBoxFind.Text);
+            surnameListBox.Items.Clear();
+            InsertToListBox();
+            InputInformationOfContact(index);
+            if (_viewContacts.Contacts.Count > 0)
+            {
+                surnameListBox.SelectedItem = 0;
+                InputInformationOfContact(0);
             }
             else
             {
-                MessageBox.Show("Select contact");
+                ClearInformationOfContact();
             }
         }
 
@@ -89,21 +136,30 @@ namespace ContactsAppUI
                 return;
             }
 
-            int index = _indexOfContact[surnameListBox.SelectedIndex];
+            int index = surnameListBox.SelectedIndex;
             DialogResult result =
                 MessageBox.Show("Do you really want to remove this contact: " +
-                                $"{project.Contacts[index].Surname}",
+                                $"{_viewContacts.Contacts[index].Surname}",
                         "Remove Contact", MessageBoxButtons.OKCancel);
             if (result == DialogResult.OK)
             {
-                project.Contacts.RemoveAt(index);
+                _project.Contacts.RemoveAt(_project.Contacts.IndexOf(
+                    _viewContacts.Contacts[index]));
             }
-            ProjectManager.SaveToFile(project, 
-                Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
-            textBoxFind.Clear();
-            InitializeInbexOfContact();
+            ProjectManager.SaveToFile(_project, ProjectManager.Path);
+            _viewContacts.Contacts = new List<Contact>();
+            _viewContacts.Contacts = _project.SearchContactByString(textBoxFind.Text);
+            surnameListBox.Items.Clear();
             InsertToListBox();
-          
+            if (_viewContacts.Contacts.Count > 0)
+            {
+                surnameListBox.SelectedItem = 0;
+                InputInformationOfContact(0);
+            }
+            else
+            {
+                ClearInformationOfContact();
+            }
         }
 
         private void About_Click(object sender, EventArgs e)
@@ -117,41 +173,10 @@ namespace ContactsAppUI
             InsertToListBox();
         }
 
-        /// <summary>
-        /// вывод всех контактов по фамилии в ListBox
-        /// </summary>
-        private void InsertToListBox()
-        {
-            surnameListBox.Items.Clear();
-            surnameTextBox.Clear();
-            nameTextBox.Clear();
-            dateBox.Value = DateTime.Now;
-            phoneTextBox.Clear();
-            mailTextBox.Clear();
-            vkTextBox.Clear();
-
-            if (project != null)
-            {
-                for (int index = 0; index < project.Contacts.Count; index++)
-                {
-                    surnameListBox.Items.Insert(index, project.Contacts[index].Surname);
-                }
-            }
-
-        }
-
         private void surnameListBox_Click(object sender, EventArgs e)
         {
-            int index = _indexOfContact[surnameListBox.SelectedIndex];
-            if (index != -1)
-            {
-                surnameTextBox.Text = project.Contacts[index].Surname;
-                nameTextBox.Text = project.Contacts[index].Name;
-                dateBox.Value = project.Contacts[index].Birthday;
-                phoneTextBox.Text = project.Contacts[index].PhoneNumber.Number.ToString();
-                vkTextBox.Text = project.Contacts[index].IdVkontakte;
-                mailTextBox.Text = project.Contacts[index].EMail;
-            }
+            int index = surnameListBox.SelectedIndex;
+            InputInformationOfContact(index);
         }
 
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
@@ -167,34 +192,21 @@ namespace ContactsAppUI
             }
         }
 
-        //изменить реализацию вынести поиск в отдельный метод класса Project, создать метод выводящий список контактов из метода поиска 
         private void TextBoxFind_Changer(object sender, EventArgs e)
         {
-            string strFind = textBoxFind.Text;
-            _indexOfContact = null;
-            _indexOfContact = new int[project.Contacts.Count];
-
-            if (strFind != "")
+            _viewContacts.Contacts = new List<Contact>();
+            string searchString = textBoxFind.Text;
+            _viewContacts.Contacts = _project.SearchContactByString(searchString);
+            surnameListBox.Items.Clear();
+            InsertToListBox();
+            if (_viewContacts.Contacts.Count > 0)
             {
-                surnameListBox.Items.Clear();
-                int count = 0;
-                for (int index = 0; index < project.Contacts.Count; index++)
-                {
-                    if (project.Contacts[index].Surname.Contains(strFind))
-                    {
-                        _indexOfContact[count] = index;
-                        surnameListBox.Items.Insert(count, project.Contacts[index].Surname);
-                        count++;
-
-                    }
-
-
-                }
+                surnameListBox.SelectedItem = 0;
+                InputInformationOfContact(0);
             }
             else
             {
-                InitializeInbexOfContact();
-                InsertToListBox();
+                ClearInformationOfContact();
             }
         }
 
@@ -202,7 +214,7 @@ namespace ContactsAppUI
         {
             if (surnameListBox.SelectedIndex != -1)
             {
-                dateBox.Value = project.Contacts[surnameListBox.SelectedIndex].Birthday;
+                dateBox.Value = _viewContacts.Contacts[surnameListBox.SelectedIndex].Birthday;
             }
             else
             {

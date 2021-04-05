@@ -3,13 +3,13 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using System.Drawing;
 using System.Windows.Forms.VisualStyles;
-//переименовать класс по типу Backgrounddatetimepicker
+
 namespace ContactsAppUI
 {
     //https://stackoverflow.com/questions/33436162/why-datetimepicker-backcolor-disable-manual-typing
-    public class myDateTimePicker:DateTimePicker
+    public class DateTimePicker:System.Windows.Forms.DateTimePicker
     {
-        public myDateTimePicker()
+        public DateTimePicker()
         {
             this.SetStyle(ControlStyles.UserPaint, true);
         }

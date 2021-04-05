@@ -44,7 +44,7 @@ namespace ContactsAppUI
             this.surnameLabel = new System.Windows.Forms.Label();
             this.cancelButton = new System.Windows.Forms.Button();
             this.OkButton = new System.Windows.Forms.Button();
-            this.myDateTimePicker = new ContactsAppUI.myDateTimePicker();
+            this._dateTimePicker = new ContactsAppUI.DateTimePicker();
             this.SuspendLayout();
             // 
             // nameTextBox
@@ -52,7 +52,7 @@ namespace ContactsAppUI
             this.nameTextBox.Location = new System.Drawing.Point(89, 40);
             this.nameTextBox.Name = "nameTextBox";
             this.nameTextBox.Size = new System.Drawing.Size(426, 22);
-            this.nameTextBox.TabIndex = 0;
+            this.nameTextBox.TabIndex = 1;
             this.nameTextBox.TextChanged += new System.EventHandler(this.nameTextBox_TextChanged);
             // 
             // mailTextBox
@@ -60,7 +60,7 @@ namespace ContactsAppUI
             this.mailTextBox.Location = new System.Drawing.Point(89, 124);
             this.mailTextBox.Name = "mailTextBox";
             this.mailTextBox.Size = new System.Drawing.Size(426, 22);
-            this.mailTextBox.TabIndex = 1;
+            this.mailTextBox.TabIndex = 4;
             this.mailTextBox.TextChanged += new System.EventHandler(this.mailTextBox_TextChanged);
             // 
             // vkTextBox
@@ -68,7 +68,7 @@ namespace ContactsAppUI
             this.vkTextBox.Location = new System.Drawing.Point(89, 152);
             this.vkTextBox.Name = "vkTextBox";
             this.vkTextBox.Size = new System.Drawing.Size(426, 22);
-            this.vkTextBox.TabIndex = 2;
+            this.vkTextBox.TabIndex = 5;
             this.vkTextBox.TextChanged += new System.EventHandler(this.vkTextBox_TextChanged);
             // 
             // surnameTextBox
@@ -77,7 +77,7 @@ namespace ContactsAppUI
             this.surnameTextBox.Location = new System.Drawing.Point(89, 12);
             this.surnameTextBox.Name = "surnameTextBox";
             this.surnameTextBox.Size = new System.Drawing.Size(426, 22);
-            this.surnameTextBox.TabIndex = 3;
+            this.surnameTextBox.TabIndex = 0;
             this.surnameTextBox.TextChanged += new System.EventHandler(this.surnameTextBox_Changed);
             // 
             // phoneTextBox
@@ -85,7 +85,7 @@ namespace ContactsAppUI
             this.phoneTextBox.Location = new System.Drawing.Point(89, 96);
             this.phoneTextBox.Name = "phoneTextBox";
             this.phoneTextBox.Size = new System.Drawing.Size(426, 22);
-            this.phoneTextBox.TabIndex = 4;
+            this.phoneTextBox.TabIndex = 3;
             this.phoneTextBox.TextChanged += new System.EventHandler(this.phoneTextBox_TextChanged);
             // 
             // vkLabel
@@ -153,7 +153,7 @@ namespace ContactsAppUI
             this.cancelButton.Location = new System.Drawing.Point(433, 189);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(92, 26);
-            this.cancelButton.TabIndex = 22;
+            this.cancelButton.TabIndex = 7;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
@@ -163,27 +163,27 @@ namespace ContactsAppUI
             this.OkButton.Location = new System.Drawing.Point(335, 189);
             this.OkButton.Name = "OkButton";
             this.OkButton.Size = new System.Drawing.Size(92, 26);
-            this.OkButton.TabIndex = 23;
+            this.OkButton.TabIndex = 6;
             this.OkButton.Text = "OK";
             this.OkButton.UseVisualStyleBackColor = true;
             this.OkButton.Click += new System.EventHandler(this.OkButton_Click);
             // 
-            // myDateTimePicker
+            // _dateTimePicker
             // 
-            this.myDateTimePicker.CustomFormat = "dd.MM.yyyy";
-            this.myDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.myDateTimePicker.Location = new System.Drawing.Point(89, 68);
-            this.myDateTimePicker.Name = "myDateTimePicker";
-            this.myDateTimePicker.Size = new System.Drawing.Size(126, 22);
-            this.myDateTimePicker.TabIndex = 24;
-            this.myDateTimePicker.ValueChanged += new System.EventHandler(this.dateBox_ValueChanged);
+            this._dateTimePicker.CustomFormat = "dd.MM.yyyy";
+            this._dateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this._dateTimePicker.Location = new System.Drawing.Point(89, 68);
+            this._dateTimePicker.Name = "_dateTimePicker";
+            this._dateTimePicker.Size = new System.Drawing.Size(126, 22);
+            this._dateTimePicker.TabIndex = 2;
+            this._dateTimePicker.ValueChanged += new System.EventHandler(this.dateBox_ValueChanged);
             // 
             // EditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(537, 227);
-            this.Controls.Add(this.myDateTimePicker);
+            this.Controls.Add(this._dateTimePicker);
             this.Controls.Add(this.OkButton);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.vkLabel);
@@ -223,6 +223,6 @@ namespace ContactsAppUI
         private System.Windows.Forms.Label surnameLabel;
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Button OkButton;
-        private myDateTimePicker myDateTimePicker;
+        private DateTimePicker _dateTimePicker;
     }
 }

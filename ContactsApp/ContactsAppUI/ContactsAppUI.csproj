@@ -67,7 +67,7 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="myDateTimePicker.cs">
+    <Compile Include="DateTimePicker.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Program.cs" />

@@ -33,39 +33,49 @@ namespace ContactsAppUI
         {
             InitializeComponent();
         }
-
-        //исправить проверку на неккоректный ввод (сгруппиовать чтобы показывалло все ошибки)
+        
         private void OkButton_Click(object sender, EventArgs e)
         {
-            if ((surnameTextBox.BackColor == Color.DarkSalmon)||(surnameTextBox.Text == ""))
+            string inputError = "";
+
+            if ((surnameTextBox.BackColor == Color.DarkSalmon) || (surnameTextBox.Text == ""))
             {
-                MessageBox.Show("incorrect surname!");
+                inputError = inputError + "incorrect surname!\n";
             }
-            else if ((nameTextBox.BackColor == Color.DarkSalmon) || (nameTextBox.Text == ""))
+
+            if ((nameTextBox.BackColor == Color.DarkSalmon) || (nameTextBox.Text == ""))
             {
-                MessageBox.Show("Incorrect name!", "Error");
+                inputError = inputError + "incorrect name!\n";
             }
-            else if (myDateTimePicker.BackColor == Color.DarkSalmon)
+
+            if (_dateTimePicker.BackColor == Color.DarkSalmon)
             {
-                MessageBox.Show("Incorrect date!", "Error");
+                inputError = inputError + "incorrect date!\n";
             }
-            else if ((phoneTextBox.BackColor == Color.DarkSalmon) || (phoneTextBox.Text == ""))
+
+            if ((phoneTextBox.BackColor == Color.DarkSalmon) || (phoneTextBox.Text == ""))
             {
-                MessageBox.Show("Incorrect phone!", "Error");
+                inputError = inputError + "incorrect phone!\n";
             }
-            else if ((mailTextBox.BackColor == Color.DarkSalmon) || (mailTextBox.Text == ""))
+
+            if ((mailTextBox.BackColor == Color.DarkSalmon) || (mailTextBox.Text == ""))
             {
-                MessageBox.Show("Incorrect e-mail!", "Error");
+                inputError = inputError + "incorrect e-mail!\n";
             }
-            else if ((vkTextBox.BackColor == Color.DarkSalmon)||(vkTextBox.Text == ""))
+
+            if ((vkTextBox.BackColor == Color.DarkSalmon) || (vkTextBox.Text == ""))
             {
-                MessageBox.Show("Incorrect vk.com!");
+                inputError = inputError + "incorrect vk.com!";
             }
-            else
+
+            if (inputError != "")
             {
-                DialogResult = DialogResult.OK;
-                this.Close();
+                MessageBox.Show(inputError, "Error");
+                return;
             }
+
+            DialogResult = DialogResult.OK;
+            this.Close();
         }
 
         private void nameTextBox_TextChanged(object sender, EventArgs e)
@@ -84,16 +94,16 @@ namespace ContactsAppUI
 
         private void dateBox_ValueChanged(object sender, EventArgs e)
         {
-            myDateTimePicker.BackColor = Color.White;
+            _dateTimePicker.BackColor = Color.White;
             try
             {
-                _contact.Birthday = myDateTimePicker.Value;
+                _contact.Birthday = _dateTimePicker.Value;
             }
             catch (ArgumentException exception)
             {
                 Console.WriteLine(exception);
-                myDateTimePicker.BackColor = Color.DarkSalmon;
-                myDateTimePicker.Invalidate();
+                _dateTimePicker.BackColor = Color.DarkSalmon;
+                _dateTimePicker.Invalidate();
 
 
             }
@@ -162,7 +172,7 @@ namespace ContactsAppUI
             {
                 surnameTextBox.Text = _contact.Surname;
                 nameTextBox.Text = _contact.Name;
-                myDateTimePicker.Value = _contact.Birthday;
+                _dateTimePicker.Value = _contact.Birthday;
                 phoneTextBox.Text = _contact.PhoneNumber.Number.ToString();
                 mailTextBox.Text = _contact.EMail;
                 vkTextBox.Text = _contact.IdVkontakte;
@@ -171,7 +181,7 @@ namespace ContactsAppUI
             {
                 _contact = new Contact();
                 _contact.Birthday = DateTime.Now;
-                myDateTimePicker.Value = DateTime.Now;
+                _dateTimePicker.Value = DateTime.Now;
             }
         }
 
