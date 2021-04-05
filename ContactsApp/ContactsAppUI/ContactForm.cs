@@ -6,7 +6,7 @@ using ContactsApp;
 
 namespace ContactsAppUI
 {
-    public partial class EditForm : Form
+    public partial class ContactForm : Form
     {
         /// <summary>
         /// объект класса Contact, который нужно изменить или добавить
@@ -27,9 +27,7 @@ namespace ContactsAppUI
             }
         }
 
-     
-
-        public EditForm()
+        public ContactForm()
         {
             InitializeComponent();
         }
@@ -73,7 +71,6 @@ namespace ContactsAppUI
                 MessageBox.Show(inputError, "Error");
                 return;
             }
-
             DialogResult = DialogResult.OK;
             this.Close();
         }
@@ -104,8 +101,6 @@ namespace ContactsAppUI
                 Console.WriteLine(exception);
                 _dateTimePicker.BackColor = Color.DarkSalmon;
                 _dateTimePicker.Invalidate();
-
-
             }
         }
 

@@ -25,7 +25,6 @@ namespace ContactsApp
                 viewContacts = Contacts;
                 return viewContacts;
             }
-
             for (int index = 0; index < Contacts.Count; index++)
             {
                 if (Contacts[index].Surname.Contains(searchString))
@@ -33,7 +32,6 @@ namespace ContactsApp
                     viewContacts.Add(Contacts[index]);
                 }
             }
-
             return viewContacts;
         }
     }

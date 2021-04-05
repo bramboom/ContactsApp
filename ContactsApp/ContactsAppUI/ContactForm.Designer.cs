@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace ContactsAppUI
 {
-    partial class EditForm
+    partial class ContactForm
     {
         /// <summary>
         /// Required designer variable.
@@ -178,7 +178,7 @@ namespace ContactsAppUI
             this._dateTimePicker.TabIndex = 2;
             this._dateTimePicker.ValueChanged += new System.EventHandler(this.dateBox_ValueChanged);
             // 
-            // EditForm
+            // ContactForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -199,7 +199,7 @@ namespace ContactsAppUI
             this.Controls.Add(this.nameTextBox);
             this.MaximumSize = new System.Drawing.Size(555, 274);
             this.MinimumSize = new System.Drawing.Size(555, 274);
-            this.Name = "EditForm";
+            this.Name = "ContactForm";
             this.ShowIcon = false;
             this.Text = "Add/Edit Contact";
             this.Load += new System.EventHandler(this.EditForm_Load);
