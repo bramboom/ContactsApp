@@ -136,7 +136,7 @@ namespace ContactsApp.UnitTests
                 "Геттер PhoneNumber возвращает неправильное значение");
         }
 
-        [Test(Description = "Позитивный тест сеттера EMail")]
+        [Test(Description = "Негативный тест сеттера EMail")]
         public void TestEmail_Set_IncorrectValue()
         {
             Assert.Throws<ArgumentException>(
