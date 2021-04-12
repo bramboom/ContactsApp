@@ -18,7 +18,7 @@ namespace ContactsApp
         /// <summary>
         ///хранит имя файла
         /// </summary>
-        public static readonly string FileName = "/ContactsApp.notes";
+        private static readonly string FileName = "/ContactsApp.notes";
 
         /// <summary>
         /// сериализирует объект Project в файл

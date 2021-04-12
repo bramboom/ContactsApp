@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NUnit.Framework;
 
 namespace ContactsApp.UnitTests
@@ -198,6 +194,54 @@ namespace ContactsApp.UnitTests
             var actual = _contact.IdVkontakte;
             Assert.AreEqual(expected, actual,
                 "Геттер VKontakte возвращает неправильное значение");
+        }
+
+        [Test(Description = "Позитивный тест конструктора класса Contact")]
+        public void TestContact_Constructor_CorrectValue()
+        {
+            var expectedSurname = "Smit";
+            var expectedName = "Smit";
+            var expectedNumber = new PhoneNumber();
+            expectedNumber.Number = 71234567890;
+            var expectedBirthday = new DateTime(2000 - 01 - 01);
+            var expectedEmail = "mailName@mail.com";
+            var expectedVKontakte = "id555555555";
+            _contact = new Contact(
+                expectedSurname, expectedName,
+                expectedBirthday, expectedNumber,
+                expectedVKontakte, expectedEmail);
+
+            var actualSurname = _contact.Surname;
+            var actualName = _contact.Name;
+            var actualBirthday = _contact.Birthday;
+            var actualNumber = _contact.PhoneNumber;
+            var actualVK = _contact.IdVkontakte;
+            var actualEmail = _contact.EMail;
+
+            Assert.Multiple(() =>
+            {
+                Assert.AreEqual(expectedSurname, actualSurname, 
+                    "Конструктор содержит неверное значение Surname");
+                Assert.AreEqual(expectedName, actualName,
+                    "Конструктор содержит неверное значение Name");
+                Assert.AreEqual(expectedBirthday, actualBirthday,
+                    "Конструктор содержит неверное значение Birthday");
+                Assert.AreEqual(expectedNumber, actualNumber,
+                    "Конструктор содержит неверное значение PhoneNumber");
+                Assert.AreEqual(expectedVKontakte, actualVK,
+                    "Конструктор содержит неверное значение VKontakte");
+                Assert.AreEqual(expectedEmail, actualEmail,
+                    "Конструктор содержит неверное значение EMail");
+            });
+        }
+
+        [Test(Description = "Позитивный тест клонирования контакта")]
+        public void TestClone_CorrectValue()
+        {
+            var expected = _contact;
+            var actual = (Contact) expected.Clone();
+            Assert.AreEqual(expected, actual, 
+                "Метод Clone клонирует Contact неправильно");
         }
     }
 }
