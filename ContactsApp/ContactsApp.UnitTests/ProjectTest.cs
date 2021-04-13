@@ -10,7 +10,7 @@ namespace ContactsApp.UnitTests
     [TestFixture]
     class ProjectTest
     {
-        private Project _project;
+        public Project _project;
         [SetUp]
         public void InitProject()
         {
@@ -20,29 +20,50 @@ namespace ContactsApp.UnitTests
         [Test(Description = "позитивный тест сеттера Contact")]
         public void TestContact_Set_CorrectValue()
         {
-            var surname = "Smit";
-            var name = "Smit";
-            var birthday = new DateTime(2000 - 01 - 01);
-            var phoneNumber = new PhoneNumber();
-            phoneNumber.Number = 71234567890;
-            var vKontakte = "id55555";
-            var email = "mailname@mail.com";
+            var expectedSurname = "Smit";
+            var expectedName = "Smit";
+            var expectedBirthday = DateTime.Now;
+            var expectedNumber = new PhoneNumber();
+            expectedNumber.Number = 71234567890;
+            var expectedVK = "id555555";
+            var expectedEmail = "mailName@mail.com";
             var contact = new Contact(
-                surname, name,
-                birthday, phoneNumber,
-                vKontakte, email);
+                expectedSurname, expectedName,
+                expectedBirthday, expectedNumber,
+                expectedVK, expectedEmail);
 
-            Assert.Throws<ArgumentException>(
-                () => { _project.Contacts.Add(contact); },
-                "");
+            _project.Contacts.Add(contact);
+            var actualSurname = _project.Contacts[0].Surname;
+            var actualName = _project.Contacts[0].Name;
+            var actualBirthday = _project.Contacts[0].Birthday;
+            var actualNumber = _project.Contacts[0].PhoneNumber;
+            var actualVK = _project.Contacts[0].IdVkontakte;
+            var actualEmail = _project.Contacts[0].EMail;
+
+            Assert.Multiple(() =>
+            {
+                Assert.AreEqual(expectedSurname, actualSurname,
+                    "Cеттер списка возврашает неверное значение Surname");
+                Assert.AreEqual(expectedName, actualName,
+                    "Cеттер списка возврашает неверное значение Name");
+                Assert.AreEqual(expectedBirthday, actualBirthday,
+                    "Cеттер списка возврашает неверное значение Birthday");
+                Assert.AreEqual(expectedNumber, actualNumber,
+                    "Cеттер списка возврашает неверное значение PhoneNumber");
+                Assert.AreEqual(expectedVK, actualVK,
+                    "Cеттер списка возврашает неверное значение VKontakte");
+                Assert.AreEqual(expectedEmail, actualEmail,
+                    "Cеттер списка возврашает неверное значение Email");
+            });
         }
 
         [Test(Description = "Позитивный тест геттера Contact")]
         public void TestContacts_Get_CorrectValue()
         {
+            InitProject();
             var expectedSurname = "Smit";
             var expectedName = "Smit";
-            var expectedBirthday = new DateTime(2000 - 01 - 01);
+            var expectedBirthday = DateTime.Now;
             var expectedNumber = new PhoneNumber();
             expectedNumber.Number = 71234567890;
             var expectedVK = "id555555";
@@ -63,21 +84,21 @@ namespace ContactsApp.UnitTests
             Assert.Multiple(() =>
             {
                 Assert.AreEqual(expectedSurname, actualSurname, 
-                    "Конструктор содержит неверное значение Surname");
+                    "Геттер списка возврашает неверное значение Surname");
                 Assert.AreEqual(expectedName, actualName,
-                    "Конструктор содержит неверное значение Name");
+                    "Геттер списка возврашает неверное значение Name");
                 Assert.AreEqual(expectedBirthday, actualBirthday,
-                    "Конструктор содержит неверное значение Birthday");
+                    "Геттер списка возврашает неверное значение Birthday");
                 Assert.AreEqual(expectedNumber, actualNumber,
-                    "Конструктор содержит неверное значение PhoneNumber");
+                    "Геттер списка возврашает неверное значение PhoneNumber");
                 Assert.AreEqual(expectedVK, actualVK,
-                    "Конструктор содержит неверное значение VKontakte");
+                    "Геттер списка возврашает неверное значение VKontakte");
                 Assert.AreEqual(expectedEmail, actualEmail,
-                    "Конструктор содержит неверное значение Email");
+                    "Геттер списка возврашает неверное значение Email");
             });
         }
 
-        [TestCase("Smit",
+        [TestCase("S",
             "Не должно возникать искльчение, если возвращает тотже список", 
             TestName="Поиск по строке которая содержится в каждом объекте")]
         [TestCase("",
@@ -85,9 +106,10 @@ namespace ContactsApp.UnitTests
             TestName = "Поиск по пустой строке")]
         public void TestSearchContactByString_CorrectValue(string searchString, string message)
         {
+            InitProject();
             var expectedSurname = "Smit";
             var expectedName = "Smit";
-            var expectedBirthday = new DateTime(2000 - 01 - 01);
+            var expectedBirthday = DateTime.Now;
             var expectedNumber = new PhoneNumber();
             expectedNumber.Number = 71234567890;
             var expectedVK = "id555555";
@@ -110,26 +132,27 @@ namespace ContactsApp.UnitTests
             Assert.Multiple(() =>
             {
                 Assert.AreEqual(expectedSurname, actualSurname,
-                    "Конструктор содержит неверное значение Surname");
+                    "Метод нашел неверное значение Surname");
                 Assert.AreEqual(expectedName, actualName,
-                    "Конструктор содержит неверное значение Name");
+                    "Метод нашел неверное значение Name");
                 Assert.AreEqual(expectedBirthday, actualBirthday,
-                    "Конструктор содержит неверное значение Birthday");
+                    "Метод нашел неверное значение Birthday");
                 Assert.AreEqual(expectedNumber, actualNumber,
-                    "Конструктор содержит неверное значение PhoneNumber");
+                    "Метод нашел неверное значение PhoneNumber");
                 Assert.AreEqual(expectedVK, actualVK,
-                    "Конструктор содержит неверное значение VKontakte");
+                    "Метод нашел неверное значение VKontakte");
                 Assert.AreEqual(expectedEmail, actualEmail,
-                    "Конструктор содержит неверное значение Email");
+                    "Метод нашел неверное значение Email");
             });
         }
 
-        [Test(Description = "")]
+        [Test(Description = "Поиск по строке которая не содержится ни в одном из объектов")]
         public void TestSearchByString_CorrectValue()
         {
+            InitProject();
             var expectedSurname = "Smit";
             var expectedName = "Smit";
-            var expectedBirthday = new DateTime(2000 - 01 - 01);
+            var expectedBirthday = DateTime.Now;
             var expectedNumber = new PhoneNumber();
             expectedNumber.Number = 71234567890;
             var expectedVK = "id555555";
@@ -143,28 +166,8 @@ namespace ContactsApp.UnitTests
             _project.Contacts.Add(contact);
             var viewContact =
                 _project.SearchContactByString(searchString);
-            var actualSurname = viewContact[0].Surname;
-            var actualName = viewContact[0].Name;
-            var actualBirthday = viewContact[0].Birthday;
-            var actualNumber = viewContact[0].PhoneNumber;
-            var actualVK = viewContact[0].IdVkontakte;
-            var actualEmail = viewContact[0].EMail;
 
-            Assert.Multiple(() =>
-            {
-                Assert.AreEqual(expectedSurname, actualSurname,
-                    "Конструктор содержит неверное значение Surname");
-                Assert.AreEqual(expectedName, actualName,
-                    "Конструктор содержит неверное значение Name");
-                Assert.AreEqual(expectedBirthday, actualBirthday,
-                    "Конструктор содержит неверное значение Birthday");
-                Assert.AreEqual(expectedNumber, actualNumber,
-                    "Конструктор содержит неверное значение PhoneNumber");
-                Assert.AreEqual(expectedVK, actualVK,
-                    "Конструктор содержит неверное значение VKontakte");
-                Assert.AreEqual(expectedEmail, actualEmail,
-                    "Конструктор содержит неверное значение Email");
-            });
+            Assert.IsNotNull(viewContact, "Список должен быть пуст");
         }
     }
 }

@@ -6,10 +6,10 @@ namespace ContactsApp.UnitTests
     [TestFixture]
     class PhoneNumberTest
     {
-        private PhoneNumber _phone;
+        public PhoneNumber _phone;
 
         [SetUp]
-        private void InitPhone()
+        public void InitPhone()
         {
             _phone = new PhoneNumber();
         }
@@ -22,6 +22,7 @@ namespace ContactsApp.UnitTests
             TestName = "Добавление ноера, не содержащего 11 цифр")]
         public void TestNumber_Set_IncorrectValue(long wrongNumber, string message)
         {
+            InitPhone();
             Assert.Throws<ArgumentException>(
                 () => { _phone.Number = wrongNumber; }, 
                 message);
@@ -30,21 +31,25 @@ namespace ContactsApp.UnitTests
         [Test(Description = "Позитивный тест сеттера Number")]
         public void TestNumber_Set_CorrectValue()
         {
-            Assert.Throws<ArgumentException>(
-                () => { _phone.Number = 71234567890; }, 
+            InitPhone();
+            var expected = 71234567890;
+            _phone.Number = expected;
+            var actual = _phone.Number;
+            Assert.AreEqual(expected, actual,
                 "При присвоении Number корректного " +
-                "значения не должно возьникать ошибки");
+                "значения не должно возникать ошибки");
         }
 
         [Test(Description = "Позитивный тест геттера Number")]
         public void TestNumber_Get_CorrectValue()
         {
+            InitPhone();
             var expected = 71234567890;
             _phone.Number = expected;
             var actual = _phone.Number;
             Assert.AreEqual(expected, actual, 
-                "При присвоении Number корректного " +
-                "значения не должно возьникать ошибки");
+                "При возвращении Number корректного " +
+                "значения не должно возникать ошибки");
         }
     }
 }
