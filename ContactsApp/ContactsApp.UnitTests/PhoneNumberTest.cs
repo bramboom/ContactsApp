@@ -32,12 +32,7 @@ namespace ContactsApp.UnitTests
         public void TestNumber_Set_CorrectValue()
         {
             InitPhone();
-            var expected = 71234567890;
-            _phone.Number = expected;
-            var actual = _phone.Number;
-            Assert.AreEqual(expected, actual,
-                "При присвоении Number корректного " +
-                "значения не должно возникать ошибки");
+            _phone.Number = 71234567890;
         }
 
         [Test(Description = "Позитивный тест геттера Number")]

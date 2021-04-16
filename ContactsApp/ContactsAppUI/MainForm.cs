@@ -10,7 +10,8 @@ namespace ContactsAppUI
         /// <summary>
         /// объект класса Project
         /// </summary>
-        private Project _project = ProjectManager.LoadFromFile(ProjectManager.Path);
+        private Project _project = 
+            ProjectManager.LoadFromFile(ProjectManager.Path, ProjectManager.FileName);
 
         /// <summary>
         /// Хранит список контактов для просмотра
@@ -74,7 +75,7 @@ namespace ContactsAppUI
             if (contact.DialogResult == DialogResult.OK)
             {
                 _project.Contacts.Add(contact.Contact);
-                ProjectManager.SaveToFile(_project, ProjectManager.Path);
+                ProjectManager.SaveToFile(_project, ProjectManager.Path, ProjectManager.FileName);
                 _viewContacts = new List<Contact>();
                 _viewContacts = _project.SearchContactByString(textBoxFind.Text);
                 surnameListBox.Items.Clear();
@@ -104,7 +105,7 @@ namespace ContactsAppUI
                 _project.Contacts[contactIndex] 
                     = (Contact)contact.Contact.Clone();
             }
-            ProjectManager.SaveToFile(_project, ProjectManager.Path);
+            ProjectManager.SaveToFile(_project, ProjectManager.Path, ProjectManager.FileName);
             _viewContacts = new List<Contact>();
             _viewContacts = _project.SearchContactByString(textBoxFind.Text);
             surnameListBox.Items.Clear();
@@ -130,7 +131,7 @@ namespace ContactsAppUI
                 _project.Contacts.RemoveAt(_project.Contacts.IndexOf(
                     _viewContacts[index]));
             }
-            ProjectManager.SaveToFile(_project, ProjectManager.Path);
+            ProjectManager.SaveToFile(_project, ProjectManager.Path, ProjectManager.FileName);
             _viewContacts = new List<Contact>();
             _viewContacts = _project.SearchContactByString(textBoxFind.Text);
             surnameListBox.Items.Clear();

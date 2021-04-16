@@ -18,16 +18,16 @@ namespace ContactsApp
         /// <summary>
         ///хранит имя файла
         /// </summary>
-        private static readonly string FileName = "/ContactsApp.notes";
+        public static readonly string FileName = "/ContactsApp.notes";
 
         /// <summary>
         /// сериализирует объект Project в файл
         /// </summary>
         /// <param name="project">сериализируемый объект</param>
         /// <param name="fileName">путь к файлу</param>
-        public static void SaveToFile(Project project, string fileName)
+        public static void SaveToFile(Project project, string path, string filename)
         {
-            DirectoryInfo directoryInfo = new DirectoryInfo(fileName);
+            DirectoryInfo directoryInfo = new DirectoryInfo(path + filename);
 
             if (!directoryInfo.Exists)
             {
@@ -35,7 +35,7 @@ namespace ContactsApp
             }
 
             JsonSerializer serializer = new JsonSerializer();
-            using (StreamWriter sw = new StreamWriter(fileName + FileName))
+            using (StreamWriter sw = new StreamWriter(path + filename))
             using (JsonWriter writer = new JsonTextWriter(sw))
             {
                 serializer.Serialize(writer, project);
@@ -47,13 +47,13 @@ namespace ContactsApp
         /// </summary>
         /// <param name="fileName">путь к файлу</param>
         /// <returns>десериализированный объект</returns>
-        public static Project LoadFromFile(string fileName)
+        public static Project LoadFromFile(string path, string filename)
         {
             Project project = new Project();
-            if (File.Exists(fileName + FileName))
+            if (File.Exists(path))
             {
                 JsonSerializer serializer = new JsonSerializer();
-                using (StreamReader sr = new StreamReader(fileName + FileName))
+                using (StreamReader sr = new StreamReader(path + filename))
                 using (JsonReader reader = new JsonTextReader(sr))
                 {
                     project = serializer.Deserialize<Project>(reader);
