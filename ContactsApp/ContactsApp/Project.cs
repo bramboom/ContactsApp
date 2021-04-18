@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace ContactsApp
 {
     /// <summary>
     ///содержит список контактов
     /// </summary>
-    public class Project
+    public class Project: IEquatable<Project>
     {
         /// <summary>
         /// Список контактов
@@ -33,6 +34,26 @@ namespace ContactsApp
                 }
             }
             return viewContacts;
+        }
+
+        public bool Equals(Project other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return Equals(Contacts, other.Contacts);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((Project) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return (Contacts != null ? Contacts.GetHashCode() : 0);
         }
     }
 }

@@ -27,15 +27,16 @@ namespace ContactsApp
         /// <param name="fileName">путь к файлу</param>
         public static void SaveToFile(Project project, string path, string filename)
         {
-            DirectoryInfo directoryInfo = new DirectoryInfo(path + filename);
+            var fullPath = path + filename;
+            var folder = System.IO.Path.GetDirectoryName(fullPath);
 
-            if (!directoryInfo.Exists)
+            if (!System.IO.Directory.Exists(folder))
             {
-                directoryInfo.Create();
+                System.IO.Directory.CreateDirectory(folder);
             }
 
             JsonSerializer serializer = new JsonSerializer();
-            using (StreamWriter sw = new StreamWriter(path + filename))
+            using (StreamWriter sw = new StreamWriter(fullPath))
             using (JsonWriter writer = new JsonTextWriter(sw))
             {
                 serializer.Serialize(writer, project);
@@ -50,10 +51,14 @@ namespace ContactsApp
         public static Project LoadFromFile(string path, string filename)
         {
             Project project = new Project();
-            if (File.Exists(path))
+
+            var fullPath = path + filename;
+            var folder = System.IO.Path.GetDirectoryName(fullPath);
+
+            if (System.IO.Directory.Exists(folder))
             {
                 JsonSerializer serializer = new JsonSerializer();
-                using (StreamReader sr = new StreamReader(path + filename))
+                using (StreamReader sr = new StreamReader(fullPath))
                 using (JsonReader reader = new JsonTextReader(sr))
                 {
                     project = serializer.Deserialize<Project>(reader);

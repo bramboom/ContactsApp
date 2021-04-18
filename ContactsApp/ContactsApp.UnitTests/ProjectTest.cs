@@ -11,7 +11,7 @@ namespace ContactsApp.UnitTests
     class ProjectTest
     {
         public Project _project;
-        [SetUp]
+      
         public void InitProject()
         {
             _project = new Project();
@@ -20,6 +20,8 @@ namespace ContactsApp.UnitTests
         [Test(Description = "позитивный тест сеттера Contact")]
         public void TestContact_Set_CorrectValue()
         {
+            //Arrange
+            InitProject();
             var expectedSurname = "Smit";
             var expectedName = "Smit";
             var expectedBirthday = DateTime.Now;
@@ -31,8 +33,9 @@ namespace ContactsApp.UnitTests
                 expectedSurname, expectedName,
                 expectedBirthday, expectedNumber,
                 expectedVK, expectedEmail);
-
             _project.Contacts.Add(contact);
+
+            //Act
             var actualSurname = _project.Contacts[0].Surname;
             var actualName = _project.Contacts[0].Name;
             var actualBirthday = _project.Contacts[0].Birthday;
@@ -40,6 +43,7 @@ namespace ContactsApp.UnitTests
             var actualVK = _project.Contacts[0].IdVkontakte;
             var actualEmail = _project.Contacts[0].EMail;
 
+            //Assert
             Assert.Multiple(() =>
             {
                 Assert.AreEqual(expectedSurname, actualSurname,
@@ -57,47 +61,6 @@ namespace ContactsApp.UnitTests
             });
         }
 
-        [Test(Description = "Позитивный тест геттера Contact")]
-        public void TestContacts_Get_CorrectValue()
-        {
-            InitProject();
-            var expectedSurname = "Smit";
-            var expectedName = "Smit";
-            var expectedBirthday = DateTime.Now;
-            var expectedNumber = new PhoneNumber();
-            expectedNumber.Number = 71234567890;
-            var expectedVK = "id555555";
-            var expectedEmail = "mailName@mail.com";
-            var contact = new Contact(
-                expectedSurname, expectedName,
-                expectedBirthday, expectedNumber,
-                expectedVK, expectedEmail);
-
-            _project.Contacts.Add(contact);
-            var actualSurname = _project.Contacts[0].Surname;
-            var actualName = _project.Contacts[0].Name;
-            var actualBirthday = _project.Contacts[0].Birthday;
-            var actualNumber = _project.Contacts[0].PhoneNumber;
-            var actualVK = _project.Contacts[0].IdVkontakte;
-            var actualEmail = _project.Contacts[0].EMail;
-
-            Assert.Multiple(() =>
-            {
-                Assert.AreEqual(expectedSurname, actualSurname, 
-                    "Геттер списка возврашает неверное значение Surname");
-                Assert.AreEqual(expectedName, actualName,
-                    "Геттер списка возврашает неверное значение Name");
-                Assert.AreEqual(expectedBirthday, actualBirthday,
-                    "Геттер списка возврашает неверное значение Birthday");
-                Assert.AreEqual(expectedNumber, actualNumber,
-                    "Геттер списка возврашает неверное значение PhoneNumber");
-                Assert.AreEqual(expectedVK, actualVK,
-                    "Геттер списка возврашает неверное значение VKontakte");
-                Assert.AreEqual(expectedEmail, actualEmail,
-                    "Геттер списка возврашает неверное значение Email");
-            });
-        }
-
         [TestCase("S",
             "Не должно возникать искльчение, если возвращает тотже список", 
             TestName="Поиск по строке которая содержится в каждом объекте")]
@@ -106,6 +69,7 @@ namespace ContactsApp.UnitTests
             TestName = "Поиск по пустой строке")]
         public void TestSearchContactByString_CorrectValue(string searchString, string message)
         {
+            //Arrange
             InitProject();
             var expectedSurname = "Smit";
             var expectedName = "Smit";
@@ -118,8 +82,9 @@ namespace ContactsApp.UnitTests
                 expectedSurname, expectedName,
                 expectedBirthday, expectedNumber,
                 expectedVK, expectedEmail);
-
             _project.Contacts.Add(contact);
+
+            //Act
             var viewContact = 
                 _project.SearchContactByString(searchString);
             var actualSurname = viewContact[0].Surname;
@@ -129,6 +94,7 @@ namespace ContactsApp.UnitTests
             var actualVK = viewContact[0].IdVkontakte;
             var actualEmail = viewContact[0].EMail;
 
+            //Assert
             Assert.Multiple(() =>
             {
                 Assert.AreEqual(expectedSurname, actualSurname,
@@ -149,6 +115,7 @@ namespace ContactsApp.UnitTests
         [Test(Description = "Поиск по строке которая не содержится ни в одном из объектов")]
         public void TestSearchByString_CorrectValue()
         {
+            //Arrange
             InitProject();
             var expectedSurname = "Smit";
             var expectedName = "Smit";
@@ -162,11 +129,13 @@ namespace ContactsApp.UnitTests
                 expectedBirthday, expectedNumber,
                 expectedVK, expectedEmail);
             var searchString = "fff";
-
             _project.Contacts.Add(contact);
+
+            //Act
             var viewContact =
                 _project.SearchContactByString(searchString);
 
+            //Assert
             Assert.IsNotNull(viewContact, "Список должен быть пуст");
         }
     }
