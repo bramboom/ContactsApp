@@ -14,7 +14,7 @@ namespace ContactsApp.UnitTests
         [TestCase("1",
             "Должно возникать исключение, если фамилия содержит цифры",
             TestName = "Присвоение фамилии, содержащей цифры")]
-        public void TestSurname_Set_IncorrectValue(string wrongSurname, string message)
+        public void TestSurnameSet_IncorrectValue_ArgumentException(string wrongSurname, string message)
         {
             //Arrange
             Contact contact = new Contact();
@@ -30,7 +30,7 @@ namespace ContactsApp.UnitTests
         }
         
         [Test(Description = "Позитивный тест сеттера Surname")]
-        public void TestSurname_Set_CorrectValue()
+        public void TestSurnameSet_CorrectValue_ReturnCorrectValue()
         {
             //Arrange
             Contact contact = new Contact();
@@ -52,7 +52,7 @@ namespace ContactsApp.UnitTests
         [TestCase("1",
             "Должно возникать исключение, если имя содержит цифры",
             TestName = "Присвоение имени, содержащего цифры")]
-        public void TestName_Set_IncorrectValue(string wrongName, string message)
+        public void TestNameSet_IncorrectValue_ArgumentException(string wrongName, string message)
         {
             //Arrange
             Contact contact = new Contact();
@@ -68,7 +68,7 @@ namespace ContactsApp.UnitTests
         }
 
         [Test(Description = "Позитивный тест сеттера Name")]
-        public void TestName_Set_CorrectValue()
+        public void TestNameSet_CorrectValue_ReturnCorrectValue()
         {
             //Arrange
             Contact contact = new Contact();
@@ -85,7 +85,7 @@ namespace ContactsApp.UnitTests
         }
 
         [Test(Description = "Негативный тест для сеттера Birthday")]
-        public void TestBirthday_Set_InCorrectValueMore()
+        public void TestBirthdaySet_InCorrectValueMore_ArgumentException()
         {
             //Arrange
             Contact contact = new Contact();
@@ -102,7 +102,7 @@ namespace ContactsApp.UnitTests
         }
 
         [Test(Description = "Негативный тест для сеттера Birthday")]
-        public void TestBirthday_Set_InCorrectValueLess()
+        public void TestBirthdaySet_InCorrectValueLess_ArgumentException()
         {
             //Arrange
             Contact contact = new Contact();
@@ -119,7 +119,7 @@ namespace ContactsApp.UnitTests
         }
 
         [Test(Description = "Позитивный тест для сеттера Birthday")]
-        public void TestBirthday_Set_CorrectValue()
+        public void TestBirthdaySet_CorrectValue_ReturnCorrectValue()
         {
             //Arrange
             Contact contact = new Contact();
@@ -136,7 +136,7 @@ namespace ContactsApp.UnitTests
         }
 
         [Test(Description = "Позитивный тест сеттера PhoneNumber")]
-        public void TestPhoneNumber_Set_CorrectValue()
+        public void TestPhoneNumberSet_CorrectValue_ReturnCorrectValue()
         {
             //Arrange
             Contact contact = new Contact();
@@ -154,7 +154,7 @@ namespace ContactsApp.UnitTests
         }
 
         [Test(Description = "Негативный тест сеттера EMail")]
-        public void TestEmail_Set_IncorrectValue()
+        public void TestEmailSet_IncorrectValue_ArgumentException()
         {
             //Arrange
             Contact contact = new Contact();
@@ -173,7 +173,7 @@ namespace ContactsApp.UnitTests
         }
 
         [Test(Description = "Позитивный тест сеттера EMail")]
-        public void TestEmail_Set_CorrectValue()
+        public void TestEmailSet_CorrectValue_ReturnCorrectValue()
         {
             //Arrange
             Contact contact = new Contact();
@@ -195,7 +195,7 @@ namespace ContactsApp.UnitTests
         [TestCase("id-test-test-test-test",
             "Должно возникать исключение, если VKontakte больше 15",
             TestName = "Присвоение VKontakte, у которого больше 15 символов")]
-        public void TestVK_Set_IncorrectValue(string wrongVkontacte, string message)
+        public void TestVKSet_IncorrectValue_ArgumentException(string wrongVkontacte, string message)
         {
             //Arrange
             Contact contact = new Contact();
@@ -211,7 +211,7 @@ namespace ContactsApp.UnitTests
         }
 
         [Test(Description = "Позитивный тест сеттера VKontakte")]
-        public void TestVK_Set_CorrectValue()
+        public void TestVKSet_CorrectValue_ReturnCorrectValue()
         {
             //Arrange
             Contact contact = new Contact();
@@ -228,7 +228,7 @@ namespace ContactsApp.UnitTests
         }
 
         [Test(Description = "Позитивный тест конструктора класса Contact")]
-        public void TestContact_Constructor_CorrectValue()
+        public void TestContactConstructor_CorrectValue_ReturnCorrectValue()
         {
             //Arrange
             Contact contact = new Contact();
@@ -271,7 +271,7 @@ namespace ContactsApp.UnitTests
         }
 
         [Test(Description = "Позитивный тест клонирования контакта")]
-        public void TestClone_CorrectValue()
+        public void TestClone_CorrectValue_ReturnCorrectValue()
         {
             //Arrange
             Contact contact = new Contact();

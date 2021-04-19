@@ -19,7 +19,7 @@ namespace ContactsApp.UnitTests
         [TestCase(723456789, 
             "Должно возникать исключение, если номер не содержит 11 цифр", 
             TestName = "Добавление ноера, не содержащего 11 цифр")]
-        public void TestNumber_Set_IncorrectValue(long wrongNumber, string message)
+        public void TestNumberSet_IncorrectValue_ArgumentException(long wrongNumber, string message)
         {
             //Arrange
             InitPhone();
@@ -35,7 +35,7 @@ namespace ContactsApp.UnitTests
         }
 
         [Test(Description = "Позитивный тест сеттера Number")]
-        public void TestNumber_Set_CorrectValue()
+        public void TestNumberSet_CorrectValue_ReturnCorrectValue()
         {
             //Arrange
             InitPhone();

@@ -18,7 +18,7 @@ namespace ContactsApp.UnitTests
         }
 
         [Test(Description = "позитивный тест сеттера Contact")]
-        public void TestContact_Set_CorrectValue()
+        public void TestContactSet_CorrectValue_ReturnCorrectValue()
         {
             //Arrange
             InitProject();
@@ -67,7 +67,7 @@ namespace ContactsApp.UnitTests
         [TestCase("",
             "Не должно возникать исключенеи, если возвращает тотже список", 
             TestName = "Поиск по пустой строке")]
-        public void TestSearchContactByString_CorrectValue(string searchString, string message)
+        public void TestSearchContactByString_CorrectValue_ReturnCorrectList(string searchString, string message)
         {
             //Arrange
             InitProject();
@@ -113,7 +113,7 @@ namespace ContactsApp.UnitTests
         }
 
         [Test(Description = "Поиск по строке которая не содержится ни в одном из объектов")]
-        public void TestSearchByString_CorrectValue()
+        public void TestSearchByString_CorrectValue_ReturnEmptyList()
         {
             //Arrange
             InitProject();
