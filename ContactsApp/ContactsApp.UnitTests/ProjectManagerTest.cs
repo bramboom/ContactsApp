@@ -1,8 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
 using NUnit.Framework;
 
 namespace ContactsApp.UnitTests
@@ -105,22 +103,47 @@ namespace ContactsApp.UnitTests
             );
         }
 
-        [TestCase(@"\CorrectContactsDataTwo.notes",
-            TestName = "Проверка  сохранения корректного обьекта")]
-        [TestCase(@"1\CorrectContactsDataTwo.notes",
-            TestName = "Проверка  сохранения корректного обьекта по некорректному пути")]
-        public void ProjectManager_SaveCorrectionData_FileSavedCorrectly(string filename)
+        [Test(Description = "Проверка  сохранения корректного обьекта")]
+        public void ProjectManager_SaveCorrectionData_FileSavedCorrectly()
         {
             //SetUp
             var expectedProject = CreateProject();
 
             //Testing
-            ProjectManager.SaveToFile(expectedProject, _projectFileName, filename);
+            ProjectManager.SaveToFile(
+                expectedProject, 
+                _projectFileName, 
+                @"\CorrectContactsDataTwo.notes");
 
             //Assert
-            var actual = 
-                File.ReadAllText(_projectFileName + filename);
-            var expected = 
+            var actual =
+                File.ReadAllText(_projectFileName + @"\CorrectContactsDataTwo.notes");
+            var expected =
+                File.ReadAllText(_projectFileName + @"\CorrectContactsData.notes");
+            Assert.AreEqual(expected, actual);
+
+        }
+
+        [Test(Description = "Проверка  сохранения корректного обьекта по несущесвующему пути")]
+        public void ProjectManager_SaveDataWithWrongPath_FileSavedCorrectly()
+        {
+            //SetUp
+            if (!System.IO.Directory.Exists(_projectFileName))
+            {
+                System.IO.Directory.Delete(_projectFileName);
+            }
+            var expectedProject = CreateProject();
+
+            //Testing
+            ProjectManager.SaveToFile(
+                expectedProject,
+                _projectFileName,
+                @"\CorrectContactsDataTwo.notes");
+
+            //Assert
+            var actual =
+                File.ReadAllText(_projectFileName + @"1\CorrectContactsDataTwo.notes");
+            var expected =
                 File.ReadAllText(_projectFileName + @"\CorrectContactsData.notes");
             Assert.AreEqual(expected, actual);
 

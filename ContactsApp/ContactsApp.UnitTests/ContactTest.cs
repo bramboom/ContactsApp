@@ -6,6 +6,27 @@ namespace ContactsApp.UnitTests
     [TestFixture]
     public class ContactTest
     {
+        /// <summary>
+        /// Создает контакт
+        /// </summary>
+        /// <returns>контакт</returns>
+        private Contact expectedContact()
+        {
+            Contact expected = new Contact();
+            var expectedSurname = "Smit";
+            var expectedName = "Smit";
+            var expectedNumber = new PhoneNumber();
+            expectedNumber.Number = 71234567890;
+            var expectedBirthday = DateTime.Now;
+            var expectedEmail = "mailName@mail.com";
+            var expectedVKontakte = "id5555";
+            expected = new Contact(
+                expectedSurname, expectedName,
+                expectedBirthday, expectedNumber,
+                expectedVKontakte, expectedEmail);
+            return expected;
+        }
+
         [TestCase("TestTestTestTestTestTestTestTestTestTestTestTestTest", 
             "Должно возникать исключение, если фамилия - превышает 50 символов",
             TestName = "Присвоение фамилии, содержащей больше 50 символов")]
@@ -229,87 +250,32 @@ namespace ContactsApp.UnitTests
         public void TestContactConstructor_CorrectValue_ReturnCorrectValue()
         {
             //Arrange
-            Contact contact = new Contact();
-            var expectedSurname = "Smit";
-            var expectedName = "Smit";
-            var expectedNumber = new PhoneNumber();
-            expectedNumber.Number = 71234567890;
-            var expectedBirthday = DateTime.Now;
-            var expectedEmail = "mailName@mail.com";
-            var expectedVKontakte = "id555555555";
-            contact = new Contact(
-                expectedSurname, expectedName,
-                expectedBirthday, expectedNumber,
-                expectedVKontakte, expectedEmail);
+            var expected = expectedContact();
 
             //Act
-            var actualSurname = contact.Surname;
-            var actualName = contact.Name;
-            var actualBirthday = contact.Birthday;
-            var actualNumber = contact.PhoneNumber;
-            var actualVK = contact.IdVkontakte;
-            var actualEmail = contact.EMail;
+            var actual = new Contact();
+            actual.Surname = expected.Surname;
+            actual.Name = expected.Name;
+            actual.Birthday = expected.Birthday;
+            actual.PhoneNumber = expected.PhoneNumber;
+            actual.IdVkontakte = expected.IdVkontakte;
+            actual.EMail = expected.EMail;
 
             //Assert
-            Assert.Multiple(() =>
-            {
-                Assert.AreEqual(expectedSurname, actualSurname, 
-                    "Конструктор внес неверное значение Surname");
-                Assert.AreEqual(expectedName, actualName,
-                    "Конструктор внес неверное значение Name");
-                Assert.AreEqual(expectedBirthday, actualBirthday,
-                    "Конструктор внес неверное значение Birthday");
-                Assert.AreEqual(expectedNumber, actualNumber,
-                    "Конструктор внес неверное значение PhoneNumber");
-                Assert.AreEqual(expectedVKontakte, actualVK,
-                    "Конструктор внес неверное значение VKontakte");
-                Assert.AreEqual(expectedEmail, actualEmail,
-                    "Конструктор внес неверное значение EMail");
-            });
+            Assert.AreEqual(expected, actual);
         }
 
         [Test(Description = "Позитивный тест клонирования контакта")]
         public void TestClone_CorrectValue_ReturnCorrectValue()
         {
             //Arrange
-            Contact contact = new Contact();
-            var expectedSurname = "Smit";
-            var expectedName = "Smit";
-            var expectedNumber = new PhoneNumber();
-            expectedNumber.Number = 71234567890;
-            var expectedBirthday = DateTime.Now;
-            var expectedEmail = "mailName@mail.com";
-            var expectedVKontakte = "id555555555";
-            contact = new Contact(
-                expectedSurname, expectedName,
-                expectedBirthday, expectedNumber,
-                expectedVKontakte, expectedEmail);
+            var expected = expectedContact();
 
             //Act
-            Contact cloneContact = (Contact) contact.Clone();
-            var actualSurname = cloneContact.Surname;
-            var actualName = cloneContact.Name;
-            var actualBirthday = cloneContact.Birthday;
-            var actualNumber = cloneContact.PhoneNumber;
-            var actualVK = cloneContact.IdVkontakte;
-            var actualEmail = cloneContact.EMail;
+            Contact actual = (Contact) expected.Clone();
 
             //Assert
-            Assert.Multiple(() =>
-            {
-                Assert.AreEqual(expectedSurname, actualSurname,
-                    "Клонировано неверное значение Surname");
-                Assert.AreEqual(expectedName, actualName,
-                    "Клонировано неверное значение Name");
-                Assert.AreEqual(expectedBirthday, actualBirthday,
-                    "Клонировано неверное значение Birthday");
-                Assert.AreEqual(expectedNumber, actualNumber,
-                    "Клонировано неверное значение PhoneNumber");
-                Assert.AreEqual(expectedVKontakte, actualVK,
-                    "Клонировано неверное значение VKontakte");
-                Assert.AreEqual(expectedEmail, actualEmail,
-                    "Клонировано неверное значение EMail");
-            });
+            Assert.AreEqual(expected, actual);
         }
     }
 }
