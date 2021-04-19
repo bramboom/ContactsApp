@@ -10,8 +10,14 @@ namespace ContactsApp.UnitTests
     [TestFixture]
     class ProjectTest
     {
+        /// <summary>
+        /// поле хранит экземпляр класса Project
+        /// </summary>
         public Project _project;
       
+        /// <summary>
+        /// инициализирует поле _project
+        /// </summary>
         public void InitProject()
         {
             _project = new Project();

@@ -6,8 +6,14 @@ namespace ContactsApp.UnitTests
     [TestFixture]
     class PhoneNumberTest
     {
+        /// <summary>
+        /// экземпляр класса PhoneNumber 
+        /// </summary>
         public PhoneNumber _phone;
 
+        /// <summary>
+        /// инициализирует поле _phone
+        /// </summary>
         public void InitPhone()
         {
             _phone = new PhoneNumber();

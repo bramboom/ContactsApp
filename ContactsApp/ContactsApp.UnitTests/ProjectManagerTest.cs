@@ -1,5 +1,8 @@
 ﻿using System;
 using System.IO;
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using NUnit.Framework;
 
 namespace ContactsApp.UnitTests
@@ -7,6 +10,28 @@ namespace ContactsApp.UnitTests
     [TestFixture]
     class ProjectManagerTest
     {
+        /// <summary>
+        /// путь к фалу из которого загружается сборка 
+        /// </summary>
+        private static readonly string LocalPath =
+            Assembly.GetExecutingAssembly().Location;
+
+        /// <summary>
+        /// путь  к файлу, в котором хранится сборка 
+        /// </summary>
+        private static readonly string PathDirectoryName =
+            Path.GetDirectoryName(LocalPath);
+
+        /// <summary>
+        /// путь к правильному файлу 
+        /// </summary>
+        private readonly string _projectFileName =
+            PathDirectoryName + @"\TestContactsData";
+
+        /// <summary>
+        /// создает экземпляр класса project с двумя оьектами класса Contacts
+        /// </summary>
+        /// <returns></returns>
         public Project CreateProject()
         {
             Project project = new Project();
@@ -30,12 +55,11 @@ namespace ContactsApp.UnitTests
             return project;
         }
 
-        [TestCase("/IncorrectContactsData.notes",
-            "TestContactsData",
+        [TestCase("/CorrectVoidContactsData.notes",
             TestName = "Проверка выгрузки некорректного обьекта")]
-        [TestCase("contacts", "1",
+        [TestCase("2/contacts.json",
             TestName = "Проверка выгрузки по неправильному пути")]
-        public void TestProgectManager_LoadFromFile_FileLoadedNull(string filename, string path)
+        public void TestProgectManager_LoadFromFile_FileLoadedNull(string filename)
         {
             //Arrange
             var expectedProject = new Project();
@@ -43,7 +67,7 @@ namespace ContactsApp.UnitTests
             //Act
             var actualProject =
                 ProjectManager.LoadFromFile(
-                    path,
+                    _projectFileName,
                     filename);
 
             //Assert
@@ -61,7 +85,7 @@ namespace ContactsApp.UnitTests
             //Act
             var actualProject =
                 ProjectManager.LoadFromFile(
-                    @"TestContactsData",
+                    _projectFileName,
                     @"\CorrectContactsData.notes");
 
             //Assert
@@ -82,21 +106,22 @@ namespace ContactsApp.UnitTests
         }
 
         [TestCase(@"\CorrectContactsDataTwo.notes",
-            "TestContactsData",
-            TestName = "Проверка  загрузки корректного обьекта")]
-        public void ProjectManager_SaveCorrectionData_FileLoadedCorrectly(string filename, string path)
+            TestName = "Проверка  сохранения корректного обьекта")]
+        [TestCase(@"1\CorrectContactsDataTwo.notes",
+            TestName = "Проверка  сохранения корректного обьекта по некорректному пути")]
+        public void ProjectManager_SaveCorrectionData_FileSavedCorrectly(string filename)
         {
             //SetUp
             var expectedProject = CreateProject();
 
             //Testing
-            ProjectManager.SaveToFile(expectedProject, path, filename);
+            ProjectManager.SaveToFile(expectedProject, _projectFileName, filename);
 
             //Assert
             var actual = 
-                File.ReadAllText(path + filename);
+                File.ReadAllText(_projectFileName + filename);
             var expected = 
-                File.ReadAllText("TestContactsData" + @"\CorrectContactsData.notes");
+                File.ReadAllText(_projectFileName + @"\CorrectContactsData.notes");
             Assert.AreEqual(expected, actual);
 
         }

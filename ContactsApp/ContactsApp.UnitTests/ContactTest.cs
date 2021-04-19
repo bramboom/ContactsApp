@@ -6,8 +6,6 @@ namespace ContactsApp.UnitTests
     [TestFixture]
     public class ContactTest
     {
-        public Contact contact = new Contact();
-
         [TestCase("TestTestTestTestTestTestTestTestTestTestTestTestTest", 
             "Должно возникать исключение, если фамилия - превышает 50 символов",
             TestName = "Присвоение фамилии, содержащей больше 50 символов")]
