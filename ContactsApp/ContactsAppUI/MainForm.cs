@@ -23,6 +23,9 @@ namespace ContactsAppUI
         /// </summary>
         private void InsertToListBox()
         {
+            ContactSurnameComparer surnameComparer = new ContactSurnameComparer();
+            _viewContacts.Sort(surnameComparer);
+
             for (int index = 0; index < _viewContacts.Count; index++)
             {
                 surnameListBox.Items.Insert(index, _viewContacts[index].Surname);
@@ -58,6 +61,63 @@ namespace ContactsAppUI
             mailTextBox.Text = "";
         }
 
+        /// <summary>
+        /// Удаляет выбранный контакт
+        /// </summary>
+        private void RemoveComtact()
+        {
+            if (surnameListBox.SelectedItem == null)
+            {
+                MessageBox.Show("Select contact!");
+                return;
+            }
+            int index = surnameListBox.SelectedIndex;
+            DialogResult result =
+                MessageBox.Show("Do you really want to remove this contact: " +
+                                $"{_viewContacts[index].Surname}",
+                    "Remove Contact", MessageBoxButtons.OKCancel);
+            if (result == DialogResult.OK)
+            {
+                _project.Contacts.RemoveAt(_project.Contacts.IndexOf(
+                    _viewContacts[index]));
+            }
+            ProjectManager.SaveToFile(_project, ProjectManager.Path, ProjectManager.FileName);
+            _viewContacts = new List<Contact>();
+            _viewContacts = _project.SearchContactByString(textBoxFind.Text);
+            surnameListBox.Items.Clear();
+            InsertToListBox();
+            if (_viewContacts.Count > 0)
+            {
+                surnameListBox.SelectedIndex = 0;
+                InputInformationOfContact(0);
+            }
+            else
+            {
+                ClearInformationOfContact();
+            }
+        }
+
+        /// <summary>
+        /// находит контакты у которых сегодня день рождения 
+        /// </summary>
+        void SearchBirthdaySurnames()
+        {
+            labelSurames.Text = "";
+            for (int index = 0; index < _viewContacts.Count; index++)
+            {
+                if ((_viewContacts[index].Birthday.Month == DateTime.Now.Month)
+                    && (_viewContacts[index].Birthday.Day == DateTime.Now.Day))
+                {
+                    if (labelSurames.Text != "")
+                    {
+                        labelSurames.Text = labelSurames.Text + ", ";
+                    }
+
+                    labelSurames.Text = labelSurames.Text + _viewContacts[index].Surname;
+                }
+            }
+        }
+
         public MainForm()
         {
             InitializeComponent();
@@ -83,6 +143,7 @@ namespace ContactsAppUI
                 int index = _viewContacts.Count - 1;
                 surnameListBox.SelectedIndex = index;
                 InputInformationOfContact(index);
+                SearchBirthdaySurnames();
             }
         }
 
@@ -116,35 +177,7 @@ namespace ContactsAppUI
 
         private void RemoveContact_Click(object sender, EventArgs e)
         {
-            if (surnameListBox.SelectedItem == null)
-            {
-                MessageBox.Show("Select contact!");
-                return;
-            }
-            int index = surnameListBox.SelectedIndex;
-            DialogResult result =
-                MessageBox.Show("Do you really want to remove this contact: " +
-                                $"{_viewContacts[index].Surname}",
-                        "Remove Contact", MessageBoxButtons.OKCancel);
-            if (result == DialogResult.OK)
-            {
-                _project.Contacts.RemoveAt(_project.Contacts.IndexOf(
-                    _viewContacts[index]));
-            }
-            ProjectManager.SaveToFile(_project, ProjectManager.Path, ProjectManager.FileName);
-            _viewContacts = new List<Contact>();
-            _viewContacts = _project.SearchContactByString(textBoxFind.Text);
-            surnameListBox.Items.Clear();
-            InsertToListBox();
-            if (_viewContacts.Count > 0)
-            {
-                surnameListBox.SelectedIndex = 0;
-                InputInformationOfContact(0);
-            }
-            else
-            {
-                ClearInformationOfContact();
-            }
+            RemoveComtact();
         }
 
         private void About_Click(object sender, EventArgs e)
@@ -162,6 +195,7 @@ namespace ContactsAppUI
                 surnameListBox.SelectedIndex = 0;
                 InputInformationOfContact(0);
             }
+            SearchBirthdaySurnames();
         }
 
         private void surnameListBox_Click(object sender, EventArgs e)
@@ -180,6 +214,10 @@ namespace ContactsAppUI
             else if (e.KeyCode == Keys.F4)
             {
                 this.Close();
+            }
+            else if (e.KeyCode == Keys.Delete)
+            {
+                RemoveComtact();
             }
         }
 

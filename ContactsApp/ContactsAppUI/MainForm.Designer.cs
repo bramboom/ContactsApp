@@ -58,8 +58,13 @@ namespace ContactsAppUI
             this.textBoxFind = new System.Windows.Forms.TextBox();
             this.surnameListBox = new System.Windows.Forms.ListBox();
             this.panel = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.labelSurames = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
             this.menuStrip.SuspendLayout();
             this.panel.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -370,12 +375,56 @@ namespace ContactsAppUI
             this.panel.Size = new System.Drawing.Size(606, 178);
             this.panel.TabIndex = 19;
             // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.panel1.Controls.Add(this.labelSurames);
+            this.panel1.Controls.Add(this.panel2);
+            this.panel1.Controls.Add(this.label2);
+            this.panel1.Location = new System.Drawing.Point(319, 452);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(623, 83);
+            this.panel1.TabIndex = 20;
+            // 
+            // labelSurames
+            // 
+            this.labelSurames.AutoSize = true;
+            this.labelSurames.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.labelSurames.Location = new System.Drawing.Point(89, 32);
+            this.labelSurames.Name = "labelSurames";
+            this.labelSurames.Size = new System.Drawing.Size(0, 17);
+            this.labelSurames.TabIndex = 2;
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.panel2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel2.BackgroundImage")));
+            this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.panel2.ForeColor = System.Drawing.Color.Lime;
+            this.panel2.Location = new System.Drawing.Point(10, 11);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(64, 64);
+            this.panel2.TabIndex = 1;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.label2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label2.Location = new System.Drawing.Point(89, 11);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(121, 17);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Today is birthday:";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(932, 523);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel);
             this.Controls.Add(this.surnameListBox);
             this.Controls.Add(this.textBoxFind);
@@ -397,6 +446,8 @@ namespace ContactsAppUI
             this.menuStrip.PerformLayout();
             this.panel.ResumeLayout(false);
             this.panel.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -434,5 +485,9 @@ namespace ContactsAppUI
         private System.Windows.Forms.TextBox textBoxFind;
         private System.Windows.Forms.ListBox surnameListBox;
         private System.Windows.Forms.Panel panel;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label labelSurames;
     }
 }

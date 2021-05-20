@@ -32,6 +32,10 @@ namespace ContactsApp
                 {
                     viewContacts.Add(Contacts[index]);
                 }
+                else if (Contacts[index].Name.Contains(searchString))
+                {
+                    viewContacts.Add(Contacts[index]);
+                }
             }
             return viewContacts;
         }
