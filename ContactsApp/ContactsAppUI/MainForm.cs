@@ -95,6 +95,7 @@ namespace ContactsAppUI
             {
                 ClearInformationOfContact();
             }
+            SearchBirthdaySurnames();
         }
 
         /// <summary>
@@ -115,6 +116,15 @@ namespace ContactsAppUI
 
                     labelSurames.Text = labelSurames.Text + _viewContacts[index].Surname;
                 }
+            }
+
+            if (labelSurames.Text == "")
+            {
+                panel1.Visible = false;
+            }
+            else
+            {
+                panel1.Visible = true;
             }
         }
 
@@ -140,7 +150,7 @@ namespace ContactsAppUI
                 _viewContacts = _project.SearchContactByString(textBoxFind.Text);
                 surnameListBox.Items.Clear();
                 InsertToListBox();
-                int index = _viewContacts.Count - 1;
+                int index = 0;
                 surnameListBox.SelectedIndex = index;
                 InputInformationOfContact(index);
                 SearchBirthdaySurnames();
@@ -173,6 +183,7 @@ namespace ContactsAppUI
             InsertToListBox();
             InputInformationOfContact(index);
             surnameListBox.SelectedIndex = index;
+            SearchBirthdaySurnames();
         }
 
         private void RemoveContact_Click(object sender, EventArgs e)
