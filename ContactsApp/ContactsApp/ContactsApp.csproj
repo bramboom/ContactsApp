@@ -44,7 +44,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ContactsSurnameComparer.cs" />
     <Compile Include="Contact.cs" />
     <Compile Include="ProjectManager.cs" />
     <Compile Include="PhoneNumber.cs" />

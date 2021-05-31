@@ -1,5 +1,5 @@
 #define MyAppURL "https://github.com/bramboom/ContactsApp"
-#define MyAppExeName "ContactsApp.exe"
+#define MyAppExeName "ContactsAppUI.exe"
 #define MyAppName "ContactsApp"
 #define MyAppVersion "1.0.0"
 [Setup]
@@ -24,10 +24,10 @@ Name: "en"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "Release\ContactsApp.dll"; DestDir: "{app}"
-Source: "Release\Newtonsoft.Json.dll"; DestDir: "{app}"
+Source: "Release\*.dll"; DestDir: "{app}"
 Source: "Release\ContactsAppUI.exe"; DestDir: "{app}"
+Source: "..\..\documents\MainFormIcon.ico"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
 Name: "{commonprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
-Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon;
+Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFileName: "{app}\MainFormIcon.ico";  Tasks: desktopicon;

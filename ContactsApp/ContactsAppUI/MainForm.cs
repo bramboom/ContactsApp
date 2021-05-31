@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using ContactsApp;
 
@@ -23,8 +24,7 @@ namespace ContactsAppUI
         /// </summary>
         private void InsertToListBox()
         {
-            ContactSurnameComparer surnameComparer = new ContactSurnameComparer();
-            _viewContacts.Sort(surnameComparer);
+            _viewContacts = _viewContacts.OrderBy(t => t.Surname).ToList();
 
             for (int index = 0; index < _viewContacts.Count; index++)
             {
