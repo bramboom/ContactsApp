@@ -24,6 +24,8 @@ namespace ContactsAppUI
         /// </summary>
         private void InsertToListBox()
         {
+            _viewContacts = new List<Contact>();
+            _viewContacts = _project.SearchContactByString(textBoxFind.Text);
             _viewContacts = _viewContacts.OrderBy(t => t.Surname).ToList();
 
             for (int index = 0; index < _viewContacts.Count; index++)
@@ -64,7 +66,7 @@ namespace ContactsAppUI
         /// <summary>
         /// Удаляет выбранный контакт
         /// </summary>
-        private void RemoveComtact()
+        private void RemoveContact()
         {
             if (surnameListBox.SelectedItem == null)
             {
@@ -82,8 +84,6 @@ namespace ContactsAppUI
                     _viewContacts[index]));
             }
             ProjectManager.SaveToFile(_project, ProjectManager.Path, ProjectManager.FileName);
-            _viewContacts = new List<Contact>();
-            _viewContacts = _project.SearchContactByString(textBoxFind.Text);
             surnameListBox.Items.Clear();
             InsertToListBox();
             if (_viewContacts.Count > 0)
@@ -118,14 +118,7 @@ namespace ContactsAppUI
                 }
             }
 
-            if (labelSurames.Text == "")
-            {
-                panel1.Visible = false;
-            }
-            else
-            {
-                panel1.Visible = true;
-            }
+            panelbirthday.Visible = labelSurames.Text != "";
         }
 
         public MainForm()
@@ -142,19 +135,15 @@ namespace ContactsAppUI
         {
             ContactForm contact = new ContactForm();
             contact.ShowDialog();
-            if (contact.DialogResult == DialogResult.OK)
-            {
-                _project.Contacts.Add(contact.Contact);
-                ProjectManager.SaveToFile(_project, ProjectManager.Path, ProjectManager.FileName);
-                _viewContacts = new List<Contact>();
-                _viewContacts = _project.SearchContactByString(textBoxFind.Text);
-                surnameListBox.Items.Clear();
-                InsertToListBox();
-                int index = 0;
-                surnameListBox.SelectedIndex = index;
-                InputInformationOfContact(index);
-                SearchBirthdaySurnames();
-            }
+            if (contact.DialogResult != DialogResult.OK) return;
+            _project.Contacts.Add(contact.Contact);
+            ProjectManager.SaveToFile(_project, ProjectManager.Path, ProjectManager.FileName);
+            surnameListBox.Items.Clear();
+            InsertToListBox();
+            int index = 0;
+            surnameListBox.SelectedIndex = index;
+            InputInformationOfContact(index);
+            SearchBirthdaySurnames();
         }
 
         private void EditContact_Click(object sender, EventArgs e)
@@ -177,8 +166,6 @@ namespace ContactsAppUI
                     = (Contact)contact.Contact.Clone();
             }
             ProjectManager.SaveToFile(_project, ProjectManager.Path, ProjectManager.FileName);
-            _viewContacts = new List<Contact>();
-            _viewContacts = _project.SearchContactByString(textBoxFind.Text);
             surnameListBox.Items.Clear();
             InsertToListBox();
             InputInformationOfContact(index);
@@ -188,7 +175,7 @@ namespace ContactsAppUI
 
         private void RemoveContact_Click(object sender, EventArgs e)
         {
-            RemoveComtact();
+            RemoveContact();
         }
 
         private void About_Click(object sender, EventArgs e)
@@ -228,11 +215,23 @@ namespace ContactsAppUI
             }
             else if (e.KeyCode == Keys.Delete)
             {
-                RemoveComtact();
+                RemoveContact();
             }
         }
 
-        private void TextBoxFind_Changer(object sender, EventArgs e)
+        private void DateBox_ValueChanged(object sender, EventArgs e)
+        {
+            if (surnameListBox.SelectedIndex != -1)
+            {
+                dateBox.Value = _viewContacts[surnameListBox.SelectedIndex].Birthday;
+            }
+            else
+            {
+                dateBox.Value = DateTime.Now;
+            }
+        }
+
+        private void TextBoxFind_TextChanged(object sender, EventArgs e)
         {
             _viewContacts = new List<Contact>();
             string searchString = textBoxFind.Text;
@@ -247,18 +246,6 @@ namespace ContactsAppUI
             else
             {
                 ClearInformationOfContact();
-            }
-        }
-
-        private void DateBox_ValueChanged(object sender, EventArgs e)
-        {
-            if (surnameListBox.SelectedIndex != -1)
-            {
-                dateBox.Value = _viewContacts[surnameListBox.SelectedIndex].Birthday;
-            }
-            else
-            {
-                dateBox.Value = DateTime.Now;
             }
         }
     }
