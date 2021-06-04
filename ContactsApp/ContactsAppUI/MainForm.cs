@@ -11,7 +11,7 @@ namespace ContactsAppUI
         /// <summary>
         /// объект класса Project
         /// </summary>
-        private Project _project = 
+        private Project _project =
             ProjectManager.LoadFromFile(ProjectManager.Path, ProjectManager.FileName);
 
         /// <summary>
@@ -138,11 +138,20 @@ namespace ContactsAppUI
             if (contact.DialogResult != DialogResult.OK) return;
             _project.Contacts.Add(contact.Contact);
             ProjectManager.SaveToFile(_project, ProjectManager.Path, ProjectManager.FileName);
+            _viewContacts = new List<Contact>();
+            _viewContacts = _project.SearchContactByString(textBoxFind.Text);
             surnameListBox.Items.Clear();
             InsertToListBox();
-            int index = 0;
-            surnameListBox.SelectedIndex = index;
-            InputInformationOfContact(index);
+            var index = _viewContacts.IndexOf(contact.Contact);
+            if (_viewContacts.Count > index)
+            {
+                surnameListBox.SelectedIndex = index;
+                InputInformationOfContact(index);
+            }
+            else
+            {
+                ClearInformationOfContact();
+            }
             SearchBirthdaySurnames();
         }
 
@@ -153,7 +162,7 @@ namespace ContactsAppUI
                 MessageBox.Show("Select contact");
                 return;
             }
-            
+
             int index = surnameListBox.SelectedIndex;
             ContactForm contact = new ContactForm();
             contact.Contact = (Contact)_viewContacts[index].Clone();
@@ -162,14 +171,22 @@ namespace ContactsAppUI
             {
                 var contactIndex = _project.Contacts.IndexOf(
                     _viewContacts[index]);
-                _project.Contacts[contactIndex] 
+                _project.Contacts[contactIndex]
                     = (Contact)contact.Contact.Clone();
             }
             ProjectManager.SaveToFile(_project, ProjectManager.Path, ProjectManager.FileName);
             surnameListBox.Items.Clear();
             InsertToListBox();
-            InputInformationOfContact(index);
-            surnameListBox.SelectedIndex = index;
+            index = _viewContacts.IndexOf(contact.Contact);
+            if (_viewContacts.Count > index)
+            {
+                surnameListBox.SelectedIndex = index;
+                InputInformationOfContact(index);
+            }
+            else
+            {
+                ClearInformationOfContact();
+            }
             SearchBirthdaySurnames();
         }
 
