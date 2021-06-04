@@ -123,30 +123,5 @@ namespace ContactsApp.UnitTests
             Assert.AreEqual(expected, actual);
 
         }
-
-        [Test(Description = "Проверка  сохранения корректного обьекта по несущесвующему пути")]
-        public void ProjectManager_SaveDataWithWrongPath_FileSavedCorrectly()
-        {
-            //SetUp
-            if (!System.IO.Directory.Exists(_projectFileName))
-            {
-                System.IO.Directory.Delete(_projectFileName);
-            }
-            var expectedProject = CreateProject();
-
-            //Testing
-            ProjectManager.SaveToFile(
-                expectedProject,
-                _projectFileName,
-                @"\CorrectContactsDataTwo.notes");
-
-            //Assert
-            var actual =
-                File.ReadAllText(_projectFileName + @"1\CorrectContactsDataTwo.notes");
-            var expected =
-                File.ReadAllText(_projectFileName + @"\CorrectContactsData.notes");
-            Assert.AreEqual(expected, actual);
-
-        }
     }
 }

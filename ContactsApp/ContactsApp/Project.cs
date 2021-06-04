@@ -40,6 +40,30 @@ namespace ContactsApp
             return viewContacts;
         }
 
+        /// <summary>
+        /// ищет среди списка контактов, контакты у которы сегодня день рождения 
+        /// </summary>
+        /// <param name="Contacts">список контактов</param>
+        /// <returns>строку с фамилиями контактов</returns>
+        public string SearchSurnamesByBirthday(List<Contact> Contacts)
+        {
+            string surnames = "";
+            for (int index = 0; index < Contacts.Count; index++)
+            {
+                if ((Contacts[index].Birthday.Month == DateTime.Now.Month)
+                    && (Contacts[index].Birthday.Day == DateTime.Now.Day))
+                {
+                    if (surnames != "")
+                    {
+                        surnames = surnames + ", ";
+                    }
+
+                    surnames = surnames + Contacts[index].Surname;
+                }
+            }
+            return surnames;
+        }
+
         public bool Equals(Project other)
         {
             if (ReferenceEquals(null, other)) return false;

@@ -104,20 +104,7 @@ namespace ContactsAppUI
         void SearchBirthdaySurnames()
         {
             labelSurames.Text = "";
-            for (int index = 0; index < _viewContacts.Count; index++)
-            {
-                if ((_viewContacts[index].Birthday.Month == DateTime.Now.Month)
-                    && (_viewContacts[index].Birthday.Day == DateTime.Now.Day))
-                {
-                    if (labelSurames.Text != "")
-                    {
-                        labelSurames.Text = labelSurames.Text + ", ";
-                    }
-
-                    labelSurames.Text = labelSurames.Text + _viewContacts[index].Surname;
-                }
-            }
-
+            labelSurames.Text = _project.SearchSurnamesByBirthday(_viewContacts);
             panelbirthday.Visible = labelSurames.Text != "";
         }
 

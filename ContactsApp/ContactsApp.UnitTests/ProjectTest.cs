@@ -63,13 +63,11 @@ namespace ContactsApp.UnitTests
             });
         }
 
-        [TestCase("S",
-            "Не должно возникать искльчение, если возвращает тотже список", 
+        [TestCase("S", 
             TestName="Поиск по строке которая содержится в каждом объекте")]
-        [TestCase("",
-            "Не должно возникать исключенеи, если возвращает тотже список", 
+        [TestCase("", 
             TestName = "Поиск по пустой строке")]
-        public void TestSearchContactByString_CorrectValue_ReturnCorrectList(string searchString, string message)
+        public void TestSearchContactByString_CorrectValue_ReturnCorrectList(string searchString)
         {
             //Arrange
             InitProject();
@@ -139,6 +137,59 @@ namespace ContactsApp.UnitTests
 
             //Assert
             Assert.IsNotNull(viewContact, "Список должен быть пуст");
+        }
+
+        [Test(Description = "Поиск контактов по дню рождения")]
+        public void TestSearchSurnamesByBirthday_CorrectValue_ReturnCorrectList()
+        {
+            //Arrange
+            InitProject();
+            var expectedSurname = "Smit";
+            var expectedName = "";
+            var expectedBirthday = DateTime.Now;
+            var expectedNumber = new PhoneNumber();
+            expectedNumber.Number = 71234567890;
+            var expectedVK = "id";
+            var expectedEmail = "";
+            var contact = new Contact(
+                expectedSurname, expectedName,
+                expectedBirthday, expectedNumber,
+                expectedVK, expectedEmail);
+            _project.Contacts.Add(contact);
+
+            //Act
+            var actualSurnames =
+                _project.SearchSurnamesByBirthday(_project.Contacts);
+
+            //Assert
+            Assert.AreEqual(expectedSurname, actualSurnames,
+                "Метод нашел неверное значение Surnames");
+        }
+
+        [Test(Description = "Поиск если именинников нет")]
+        public void TestSearchSurnamesByBirthday_CorrectValue_ReturnEmptyList()
+        {
+            //Arrange
+            InitProject();
+            var expectedSurname = "Smit";
+            var expectedName = "";
+            var expectedBirthday = DateTime.Now.AddDays(-1);
+            var expectedNumber = new PhoneNumber();
+            expectedNumber.Number = 71234567890;
+            var expectedVK = "id";
+            var expectedEmail = "";
+            var contact = new Contact(
+                expectedSurname, expectedName,
+                expectedBirthday, expectedNumber,
+                expectedVK, expectedEmail);
+            _project.Contacts.Add(contact);
+
+            //Act
+            var actualSurnames =
+                _project.SearchSurnamesByBirthday(_project.Contacts);
+
+            //Assert
+            Assert.IsNotNull(actualSurnames, "Список должен быть пуст");
         }
     }
 }
