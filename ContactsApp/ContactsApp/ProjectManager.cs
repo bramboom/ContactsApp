@@ -5,26 +5,26 @@ using Newtonsoft.Json;
 namespace ContactsApp
 {
     /// <summary>
-    ///сериализация объекта Project
+    ///serializing the Project object
     /// </summary>
     public static class ProjectManager
     {
         /// <summary>
-        /// хранит путь до файла
+        /// stores the path to the file
         /// </summary>
         public static readonly string Path =
             Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/ContactsApp";
 
         /// <summary>
-        ///хранит имя файла
+        ///stores the filename
         /// </summary>
         public static readonly string FileName = "/ContactsApp.notes";
 
         /// <summary>
-        /// сериализирует объект Project в файл
+        /// serializes the Project object to a file
         /// </summary>
-        /// <param name="project">сериализируемый объект</param>
-        /// <param name="fileName">путь к файлу</param>
+        /// <param name="project">serializable object</param>
+        /// <param name="fileName">path to file</param>
         public static void SaveToFile(Project project, string path, string filename)
         {
             var fullPath = path + filename;
@@ -44,10 +44,10 @@ namespace ContactsApp
         }
 
         /// <summary>
-        /// десериализирует объект Project из файла
+        /// deserializes a Project object from a file
         /// </summary>
-        /// <param name="fileName">путь к файлу</param>
-        /// <returns>десериализированный объект</returns>
+        /// <param name="fileName">path to file</param>
+        /// <returns>deserialized object</returns>
         public static Project LoadFromFile(string path, string filename)
         {
             Project project = new Project();

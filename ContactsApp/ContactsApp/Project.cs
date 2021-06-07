@@ -4,20 +4,20 @@ using System.Collections.Generic;
 namespace ContactsApp
 {
     /// <summary>
-    ///содержит список контактов
+    /// contains a list of contacts
     /// </summary>
     public class Project: IEquatable<Project>
     {
         /// <summary>
-        /// Список контактов
+        /// list of contacts
         /// </summary>
         public List<Contact> Contacts { get; set; } = new List<Contact>();
 
         /// <summary>
-        /// Выполняет поиск контакта по строке 
+        /// Searches for a contact by string 
         /// </summary>
-        /// <param name="searchString">поисковая строка </param>
-        /// <returns>Список найденых контактов</returns>
+        /// <param name="searchString"> search bar </param>
+        /// <returns> List of found contacts </returns>
         public List<Contact> SearchContactByString(string searchString)
         {
             List<Contact> viewContacts = new List<Contact>();
@@ -41,10 +41,10 @@ namespace ContactsApp
         }
 
         /// <summary>
-        /// ищет среди списка контактов, контакты у которы сегодня день рождения 
+        /// searches among the list of contacts whose contacts have a birthday today
         /// </summary>
-        /// <param name="Contacts">список контактов</param>
-        /// <returns>строку с фамилиями контактов</returns>
+        /// <param name="Contacts"> contact list </param>
+        /// <returns> line with last names of contacts </returns>
         public string SearchSurnamesByBirthday(List<Contact> Contacts)
         {
             string surnames = "";

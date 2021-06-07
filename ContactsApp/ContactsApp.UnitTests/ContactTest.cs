@@ -7,12 +7,12 @@ namespace ContactsApp.UnitTests
     public class ContactTest
     {
         /// <summary>
-        /// Создает контакт
+        /// Create contact
         /// </summary>
-        /// <returns>контакт</returns>
+        /// <returns>contact</returns>
         private Contact expectedContact()
         {
-            Contact expected = new Contact();
+            Contact expected;
             var expectedSurname = "Smit";
             var expectedName = "Smit";
             var expectedNumber = new PhoneNumber();
@@ -27,12 +27,12 @@ namespace ContactsApp.UnitTests
             return expected;
         }
 
-        [TestCase("TestTestTestTestTestTestTestTestTestTestTestTestTest", 
-            "Должно возникать исключение, если фамилия - превышает 50 символов",
-            TestName = "Присвоение фамилии, содержащей больше 50 символов")]
+        [TestCase("TestTestTestTestTestTestTestTestTestTestTestTestTest",
+            "exception should be thrown if the last name is more than 50 characters",
+            TestName = "Assigning a surname with more than 50 characters")]
         [TestCase("1",
-            "Должно возникать исключение, если фамилия содержит цифры",
-            TestName = "Присвоение фамилии, содержащей цифры")]
+            "exception should be thrown if the last name contains numbers",
+            TestName = "Assigning a surname containing numbers")]
         public void TestSurnameSet_IncorrectValue_ArgumentException(string wrongSurname, string message)
         {
             //Arrange
@@ -48,7 +48,7 @@ namespace ContactsApp.UnitTests
                 message);
         }
         
-        [Test(Description = "Позитивный тест сеттера Surname")]
+        [Test(Description = "Surname Setter Positive Test")]
         public void TestSurnameSet_CorrectValue_ReturnCorrectValue()
         {
             //Arrange
@@ -61,16 +61,16 @@ namespace ContactsApp.UnitTests
 
             //Assert
             Assert.AreEqual(expected, actual,
-                "При присвоении Surname корректного " +
-                "значения не должно возьникать ошибки");
+                "When assigning a correct Surname " +
+                "values ​​should not be error");
         }
 
         [TestCase("TestTestTestTestTestTestTestTestTestTestTestTestTest",
-            "Должно возникать исключение, если имя - превышает 50 символов",
-            TestName = "Присвоение имени, содержащего больше 50 символов")]
+            "exception should be thrown if the name is more than 50 characters",
+            TestName = "Assigning a name with more than 50 characters")]
         [TestCase("1",
-            "Должно возникать исключение, если имя содержит цифры",
-            TestName = "Присвоение имени, содержащего цифры")]
+            "An exception should be thrown if the name contains numbers",
+            TestName = "Assigning a name containing numbers")]
         public void TestNameSet_IncorrectValue_ArgumentException(string wrongName, string message)
         {
             //Arrange
@@ -86,7 +86,7 @@ namespace ContactsApp.UnitTests
                 message);
         }
 
-        [Test(Description = "Позитивный тест сеттера Name")]
+        [Test(Description = "Name setter positive test")]
         public void TestNameSet_CorrectValue_ReturnCorrectValue()
         {
             //Arrange
@@ -99,11 +99,11 @@ namespace ContactsApp.UnitTests
 
             //Assert
             Assert.AreEqual(expected, actual,
-                "При присвоении Name корректного " +
-                "значения не должно возьникать ошибки");
+                "If the Name is assigned correctly " +
+                "values ​​should not be error");
         }
 
-        [Test(Description = "Негативный тест для сеттера Birthday")]
+        [Test(Description = "Negative test for Birthday setter")]
         public void TestBirthdaySet_InCorrectValueMore_ArgumentException()
         {
             //Arrange
@@ -116,11 +116,11 @@ namespace ContactsApp.UnitTests
                     //Act
                     contact.Birthday = new DateTime(2999, 1, 1);
                 },
-                "При присвоении Birthday корректного " +
-                "значения не должно возьникать ошибки");
+                "When assigning a correct Birthday " +
+                "values ​​should not be error");
         }
 
-        [Test(Description = "Негативный тест для сеттера Birthday")]
+        [Test(Description = "Negative test for Birthday setter")]
         public void TestBirthdaySet_InCorrectValueLess_ArgumentException()
         {
             //Arrange
@@ -133,11 +133,11 @@ namespace ContactsApp.UnitTests
                     //Act
                     contact.Birthday = new DateTime(1899, 1, 1);
                 },
-                "При присвоении Birthday корректного " +
-                "значения не должно возьникать ошибки");
+                "When assigning a correct Birthday " +
+                "values ​​should not be error");
         }
 
-        [Test(Description = "Позитивный тест для сеттера Birthday")]
+        [Test(Description = "Positive test for the Birthday setter")]
         public void TestBirthdaySet_CorrectValue_ReturnCorrectValue()
         {
             //Arrange
@@ -150,29 +150,29 @@ namespace ContactsApp.UnitTests
 
             //Assert
             Assert.AreEqual(expected, actual,
-                "При присвоении Birthday корректного " +
-                "значения не должно возьникать ошибки");
+                "When assigning a correct Birthday " +
+                "values ​​should not be error");
         }
 
-        [Test(Description = "Позитивный тест сеттера PhoneNumber")]
+        [Test(Description = "Positive test of the PhoneNumber setter")]
         public void TestPhoneNumberSet_CorrectValue_ReturnCorrectValue()
         {
             //Arrange
             Contact contact = new Contact();
             PhoneNumber phone = new PhoneNumber();
-            var expeted = phone;
-            contact.PhoneNumber = expeted;
+            var expected = phone;
+            contact.PhoneNumber = expected;
 
             //Act
             var actual = contact.PhoneNumber;
 
             //Assert
-            Assert.AreEqual(expeted, actual,
-                "При присвоении PhoneNumber корректного " +
-                "значения не должно возьникать ошибки");
+            Assert.AreEqual(expected, actual,
+                "When assigning a correct PhoneNumber " +
+                "values ​​should not be error");
         }
 
-        [Test(Description = "Негативный тест сеттера EMail")]
+        [Test(Description = "EMail setter negative test")]
         public void TestEmailSet_IncorrectValue_ArgumentException()
         {
             //Arrange
@@ -187,11 +187,11 @@ namespace ContactsApp.UnitTests
                     + "test-test-test-test-test"
                     + "test-test-test-test-test";
                 },
-                "При присвоении EMail корректного " +
-                "значения не должно возьникать ошибки");
+                "When assigning a correct EMail " +
+                "values ​​should not be error");
         }
 
-        [Test(Description = "Позитивный тест сеттера EMail")]
+        [Test(Description = "EMail setter positive test")]
         public void TestEmailSet_CorrectValue_ReturnCorrectValue()
         {
             //Arrange
@@ -204,16 +204,16 @@ namespace ContactsApp.UnitTests
 
             //Assert
             Assert.AreEqual(expected, actual,
-                "При присвоении EMail корректного " +
-                "значения не должно возьникать ошибки");
+                "When assigning a correct EMail " +
+                "values ​​should not be error");
         }
 
         [TestCase("aaa",
-            "Должно возникать исключение, если поле VKontakte не содержит 'id'",
-            TestName = "Присвоение id, которое не содержит 'id'")]
+            "An exception should be thrown if the VKontakte field does not contain 'id'",
+            TestName = "An id assignment that does not contain an 'id'")]
         [TestCase("id-test-test-test-test",
-            "Должно возникать исключение, если VKontakte больше 15",
-            TestName = "Присвоение VKontakte, у которого больше 15 символов")]
+            "An exception should be thrown if VKontakte is greater than 15",
+            TestName = "Assigning a VKontakte that has more than 15 characters")]
         public void TestVKSet_IncorrectValue_ArgumentException(string wrongVkontacte, string message)
         {
             //Arrange
@@ -229,7 +229,7 @@ namespace ContactsApp.UnitTests
                 message);
         }
 
-        [Test(Description = "Позитивный тест сеттера VKontakte")]
+        [Test(Description = "VKontakte setter positive test")]
         public void TestVKSet_CorrectValue_ReturnCorrectValue()
         {
             //Arrange
@@ -242,11 +242,11 @@ namespace ContactsApp.UnitTests
 
             //Assert
             Assert.AreEqual(expected, actual,
-                "При присвоении VKontakte корректного " +
-                "значения не должно возьникать ошибки");
+                "When assigning a correct VKontakte " +
+                "values ​​should not be error");
         }
 
-        [Test(Description = "Позитивный тест конструктора класса Contact")]
+        [Test(Description = "Positive test of the constructor of the Contact class")]
         public void TestContactConstructor_CorrectValue_ReturnCorrectValue()
         {
             //Arrange
@@ -265,7 +265,7 @@ namespace ContactsApp.UnitTests
             Assert.AreEqual(expected, actual);
         }
 
-        [Test(Description = "Позитивный тест клонирования контакта")]
+        [Test(Description = "Positive contact cloning test")]
         public void TestClone_CorrectValue_ReturnCorrectValue()
         {
             //Arrange

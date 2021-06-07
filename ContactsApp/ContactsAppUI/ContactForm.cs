@@ -9,24 +9,30 @@ namespace ContactsAppUI
     public partial class ContactForm : Form
     {
         /// <summary>
-        /// объект класса Contact, который нужно изменить или добавить
+        /// object of the Contact class to be modified or added
         /// </summary>
         private Contact _contact;
 
-        private Color _colorError = Color.DarkSalmon;
+        /// <summary>
+        /// incorrect color
+        /// </summary>
+        private readonly Color _incorrectColor = Color.DarkSalmon;
 
         /// <summary>
-        /// свойство поля _contact
+        /// correct color
+        /// </summary>
+        private readonly Color _correctColor = Color.White;
+
+        /// <summary>
+        /// property _contact
         /// </summary>
         public Contact Contact
         {
-            get { return _contact; }
-            set
-            {
+            get => _contact;
+            set =>
                 _contact = new Contact(value.Surname, value.Name,
                     value.Birthday, value.PhoneNumber,
                     value.IdVkontakte, value.EMail);
-            }
         }
 
         public ContactForm()
@@ -38,39 +44,39 @@ namespace ContactsAppUI
         {
             string inputError = "Error list:\n";
 
-            if ((surnameTextBox.BackColor == _colorError) || (surnameTextBox.Text == ""))
+            if ((surnameTextBox.BackColor == _incorrectColor) || (surnameTextBox.Text == ""))
             {
                 inputError = inputError + "incorrect surname.\n";
             }
 
-            if ((nameTextBox.BackColor == _colorError) || (nameTextBox.Text == ""))
+            if ((nameTextBox.BackColor == _incorrectColor) || (nameTextBox.Text == ""))
             {
                 inputError = inputError + "incorrect name.\n";
             }
 
-            if (_dateTimePicker.BackColor == _colorError)
+            if (_dateTimePicker.BackColor == _incorrectColor)
             {
                 inputError = inputError + "incorrect date.\n";
             }
 
-            if ((phoneTextBox.BackColor == _colorError) || (phoneTextBox.Text == ""))
+            if ((phoneTextBox.BackColor == _incorrectColor) || (phoneTextBox.Text == ""))
             {
                 inputError = inputError + "incorrect phone.\n";
             }
 
-            if ((mailTextBox.BackColor == _colorError) || (mailTextBox.Text == ""))
+            if ((mailTextBox.BackColor == _incorrectColor) || (mailTextBox.Text == ""))
             {
                 inputError = inputError + "incorrect e-mail.\n";
             }
 
-            if ((vkTextBox.BackColor == _colorError) || (vkTextBox.Text == ""))
+            if ((vkTextBox.BackColor == _incorrectColor) || (vkTextBox.Text == ""))
             {
                 inputError = inputError + "incorrect vk.com.";
             }
 
             if (inputError != "Error list:\n")
             {
-                MessageBox.Show(inputError, "Error");
+                MessageBox.Show(inputError, @"Error");
                 return;
             }
             DialogResult = DialogResult.OK;
@@ -79,21 +85,21 @@ namespace ContactsAppUI
 
         private void nameTextBox_TextChanged(object sender, EventArgs e)
         {
-            nameTextBox.BackColor = Color.White;
+            nameTextBox.BackColor = _correctColor;
             try
             {
                 _contact.Name = nameTextBox.Text;
             }
-            catch (ArgumentException exeption)
+            catch (ArgumentException exception)
             {
-                Console.WriteLine(exeption);
-                nameTextBox.BackColor = _colorError;
+                Console.WriteLine(exception);
+                nameTextBox.BackColor = _incorrectColor;
             }
         }
 
         private void dateBox_ValueChanged(object sender, EventArgs e)
         {
-            _dateTimePicker.BackColor = Color.White;
+            _dateTimePicker.BackColor = _correctColor;
             try
             {
                 _contact.Birthday = _dateTimePicker.Value;
@@ -101,14 +107,14 @@ namespace ContactsAppUI
             catch (ArgumentException exception)
             {
                 Console.WriteLine(exception);
-                _dateTimePicker.BackColor = _colorError;
+                _dateTimePicker.BackColor = _incorrectColor;
                 _dateTimePicker.Invalidate();
             }
         }
 
         private void phoneTextBox_TextChanged(object sender, EventArgs e)
         {
-            phoneTextBox.BackColor = Color.White;
+            phoneTextBox.BackColor = _correctColor;
             if ((phoneTextBox.Text.All(char.IsDigit)) && (phoneTextBox.Text != ""))
             {
                 try
@@ -120,18 +126,18 @@ namespace ContactsAppUI
                 catch (ArgumentException exception)
                 {
                     Console.WriteLine(exception);
-                    phoneTextBox.BackColor = _colorError;
+                    phoneTextBox.BackColor = _incorrectColor;
                 }
             }
             else
             {
-                phoneTextBox.BackColor = _colorError;
+                phoneTextBox.BackColor = _incorrectColor;
             }
         }
 
         private void mailTextBox_TextChanged(object sender, EventArgs e)
         {
-            mailTextBox.BackColor = Color.White;
+            mailTextBox.BackColor = _correctColor;
             try
             {
                 _contact.EMail = mailTextBox.Text;
@@ -139,13 +145,13 @@ namespace ContactsAppUI
             catch (ArgumentException exception)
             {
                 Console.WriteLine(exception);
-                mailTextBox.BackColor = _colorError;
+                mailTextBox.BackColor = _incorrectColor;
             }
         }
 
         private void vkTextBox_TextChanged(object sender, EventArgs e)
         {
-            vkTextBox.BackColor = Color.White;
+            vkTextBox.BackColor = _correctColor;
             try
             {
                 _contact.IdVkontakte = vkTextBox.Text;
@@ -153,7 +159,7 @@ namespace ContactsAppUI
             catch (ArgumentException exception)
             {
                 Console.WriteLine(exception);
-                vkTextBox.BackColor = _colorError;
+                vkTextBox.BackColor = _incorrectColor;
             }
         }
 
@@ -184,7 +190,7 @@ namespace ContactsAppUI
 
         private void surnameTextBox_TextChanged(object sender, EventArgs e)
         {
-            surnameTextBox.BackColor = Color.White;
+            surnameTextBox.BackColor = _correctColor;
             try
             {
                 _contact.Surname = surnameTextBox.Text;
@@ -192,7 +198,7 @@ namespace ContactsAppUI
             catch (ArgumentException exception)
             {
                 Console.WriteLine(exception);
-                surnameTextBox.BackColor = _colorError;
+                surnameTextBox.BackColor = _incorrectColor;
             }
         }
     }

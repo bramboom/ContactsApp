@@ -9,18 +9,18 @@ namespace ContactsAppUI
     public partial class MainForm : Form
     {
         /// <summary>
-        /// объект класса Project
+        /// Object of the Project class
         /// </summary>
         private Project _project =
             ProjectManager.LoadFromFile(ProjectManager.Path, ProjectManager.FileName);
 
         /// <summary>
-        /// Хранит список контактов для просмотра
+        /// Stores a list of contacts for viewing
         /// </summary>
         private List<Contact> _viewContacts = new List<Contact>();
 
         /// <summary>
-        /// вывод всех контактов по фамилии в ListBox
+        /// output of all contacts by last name in ListBox
         /// </summary>
         private void InsertToListBox()
         {
@@ -35,9 +35,9 @@ namespace ContactsAppUI
         }
 
         /// <summary>
-        /// Выводит информацию о контакте по индексу
+        /// Displays contact information by index
         /// </summary>
-        /// <param name="index">индекс контакта</param>
+        /// <param name="index">contact index</param>
         private void InputInformationOfContact(int index)
         {
             if (index == -1) return;
@@ -51,7 +51,7 @@ namespace ContactsAppUI
         }
 
         /// <summary>
-        /// Чистит информацию во всех TextBox
+        /// Clears information in all TextBox
         /// </summary>
         private void ClearInformationOfContact()
         {
@@ -64,7 +64,7 @@ namespace ContactsAppUI
         }
 
         /// <summary>
-        /// Удаляет выбранный контакт
+        /// Deletes the selected contact
         /// </summary>
         private void RemoveContact()
         {
@@ -99,7 +99,7 @@ namespace ContactsAppUI
         }
 
         /// <summary>
-        /// находит контакты у которых сегодня день рождения 
+        /// finds contacts who have birthday today
         /// </summary>
         void SearchBirthdaySurnames()
         {
@@ -163,16 +163,13 @@ namespace ContactsAppUI
             }
             ProjectManager.SaveToFile(_project, ProjectManager.Path, ProjectManager.FileName);
             surnameListBox.Items.Clear();
+            ClearInformationOfContact();
             InsertToListBox();
             index = _viewContacts.IndexOf(contact.Contact);
             if (_viewContacts.Count > index)
             {
                 surnameListBox.SelectedIndex = index;
                 InputInformationOfContact(index);
-            }
-            else
-            {
-                ClearInformationOfContact();
             }
             SearchBirthdaySurnames();
         }

@@ -3,17 +3,17 @@
 namespace ContactsApp
 {
     /// <summary>
-    /// содержит номер телефона
+    /// contains a phone number
     /// </summary>
     public class PhoneNumber: IEquatable<PhoneNumber>
     {
         /// <summary>
-        /// Номер телефона
+        /// Phone number
         /// </summary>
         private long _number;
 
         /// <summary>
-        ///возвращает и задает значение номера телефона
+        /// returns and sets the value of a phone number
         /// </summary>
         public long Number
         {

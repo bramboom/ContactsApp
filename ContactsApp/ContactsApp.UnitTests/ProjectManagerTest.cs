@@ -9,27 +9,27 @@ namespace ContactsApp.UnitTests
     class ProjectManagerTest
     {
         /// <summary>
-        /// путь к фалу из которого загружается сборка 
+        /// path to the file from which the assembly is loaded
         /// </summary>
         private static readonly string LocalPath =
             Assembly.GetExecutingAssembly().Location;
 
         /// <summary>
-        /// путь  к файлу, в котором хранится сборка 
+        /// the path to the file where the assembly is stored
         /// </summary>
         private static readonly string PathDirectoryName =
             Path.GetDirectoryName(LocalPath);
 
         /// <summary>
-        /// путь к правильному файлу 
+        ///  path to the correct file
         /// </summary>
         private readonly string _projectFileName =
             PathDirectoryName + @"\TestContactsData";
 
         /// <summary>
-        /// создает экземпляр класса project с двумя оьектами класса Contacts
+        /// creates an instance of the project class with two objects of the Contacts class
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Object Project class</returns>
         public Project CreateProject()
         {
             Project project = new Project();
@@ -54,9 +54,9 @@ namespace ContactsApp.UnitTests
         }
 
         [TestCase("/CorrectVoidContactsData.notes",
-            TestName = "Проверка выгрузки некорректного обьекта")]
+            TestName = "Checking the unloading of an incorrect object")]
         [TestCase("2/contacts.json",
-            TestName = "Проверка выгрузки по неправильному пути")]
+            TestName = "Checking unloading on the wrong path")]
         public void TestProgectManager_LoadFromFile_FileLoadedNull(string filename)
         {
             //Arrange
@@ -74,8 +74,8 @@ namespace ContactsApp.UnitTests
                 actualProject.Contacts.Count);
         }
 
-        [Test(Description = "Проверка выгрузки корректного значения")]
-        public void TestProgectManager_LoadFromFile_FileLoadedCorrectly()
+        [Test(Description = "Checking the unloading of the correct value")]
+        public void TestProjectManager_LoadFromFile_FileLoadedCorrectly()
         {
             //Arrange
             var expectedProject = CreateProject();
@@ -103,7 +103,7 @@ namespace ContactsApp.UnitTests
             );
         }
 
-        [Test(Description = "Проверка  сохранения корректного обьекта")]
+        [Test(Description = "Checking whether the correct object is saved")]
         public void ProjectManager_SaveCorrectionData_FileSavedCorrectly()
         {
             //SetUp

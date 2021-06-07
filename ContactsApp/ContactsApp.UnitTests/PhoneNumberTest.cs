@@ -7,24 +7,24 @@ namespace ContactsApp.UnitTests
     class PhoneNumberTest
     {
         /// <summary>
-        /// экземпляр класса PhoneNumber 
+        /// instance of the PhoneNumber class
         /// </summary>
         public PhoneNumber _phone;
 
         /// <summary>
-        /// инициализирует поле _phone
+        /// initializes the _phone field
         /// </summary>
         public void InitPhone()
         {
             _phone = new PhoneNumber();
         }
 
-        [TestCase(81234567890, 
-            "Должно возникать исключение, когда номер начинается не с 7", 
-            TestName = "Добавление номера, не содержащего цифру 7 в начале")]
-        [TestCase(723456789, 
-            "Должно возникать исключение, если номер не содержит 11 цифр", 
-            TestName = "Добавление ноера, не содержащего 11 цифр")]
+        [TestCase(81234567890,
+            "Exception should be thrown when the number does not start with 7", 
+            TestName = "Adding a number that does not contain a 7 at the beginning")]
+        [TestCase(723456789,
+            "An exception should be thrown if the number does not contain 11 digits", 
+            TestName = "Adding a noer with no 11 digits")]
         public void TestNumberSet_IncorrectValue_ArgumentException(long wrongNumber, string message)
         {
             //Arrange
@@ -40,7 +40,7 @@ namespace ContactsApp.UnitTests
                 message);
         }
 
-        [Test(Description = "Позитивный тест сеттера Number")]
+        [Test(Description = "Number setter positive test")]
         public void TestNumberSet_CorrectValue_ReturnCorrectValue()
         {
             //Arrange
@@ -53,8 +53,8 @@ namespace ContactsApp.UnitTests
 
             //Assert
             Assert.AreEqual(expected, actual,
-                "При возвращении Number корректного " +
-                "значения не должно возникать ошибки");
+                "Returning a valid Number " +
+                "values ​​should not be error");
         }
     }
 }

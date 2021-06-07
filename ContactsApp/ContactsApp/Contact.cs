@@ -4,38 +4,38 @@ using System.CodeDom;
 namespace ContactsApp
 {
     /// <summary>
-    ///содержит информацию о контакте
+    /// contains contact information
     /// </summary>
     public class Contact : ICloneable, IEquatable<Contact>
 
     {
     /// <summary>
-    /// Фамилия контакта
+    /// Contact surname
     /// </summary>
     private string _surname;
 
     /// <summary>
-    /// Имя контакта
+    /// Contact name
     /// </summary>
     private string _name;
 
     /// <summary>
-    /// День рождения контакта
+    /// Contact birthday
     /// </summary>
     private DateTime _birthday;
 
     /// <summary>
-    /// ID ВКонтакте
+    /// Contact id
     /// </summary>
     private string _idVKontakte;
 
     /// <summary>
-    /// Адрес почты
+    /// Contact e-mail
     /// </summary>
     private string _eMail;
 
     /// <summary>
-    /// метод возвращает и задает значение фамилии
+    /// returns and sets the value of the surname
     /// </summary>
     public string Surname
     {
@@ -48,7 +48,7 @@ namespace ContactsApp
     }
 
     /// <summary>
-    /// возвращает и задает значение имени
+    /// returns and sets the value of the name
     /// </summary>
     public string Name
     {
@@ -64,7 +64,7 @@ namespace ContactsApp
     }
 
     /// <summary>
-    /// возвращает и задает значение дня рождения
+    /// returns and sets the value of the birthday
     /// </summary>
     public DateTime Birthday
     {
@@ -89,12 +89,12 @@ namespace ContactsApp
     }
 
     /// <summary>
-    /// возвращает и задает значение номера телефона
+    /// returns and sets the value of the phone number
     /// </summary>
     public PhoneNumber PhoneNumber { get; set; } = new PhoneNumber();
 
     /// <summary>
-    /// возвращает и задает значение id Вконтакте
+    /// returns and sets the value of the id
     /// </summary>
     public string IdVkontakte
     {
@@ -116,7 +116,7 @@ namespace ContactsApp
     }
 
     /// <summary>
-    /// возвращает и задает значение электронной почты
+    /// returns and sets the value of the e-mail
     /// </summary>
     public string EMail
     {
@@ -133,7 +133,7 @@ namespace ContactsApp
     }
 
     /// <summary>
-    /// Создание пустого объекта
+    /// Creating an empty object
     /// </summary>
     public Contact()
     {
@@ -141,14 +141,14 @@ namespace ContactsApp
     }
 
     /// <summary>
-    /// Конструктор класса
+    /// Class constructor
     /// </summary>
-    /// <param name="surname">Инициализирует поле _surname</param>
-    /// <param name="name">Инициализирует поле _name</param>
-    /// <param name="birthday">Инициализирует поле _birthday</param>
-    /// <param name="phoneNumber">Инициализирует поле _phoneNumber</param>
-    /// <param name="idVKontakte">Инициализирует поле _idVKontakte</param>
-    /// <param name="eMail">Инициализирует поле _eMail</param>
+    /// <param name="surname">Initializes the _surname</param>
+    /// <param name="name">Initializes the _name</param>
+    /// <param name="birthday">Initializes the _birthday</param>
+    /// <param name="phoneNumber">Initializes the phoneNumber</param>
+    /// <param name="idVKontakte">Initializes the _idVKontakte</param>
+    /// <param name="eMail">Initializes the eMail</param>
     public Contact(string surname, string name, DateTime birthday,
         PhoneNumber phoneNumber, string idVKontakte, string eMail)
     {
@@ -161,20 +161,20 @@ namespace ContactsApp
     }
 
     /// <summary>
-    /// копирует объект
+    /// Copy object
     /// </summary>
-    /// <returns>Копию объекта</returns>
+    /// <returns>Object copy</returns>
     public object Clone()
     {
         return this.MemberwiseClone();
     }
 
     /// <summary>
-    /// проверяет строку с именем или фамилией
+    /// checks a string with a first or last name
     /// </summary>
-    /// <param name="value">строка которую проверяем</param>
-    /// <param name="nameProperty">строка с названием метода, в котором вызывается проверка</param>
-    /// <returns>проверенная строка</returns>
+    /// <param name="value">string</param>
+    /// <param name="nameProperty">string with the name of the method in which the check is called</param>
+    /// <returns>checked string</returns>
     private void AssertName(string value, string nameProperty)
     {
         if (value.Length > 50)
@@ -192,10 +192,10 @@ namespace ContactsApp
     }
 
     /// <summary>
-    /// приравнивает первый символ к верхнему регистру
+    /// equals the first character to uppercase
     /// </summary>
-    /// <param name="value"></param>
-    /// <returns></returns>
+    /// <param name="value">string</param>
+    /// <returns>string with uppercase</returns>
     private string ChangeRegisterOfFirstSymbol(string value)
     {
         if (value != "")

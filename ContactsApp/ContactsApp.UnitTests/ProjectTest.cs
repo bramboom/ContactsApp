@@ -7,19 +7,19 @@ namespace ContactsApp.UnitTests
     class ProjectTest
     {
         /// <summary>
-        /// поле хранит экземпляр класса Project
+        /// stores an instance of the Project class
         /// </summary>
         public Project _project;
-      
+
         /// <summary>
-        /// инициализирует поле _project
+        /// initializes the _project field
         /// </summary>
         public void InitProject()
         {
             _project = new Project();
         }
 
-        [Test(Description = "позитивный тест сеттера Contact")]
+        [Test(Description = "positive setter test Contact")]
         public void TestContactSet_CorrectValue_ReturnCorrectValue()
         {
             //Arrange
@@ -49,24 +49,24 @@ namespace ContactsApp.UnitTests
             Assert.Multiple(() =>
             {
                 Assert.AreEqual(expectedSurname, actualSurname,
-                    "Cеттер списка возврашает неверное значение Surname");
+                    "List setter returns invalid Surname");
                 Assert.AreEqual(expectedName, actualName,
-                    "Cеттер списка возврашает неверное значение Name");
+                    "List setter returns invalid Name");
                 Assert.AreEqual(expectedBirthday, actualBirthday,
-                    "Cеттер списка возврашает неверное значение Birthday");
+                    "List setter returns invalid Birthday");
                 Assert.AreEqual(expectedNumber, actualNumber,
-                    "Cеттер списка возврашает неверное значение PhoneNumber");
+                    "List setter returns invalid PhoneNumber");
                 Assert.AreEqual(expectedVK, actualVK,
-                    "Cеттер списка возврашает неверное значение VKontakte");
+                    "List setter returns invalid VKontakte");
                 Assert.AreEqual(expectedEmail, actualEmail,
-                    "Cеттер списка возврашает неверное значение Email");
+                    "List setter returns invalid Email");
             });
         }
 
         [TestCase("S", 
-            TestName="Поиск по строке которая содержится в каждом объекте")]
+            TestName= "Search by string contained in each object")]
         [TestCase("", 
-            TestName = "Поиск по пустой строке")]
+            TestName = "Search for an empty string")]
         public void TestSearchContactByString_CorrectValue_ReturnCorrectList(string searchString)
         {
             //Arrange
@@ -98,21 +98,21 @@ namespace ContactsApp.UnitTests
             Assert.Multiple(() =>
             {
                 Assert.AreEqual(expectedSurname, actualSurname,
-                    "Метод нашел неверное значение Surname");
+                    "The method found an invalid Surname");
                 Assert.AreEqual(expectedName, actualName,
-                    "Метод нашел неверное значение Name");
+                    "The method found an invalid Name");
                 Assert.AreEqual(expectedBirthday, actualBirthday,
-                    "Метод нашел неверное значение Birthday");
+                    "The method found an invalid Birthday");
                 Assert.AreEqual(expectedNumber, actualNumber,
-                    "Метод нашел неверное значение PhoneNumber");
+                    "The method found an invalid PhoneNumber");
                 Assert.AreEqual(expectedVK, actualVK,
-                    "Метод нашел неверное значение VKontakte");
+                    "The method found an invalid VKontakte");
                 Assert.AreEqual(expectedEmail, actualEmail,
-                    "Метод нашел неверное значение Email");
+                    "The method found an invalid Email");
             });
         }
 
-        [Test(Description = "Поиск по строке которая не содержится ни в одном из объектов")]
+        [Test(Description = "Search for a string that is not contained in any of the objects")]
         public void TestSearchByString_CorrectValue_ReturnEmptyList()
         {
             //Arrange
@@ -136,10 +136,10 @@ namespace ContactsApp.UnitTests
                 _project.SearchContactByString(searchString);
 
             //Assert
-            Assert.IsNotNull(viewContact, "Список должен быть пуст");
+            Assert.IsNotNull(viewContact, "The list must be empty");
         }
 
-        [Test(Description = "Поиск контактов по дню рождения")]
+        [Test(Description = "Search for contacts by birthday")]
         public void TestSearchSurnamesByBirthday_CorrectValue_ReturnCorrectList()
         {
             //Arrange
@@ -166,7 +166,7 @@ namespace ContactsApp.UnitTests
                 "Метод нашел неверное значение Surnames");
         }
 
-        [Test(Description = "Поиск если именинников нет")]
+        [Test(Description = "Search if there are no birthday people")]
         public void TestSearchSurnamesByBirthday_CorrectValue_ReturnEmptyList()
         {
             //Arrange
@@ -189,7 +189,7 @@ namespace ContactsApp.UnitTests
                 _project.SearchSurnamesByBirthday(_project.Contacts);
 
             //Assert
-            Assert.IsNotNull(actualSurnames, "Список должен быть пуст");
+            Assert.IsNotNull(actualSurnames, "The list must be empty");
         }
     }
 }
